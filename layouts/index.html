@@ -19,6 +19,23 @@
 <body>
     <!-- Navigation Header -->
     <header class="site-header">
+        <div class="header-top">
+            <div class="header-container">
+                <div class="header-info">
+                    <div class="header-address">
+                        <span class="icon">📍</span>
+                        <span>20810 NE 267th St, Battle Ground, WA 98604</span>
+                    </div>
+                    <div class="header-hours">
+                        <span class="icon">🕒</span>
+                        <span>Mon-Fri 09:00am - 04:00pm<br>Saturday & Sunday closed</span>
+                    </div>
+                </div>
+                <div class="header-contact">
+                    <a href="#contact" class="contact-btn">CONTACT US</a>
+                </div>
+            </div>
+        </div>
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
@@ -31,7 +48,10 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="nav-phone">
-                    <a href="tel:{{ .Site.Params.phone }}">{{ .Site.Params.phone }}</a>
+                    <div class="phone-cta">
+                        <span class="phone-text">call for a free estimate!</span>
+                        <a href="tel:{{ .Site.Params.phone }}" class="phone-number">{{ .Site.Params.phone }}</a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -45,8 +65,8 @@
                     <h1 class="hero-title">Welcome to Polos Electronics!</h1>
                     <p class="hero-text">Polos Electronics is a locally owned and operated Low Voltage Electrical Contractor. We have been doing consistent business under one name and one family since 1979. If you are looking for a fresh, local company to trust with your home or business needs, your search is over. Contact Polos Electronics for a free quote today!</p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Get Free Quote</a>
-                        <a href="#services" class="btn btn-secondary">Our Services</a>
+                        <a href="#contact" class="btn btn-primary">CONTACT US »</a>
+                        <a href="#services" class="btn btn-secondary">CALL FOR A FREE ESTIMATE »</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -59,7 +79,7 @@
         <section id="about" class="about-section">
             <div class="section-container">
                 <h2 class="section-title">About Our Team</h2>
-                
+
                 <div class="team-grid">
                     <!-- Andy Polos -->
                     <div class="team-member">
@@ -67,7 +87,7 @@
                             <img src="{{ "images/andy-polos.jpg" | relURL }}" alt="Andy Polos">
                         </div>
                         <h3 class="member-name">Andy Polos</h3>
-                        <p class="member-title">President</p>
+                        <div class="member-decorative">~~~</div>
                         <p class="member-bio">Andy Polos is the President of Polos Electronics and has been working for the company since 1997. Andy enjoys coaching local volleyball and spending time with his friends and family.</p>
                     </div>
 
@@ -77,7 +97,7 @@
                             <img src="{{ "images/john-polos.jpg" | relURL }}" alt="John Polos">
                         </div>
                         <h3 class="member-name">John Polos</h3>
-                        <p class="member-title">Founder</p>
+                        <div class="member-decorative">~~~</div>
                         <p class="member-bio">John Polos started Polos Electronics in 1979. JP enjoys spending time with his grandchildren and traveling to Kaua'i.</p>
                     </div>
                 </div>
@@ -90,12 +110,12 @@
                 <div class="services-layout">
                     <div class="services-content">
                         <h2 class="section-title">Services</h2>
-                        
+
                         <div class="services-intro">
-                            <p><strong>Low voltage leaders in:</strong></p>
+                            <h3>Low voltage leaders in:</h3>
                         </div>
-                        
-                        <ul class="services-list primary">
+
+                        <ul class="services-list">
                             <li>Starlink Installation</li>
                             <li>Pre-Wiring & Retrofits</li>
                             <li>Residential & Commercial Security Systems</li>
@@ -109,9 +129,11 @@
                             <li>CAT5 & CAT6</li>
                         </ul>
 
-                        <p class="services-subtitle"><strong>Commercial and residential installs and repairs of systems including:</strong></p>
-                        
-                        <ul class="services-list secondary">
+                        <div class="services-intro">
+                            <h3>Commercial and residential installs and repairs of systems including:</h3>
+                        </div>
+
+                        <ul class="services-list">
                             <li>Surveillance</li>
                             <li>Security</li>
                             <li>AV</li>
@@ -121,11 +143,13 @@
                             <li>Panel Troubleshooting</li>
                         </ul>
 
-                        <p class="services-cta"><strong>Call us for more information!</strong></p>
-                        <a href="#contact" class="btn btn-primary">call us now »</a>
+                        <p class="services-cta">Call us for more information!</p>
                     </div>
-                    
+
                     <div class="services-sidebar">
+                        <div class="services-image">
+                            <img src="{{ "images/hero-image.jpg" | relURL }}" alt="Electrical work and installation">
+                        </div>
                         <div class="since-badge">
                             <div class="since-text">Since</div>
                             <div class="since-year">1979</div>
@@ -135,62 +159,59 @@
             </div>
         </section>
 
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="cta-overlay">
+                <div class="cta-container">
+                    <h2 class="cta-title">Not sure where to begin?<br>no need to worry, give us a call!</h2>
+                    <a href="#contact" class="btn btn-primary">CALL US NOW »</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="section-container">
+                <h2 class="section-title">Contact Us</h2>
                 <div class="contact-layout">
-                    <div class="contact-info">
-                        <h2 class="section-title">Contact Us</h2>
-                        
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <strong>Phone:</strong> <a href="tel:{{ replace .Site.Params.phone " " "" }}">{{ .Site.Params.phone }}</a>
-                            </div>
-                            <div class="contact-item">
-                                <strong>Email:</strong> <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
-                            </div>
-                            <div class="contact-item">
-                                <strong>Address:</strong><br>
-                                {{ .Site.Params.address }}
-                            </div>
-                            <div class="contact-item">
-                                <strong>Hours:</strong><br>
-                                Mon-Fri 09:00am - 04:00pm<br>
-                                Closed Weekends
-                            </div>
-                        </div>
+                    <div class="contact-image">
+                        <img src="{{ "images/andy-polos.jpg" | relURL }}" alt="Andy Polos at work">
                     </div>
 
                     <div class="contact-form-container">
-                        <h3>Request a Free Quote</h3>
                         <form name="contact" method="POST" action="https://formspree.io/f/xpwzgked">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="firstName">First Name *</label>
-                                    <input type="text" id="firstName" name="firstName" required>
+                                    <input type="text" id="firstName" name="firstName" placeholder="First Name*" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastName">Last Name *</label>
-                                    <input type="text" id="lastName" name="lastName" required>
+                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name*" required>
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="tel" id="phone" name="phone">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" placeholder="Phone*" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" placeholder="Email*" required>
+                                </div>
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
+                                <textarea id="message" name="message" rows="6" placeholder="Message*" required></textarea>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Please describe your project or service needs..."></textarea>
+
+                            <div class="captcha-section">
+                                <label>CAPTCHA</label>
+                                <div class="captcha-checkbox">
+                                    <input type="checkbox" id="notRobot" required>
+                                    <label for="notRobot">I'm not a robot</label>
+                                    <div class="recaptcha-logo">reCAPTCHA</div>
+                                </div>
                             </div>
-                            
-                            <button type="submit" class="submit-btn">Send Message</button>
+
+                            <button type="submit" class="submit-btn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -201,14 +222,35 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-content">
-            <div class="footer-info">
-                <p>&copy; {{ now.Year }} Polos Electronics. All rights reserved.</p>
-                <p>Locally owned and operated Low Voltage Electrical Contractor since 1979</p>
+            <div class="footer-logo">
+                <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo">
+            </div>
+            <div class="footer-services">
+                <h4>Commercial & Residential Services</h4>
+                <ul>
+                    <li>Pre-Wiring & Retrofits</li>
+                    <li>Residential & Commercial Security Systems</li>
+                    <li>Surveillance Systems</li>
+                    <li>Door Access Systems</li>
+                    <li>Home Theater Systems</li>
+                    <li>Whole House Audio/Visual</li>
+                    <li>Full Networking Services</li>
+                    <li>Cable Management</li>
+                    <li>Wiring Cleanup</li>
+                </ul>
             </div>
             <div class="footer-contact">
-                <p>{{ .Site.Params.phone }} | {{ .Site.Params.email }}</p>
+                <h4>{{ .Site.Params.phone }}</h4>
+                <p><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
                 <p>{{ .Site.Params.address }}</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                </div>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{ now.Year }} Polos Electronics. All rights reserved.</p>
         </div>
     </footer>
 
