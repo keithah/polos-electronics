@@ -250,7 +250,7 @@
                 </ul>
             </div>
             <div class="footer-contact">
-                <h4>{{ .Site.Params.phone }}</h4>
+                <h4><a href="tel:{{ replace .Site.Params.phone " " "" }}">{{ .Site.Params.phone }}</a></h4>
                 <p><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
                 <p>{{ .Site.Params.address }}</p>
                 <div class="footer-social">
