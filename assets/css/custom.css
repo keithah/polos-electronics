@@ -768,28 +768,62 @@ body {
   }
 
   .site-main {
-    margin-top: 80px;
+    margin-top: 70px;
   }
 
   .nav-container {
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    padding: 10px 15px;
   }
 
   .nav-menu {
-    gap: 15px;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .nav-menu a {
+    font-size: 14px;
+  }
+
+  .phone-cta .phone-text {
+    font-size: 12px;
+  }
+
+  .phone-cta .phone-number {
+    font-size: 18px;
   }
 
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px 20px;
+    font-size: 13px;
   }
 
   .cta-title {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
   }
 
   .section-container {
@@ -800,20 +834,24 @@ body {
   .services-section,
   .contact-section,
   .cta-section {
-    padding: 60px 0;
+    padding: 50px 0;
   }
 
   .hero-section {
-    padding: 40px 0;
+    padding: 30px 0;
+  }
+
+  .services-image img {
+    height: 300px;
   }
 
   .since-year {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   .since-badge {
-    padding: 25px 30px;
-    min-width: 150px;
+    padding: 20px 25px;
+    min-width: 130px;
   }
 
   .form-row {
@@ -822,48 +860,103 @@ body {
 
   .team-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 50px;
   }
 
   .member-image img {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
+  }
+
+  .member-name {
+    font-size: 1.5rem;
+  }
+
+  .services-intro h3 {
+    font-size: 1.1rem;
+  }
+
+  .services-list li {
+    font-size: 0.95rem;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 1.8rem;
-  }
-
-  .cta-title {
-    font-size: 1.6rem;
+  .nav-logo .logo {
+    height: 45px;
   }
 
   .nav-menu {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
   }
 
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
+  .nav-menu a {
+    font-size: 13px;
+  }
+
+  .phone-cta .phone-number {
+    font-size: 16px;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .hero-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .cta-title {
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
   }
 
   .btn {
-    padding: 12px 20px;
+    padding: 11px 18px;
     font-size: 12px;
     width: 100%;
-    max-width: 280px;
+    max-width: 250px;
   }
 
   .member-image img {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
+  }
+
+  .member-name {
+    font-size: 1.3rem;
   }
 
   .team-grid {
-    gap: 40px;
+    gap: 35px;
+  }
+
+  .services-image img {
+    height: 250px;
+  }
+
+  .since-badge {
+    padding: 18px 22px;
+    min-width: 120px;
+  }
+
+  .since-year {
+    font-size: 2rem;
+  }
+
+  .footer-content {
+    gap: 30px;
+  }
+
+  .footer-contact h4 {
+    font-size: 1.5rem;
   }
 }
