@@ -1,0 +1,14 @@
+baseURL = 'https://poloselectronics.com'
+languageCode = 'en-us'
+title = 'Polos Electronics'
+
+[params]
+  description = "Locally owned and operated Low Voltage Electrical Contractor since 1979"
+  phone = "(360) 687-3543"
+  email = "service@poloselectronics.com"
+  address = "20810 NE 267th St, Battle Ground, WA 98604"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
