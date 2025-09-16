@@ -555,6 +555,40 @@ body {
   min-height: 120px;
 }
 
+.captcha-section {
+  margin: 25px 0;
+}
+
+.captcha-section label {
+  display: block;
+  font-weight: 600;
+  color: #323232;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.simple-captcha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: #f9f9f9;
+}
+
+.simple-captcha span {
+  font-weight: 600;
+  color: #323232;
+}
+
+.simple-captcha input[type="text"] {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: white;
+}
 
 .submit-btn {
   background: #5a9fd4;

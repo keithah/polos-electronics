@@ -189,10 +189,11 @@
                     </div>
 
                     <div class="contact-form-container">
-                        <form name="contact" method="POST" action="https://formspree.io/f/xpwzgked">
+                        <form name="contact" method="POST" action="https://formspree.io/service@poloselectronics.com">
                             <!-- Formspree configuration -->
                             <input type="hidden" name="_subject" value="New contact form submission from Polos Electronics">
                             <input type="hidden" name="_next" value="https://keithah.github.io/polos-electronics/#contact">
+                            <input type="hidden" name="_captcha" value="false">
 
                             <div class="form-row">
                                 <div class="form-group">
@@ -214,6 +215,15 @@
 
                             <div class="form-group">
                                 <textarea id="message" name="message" rows="6" placeholder="Message*" required></textarea>
+                            </div>
+
+                            <div class="captcha-section">
+                                <label>Please verify you are human</label>
+                                <div class="simple-captcha">
+                                    <span id="captcha-question"></span>
+                                    <input type="text" id="captcha-answer" name="captcha-answer" placeholder="Answer" required>
+                                    <input type="hidden" id="captcha-solution" name="captcha-solution">
+                                </div>
                             </div>
 
                             <button type="submit" class="submit-btn">Send Message</button>
@@ -284,10 +294,36 @@
             });
         }
 
+        // Simple CAPTCHA
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            const question = `${num1} + ${num2} = ?`;
+            const answer = num1 + num2;
+
+            document.getElementById('captcha-question').textContent = question;
+            document.getElementById('captcha-solution').value = answer;
+        }
+
+        // Generate CAPTCHA on page load
+        generateCaptcha();
+
         // Contact form handling
         const contactForm = document.querySelector('form[name="contact"]');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
+                // Check CAPTCHA
+                const userAnswer = document.getElementById('captcha-answer').value;
+                const correctAnswer = document.getElementById('captcha-solution').value;
+
+                if (userAnswer != correctAnswer) {
+                    e.preventDefault();
+                    alert('Please solve the math problem correctly.');
+                    generateCaptcha(); // Generate new CAPTCHA
+                    document.getElementById('captcha-answer').value = '';
+                    return;
+                }
+
                 const submitBtn = this.querySelector('.submit-btn');
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
