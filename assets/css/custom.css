@@ -24,17 +24,72 @@ body {
 /* WordPress-style Navigation */
 .site-header {
   background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  border-bottom: 1px solid #e6e6e6;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Header Top Section */
+.header-top {
+  background: #f8f8f8;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-info {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.header-address,
+.header-hours {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.header-address .icon,
+.header-hours .icon {
+  color: #5a9fd4;
+}
+
+.contact-btn {
+  background: #5a9fd4;
+  color: white;
+  padding: 8px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 3px;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+}
+
+.contact-btn:hover {
+  background: #4a8bc2;
+}
+
+/* Main Navigation */
 .navbar {
-  padding: 12px 0;
+  background: #ffffff;
+  padding: 15px 0;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .nav-container {
@@ -47,21 +102,21 @@ body {
 }
 
 .nav-logo .logo {
-  height: 45px;
+  height: 60px;
   width: auto;
 }
 
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 35px;
   margin: 0;
 }
 
 .nav-menu a {
   text-decoration: none;
   color: #323232;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   transition: color 0.3s ease;
   text-transform: uppercase;
@@ -69,103 +124,95 @@ body {
 }
 
 .nav-menu a:hover {
-  color: #fe3a46;
+  color: #5a9fd4;
 }
 
-.nav-phone a {
+.nav-phone {
+  text-align: right;
+}
+
+.phone-cta .phone-text {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.phone-cta .phone-number {
   color: #fe3a46;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 16px;
-  background: transparent;
-  border: 2px solid #fe3a46;
-  padding: 8px 16px;
-  border-radius: 3px;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  font-size: 20px;
 }
 
-.nav-phone a:hover {
-  background: #fe3a46;
-  color: white;
+.phone-cta .phone-number:hover {
+  text-decoration: underline;
 }
 
 /* Main content spacing */
 .site-main {
-  margin-top: 75px;
+  margin-top: 140px;
 }
 
 /* Hero Section - WordPress Style */
 .hero-section {
-  background: url('/images/hero-image.jpg') center center;
-  background-size: cover;
-  position: relative;
-  padding: 120px 0;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  background: #ffffff;
+  padding: 60px 0;
 }
 
 .hero-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  position: relative;
-  z-index: 2;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
 
 .hero-content {
-  max-width: 800px;
-  margin: 0 auto;
+  padding-right: 20px;
 }
 
 .hero-title {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #323232;
   margin-bottom: 25px;
   line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero-text {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   line-height: 1.7;
-  color: #ffffff;
+  color: #666;
   margin-bottom: 35px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .hero-buttons {
   display: flex;
-  gap: 20px;
-  justify-content: center;
+  gap: 15px;
   flex-wrap: wrap;
 }
 
 .hero-image {
-  display: none; /* Hidden as background image is used */
+  display: block;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 /* WordPress-style Buttons */
 .btn {
   display: inline-block;
-  padding: 15px 30px;
+  padding: 12px 25px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 3px;
   transition: all 0.3s ease;
   border: 2px solid transparent;
@@ -175,34 +222,32 @@ body {
 }
 
 .btn-primary {
-  background: #fe3a46;
+  background: #5a9fd4;
   color: white;
-  border-color: #fe3a46;
+  border-color: #5a9fd4;
 }
 
 .btn-primary:hover {
-  background: #e6333e;
-  border-color: #e6333e;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(254, 58, 70, 0.3);
+  background: #4a8bc2;
+  border-color: #4a8bc2;
 }
 
 .btn-secondary {
   background: transparent;
-  color: white;
-  border-color: white;
+  color: #5a9fd4;
+  border-color: #5a9fd4;
 }
 
 .btn-secondary:hover {
-  background: white;
-  color: #323232;
-  transform: translateY(-2px);
+  background: #5a9fd4;
+  color: white;
 }
 
 /* About Section - WordPress Style */
 .about-section {
-  background: #f9f9f9;
+  background: #2c2c2c;
   padding: 80px 0;
+  color: white;
 }
 
 .section-container {
@@ -215,13 +260,13 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #323232;
-  margin-bottom: 50px;
+  color: white;
+  margin-bottom: 60px;
   text-align: center;
   position: relative;
 }
 
-.section-title::after {
+.about-section .section-title::after {
   content: '';
   position: absolute;
   bottom: -15px;
@@ -234,58 +279,51 @@ body {
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 80px;
   margin-top: 60px;
+  justify-items: center;
 }
 
 .team-member {
   text-align: center;
-  padding: 30px 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.team-member:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  color: white;
+  max-width: 350px;
 }
 
 .member-image {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .member-image img {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #fe3a46;
+  border: 5px solid rgba(255,255,255,0.1);
 }
 
 .member-name {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  color: #323232;
-  margin-bottom: 5px;
+  color: white;
+  margin-bottom: 15px;
 }
 
-.member-title {
-  font-size: 1rem;
+.member-decorative {
   color: #fe3a46;
-  font-weight: 600;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
 }
 
 .member-bio {
   font-size: 1rem;
   line-height: 1.6;
-  color: #666;
+  color: rgba(255,255,255,0.9);
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 /* Services Section - WordPress Style */
@@ -296,86 +334,98 @@ body {
 
 .services-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: start;
 }
 
 .services-content .section-title {
   text-align: left;
-  margin-bottom: 30px;
+  color: #323232;
+  margin-bottom: 40px;
+  position: relative;
 }
 
 .services-content .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
   left: 0;
-  transform: none;
+  width: 60px;
+  height: 3px;
+  background: #5a9fd4;
 }
 
-.services-intro {
+.services-intro h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #323232;
   margin-bottom: 20px;
+  position: relative;
+  padding-left: 30px;
 }
 
-.services-intro p {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #323232;
-}
-
-.services-subtitle {
-  font-size: 1.1rem;
-  margin: 30px 0 15px 0;
-  color: #323232;
-  font-weight: 600;
+.services-intro h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 2px;
+  background: #5a9fd4;
 }
 
 .services-list {
   list-style: none;
-  margin: 20px 0 30px 0;
+  margin: 0 0 40px 0;
   padding: 0;
+  padding-left: 30px;
 }
 
 .services-list li {
   padding: 8px 0;
   font-size: 1rem;
   color: #666;
-  border-bottom: 1px solid #f0f0f0;
   position: relative;
-  padding-left: 20px;
-  transition: color 0.3s ease;
 }
 
-.services-list li:hover {
-  color: #fe3a46;
-}
-
-.services-list li:before {
+.services-list li::before {
   content: "✓";
   position: absolute;
-  left: 0;
-  color: #fe3a46;
+  left: -25px;
+  color: #5a9fd4;
   font-weight: bold;
 }
 
 .services-cta {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
   margin: 30px 0 20px 0;
   color: #323232;
 }
 
 .services-sidebar {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 40px;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.services-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .since-badge {
-  background: linear-gradient(135deg, #323232 0%, #4a4a4a 100%);
+  background: #5a9fd4;
   color: white;
-  padding: 40px;
+  padding: 30px 40px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(90, 159, 212, 0.3);
   min-width: 180px;
 }
 
@@ -383,21 +433,73 @@ body {
   font-size: 1.2rem;
   font-weight: 400;
   display: block;
-  margin-bottom: 10px;
-  opacity: 0.9;
+  margin-bottom: 5px;
 }
 
 .since-year {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1;
 }
 
+/* Call to Action Section */
+.cta-section {
+  background: url('/images/hero-image.jpg') center center;
+  background-size: cover;
+  position: relative;
+  padding: 100px 0;
+}
+
+.cta-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.cta-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.cta-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
 /* Contact Section - WordPress Style */
 .contact-section {
-  background: #f9f9f9;
+  background: #ffffff;
   padding: 80px 0;
+}
+
+.contact-section .section-title {
+  text-align: center;
+  color: #323232;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.contact-section .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #5a9fd4;
 }
 
 .contact-layout {
@@ -407,64 +509,15 @@ body {
   align-items: start;
 }
 
-.contact-info .section-title {
-  text-align: left;
-  margin-bottom: 30px;
-}
-
-.contact-info .section-title::after {
-  left: 0;
-  transform: none;
-}
-
-.contact-details {
-  background: #ffffff;
-  padding: 30px;
+.contact-image img {
+  width: 100%;
+  height: auto;
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.contact-item {
-  margin-bottom: 20px;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.contact-item:last-child {
-  margin-bottom: 0;
-}
-
-.contact-item strong {
-  color: #323232;
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-}
-
-.contact-item a {
-  color: #fe3a46;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.contact-item a:hover {
-  text-decoration: underline;
 }
 
 /* Contact Form - WordPress Style */
 .contact-form-container {
   background: #ffffff;
-  padding: 35px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.contact-form-container h3 {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 1.6rem;
-  color: #323232;
-  margin-bottom: 25px;
-  text-align: center;
 }
 
 .form-row {
@@ -478,16 +531,7 @@ body {
   margin-bottom: 20px;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #323232;
-  font-size: 0.95rem;
-}
-
 .form-group input,
-.form-group select,
 .form-group textarea {
   width: 100%;
   padding: 12px 15px;
@@ -496,23 +540,64 @@ body {
   font-size: 16px;
   font-family: inherit;
   transition: border-color 0.3s ease;
-  background: #ffffff;
+  background: #f9f9f9;
 }
 
 .form-group input:focus,
-.form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #fe3a46;
+  border-color: #5a9fd4;
+  background: #ffffff;
 }
 
 .form-group textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
+}
+
+.captcha-section {
+  margin: 25px 0;
+}
+
+.captcha-section label {
+  display: block;
+  font-weight: 600;
+  color: #323232;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.captcha-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: #f9f9f9;
+}
+
+.captcha-checkbox input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.captcha-checkbox label {
+  margin: 0;
+  font-weight: normal;
+  text-transform: none;
+}
+
+.recaptcha-logo {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #999;
+  font-style: italic;
 }
 
 .submit-btn {
-  background: #fe3a46;
+  background: #5a9fd4;
   color: white;
   padding: 15px 30px;
   border: none;
@@ -527,16 +612,14 @@ body {
 }
 
 .submit-btn:hover {
-  background: #e6333e;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(254, 58, 70, 0.3);
+  background: #4a8bc2;
 }
 
 /* Footer - WordPress Style */
 .site-footer {
-  background: #323232;
-  color: #ffffff;
-  padding: 30px 0;
+  background: #ffffff;
+  padding: 50px 0 20px 0;
+  border-top: 1px solid #e6e6e6;
 }
 
 .footer-content {
@@ -544,131 +627,237 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  align-items: center;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 60px;
+  align-items: start;
 }
 
-.footer-info p,
-.footer-contact p {
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-  opacity: 0.9;
+.footer-logo img {
+  height: 60px;
+  width: auto;
+}
+
+.footer-services h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.2rem;
+  color: #323232;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.footer-services ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #5a9fd4;
+  line-height: 1.8;
+  text-align: center;
+  font-size: 0.95rem;
 }
 
 .footer-contact {
-  text-align: right;
+  text-align: center;
+}
+
+.footer-contact h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.8rem;
+  color: #5a9fd4;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.footer-contact p {
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.footer-contact a {
+  color: #5a9fd4;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+.footer-social {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-social a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background: #5a9fd4;
+  color: white;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 50%;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-social a:hover {
+  background: #4a8bc2;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid #e6e6e6;
+  margin-top: 40px;
+}
+
+.footer-bottom p {
+  color: #999;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .header-info {
+    gap: 20px;
+  }
+
+  .header-address,
+  .header-hours {
+    font-size: 13px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    padding-right: 0;
+  }
+
   .services-layout,
   .contact-layout {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
-  .services-content .section-title,
-  .contact-info .section-title {
+
+  .services-content .section-title {
     text-align: center;
   }
-  
-  .services-content .section-title::after,
-  .contact-info .section-title::after {
+
+  .services-content .section-title::after {
     left: 50%;
     transform: translateX(-50%);
   }
-  
-  .services-sidebar {
-    justify-content: center;
-    padding-top: 20px;
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
   }
 }
 
 @media (max-width: 768px) {
+  .header-top {
+    display: none;
+  }
+
+  .site-main {
+    margin-top: 80px;
+  }
+
   .nav-container {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .nav-menu {
     gap: 15px;
   }
-  
+
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
-  
+
+  .cta-title {
+    font-size: 2rem;
+  }
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .section-container {
     padding: 0 15px;
   }
-  
+
   .about-section,
   .services-section,
-  .contact-section {
+  .contact-section,
+  .cta-section {
     padding: 60px 0;
   }
-  
+
   .hero-section {
-    padding: 80px 0;
+    padding: 40px 0;
   }
-  
-  .contact-form-container {
-    padding: 25px;
-  }
-  
+
   .since-year {
     font-size: 2.5rem;
   }
-  
+
   .since-badge {
-    padding: 30px;
+    padding: 25px 30px;
     min-width: 150px;
   }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 15px;
-  }
-  
-  .footer-contact {
-    text-align: center;
-  }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .team-grid {
     grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .member-image img {
+    width: 180px;
+    height: 180px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-  
+
+  .cta-title {
+    font-size: 1.6rem;
+  }
+
   .nav-menu {
     flex-direction: column;
     gap: 10px;
     text-align: center;
   }
-  
+
   .hero-buttons {
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .btn {
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: 12px;
+    width: 100%;
+    max-width: 280px;
   }
-  
+
   .member-image img {
     width: 150px;
     height: 150px;
