@@ -555,46 +555,6 @@ body {
   min-height: 120px;
 }
 
-.captcha-section {
-  margin: 25px 0;
-}
-
-.captcha-section label {
-  display: block;
-  font-weight: 600;
-  color: #323232;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-}
-
-.captcha-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  background: #f9f9f9;
-}
-
-.captcha-checkbox input[type="checkbox"] {
-  width: auto;
-  margin: 0;
-}
-
-.captcha-checkbox label {
-  margin: 0;
-  font-weight: normal;
-  text-transform: none;
-}
-
-.recaptcha-logo {
-  margin-left: auto;
-  font-size: 0.8rem;
-  color: #999;
-  font-style: italic;
-}
 
 .submit-btn {
   background: #5a9fd4;

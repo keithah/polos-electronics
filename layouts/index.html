@@ -190,6 +190,10 @@
 
                     <div class="contact-form-container">
                         <form name="contact" method="POST" action="https://formspree.io/f/xpwzgked">
+                            <!-- Formspree configuration -->
+                            <input type="hidden" name="_subject" value="New contact form submission from Polos Electronics">
+                            <input type="hidden" name="_next" value="https://keithah.github.io/polos-electronics/#contact">
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <input type="text" id="firstName" name="firstName" placeholder="First Name*" required>
@@ -201,10 +205,10 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="tel" id="phone" name="phone" placeholder="Phone*" required>
+                                    <input type="tel" id="phone" name="phone" placeholder="Phone" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="email" name="email" placeholder="Email*" required>
+                                    <input type="email" id="email" name="_replyto" placeholder="Email*" required>
                                 </div>
                             </div>
 
@@ -212,16 +216,7 @@
                                 <textarea id="message" name="message" rows="6" placeholder="Message*" required></textarea>
                             </div>
 
-                            <div class="captcha-section">
-                                <label>CAPTCHA</label>
-                                <div class="captcha-checkbox">
-                                    <input type="checkbox" id="notRobot" required>
-                                    <label for="notRobot">I'm not a robot</label>
-                                    <div class="recaptcha-logo">reCAPTCHA</div>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="submit-btn">Submit</button>
+                            <button type="submit" class="submit-btn">Send Message</button>
                         </form>
                     </div>
                 </div>
@@ -282,10 +277,28 @@
         // Simple mobile menu toggle
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         if (navToggle) {
             navToggle.addEventListener('click', function() {
                 navMenu.classList.toggle('nav-menu-active');
+            });
+        }
+
+        // Contact form handling
+        const contactForm = document.querySelector('form[name="contact"]');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('.submit-btn');
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                // Re-enable button after 3 seconds in case of errors
+                setTimeout(() => {
+                    if (submitBtn.disabled) {
+                        submitBtn.textContent = 'Send Message';
+                        submitBtn.disabled = false;
+                    }
+                }, 3000);
             });
         }
     </script>
