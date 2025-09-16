@@ -189,8 +189,9 @@
                     </div>
 
                     <div class="contact-form-container">
-                        <form name="contact" id="contact-form">
-                            <!-- Will be handled by JavaScript -->
+                        <form name="contact" method="POST" action="https://formspree.io/f/xjkeqgvl">
+                            <input type="hidden" name="_subject" value="New contact form submission from Polos Electronics">
+                            <input type="hidden" name="_next" value="https://keithah.github.io/polos-electronics/#contact">
 
                             <div class="form-row">
                                 <div class="form-group">
@@ -306,50 +307,28 @@
         generateCaptcha();
 
         // Contact form handling
-        const contactForm = document.getElementById('contact-form');
+        const contactForm = document.querySelector('form[name="contact"]');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Check CAPTCHA
+                // Check CAPTCHA before allowing form submission
                 const userAnswer = document.getElementById('captcha-answer').value;
                 const correctAnswer = document.getElementById('captcha-solution').value;
 
                 if (userAnswer != correctAnswer) {
+                    e.preventDefault();
                     alert('Please solve the math problem correctly.');
                     generateCaptcha(); // Generate new CAPTCHA
                     document.getElementById('captcha-answer').value = '';
                     return;
                 }
 
-                // Get form data
-                const formData = new FormData(this);
-                const firstName = formData.get('firstName');
-                const lastName = formData.get('lastName');
-                const phone = formData.get('phone');
-                const email = formData.get('_replyto');
-                const message = formData.get('message');
+                // CAPTCHA is correct, show sending message
+                const submitBtn = this.querySelector('.submit-btn');
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
 
-                // Create mailto link
-                const subject = encodeURIComponent('New contact form submission from Polos Electronics');
-                const body = encodeURIComponent(
-                    `First Name: ${firstName}\n` +
-                    `Last Name: ${lastName}\n` +
-                    `Phone: ${phone}\n` +
-                    `Email: ${email}\n` +
-                    `Message: ${message}`
-                );
-                const mailtoLink = `mailto:service@poloselectronics.com?subject=${subject}&body=${body}`;
-
-                // Open email client
-                window.location.href = mailtoLink;
-
-                // Show confirmation
-                alert('Your email client should open now. If it doesn\'t, please email us directly at service@poloselectronics.com');
-
-                // Reset form
-                this.reset();
-                generateCaptcha();
+                // Form will submit normally to Formspree
+                // The _next hidden field will redirect back to the contact section
             });
         }
     </script>
