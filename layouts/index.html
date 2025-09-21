@@ -6,7 +6,21 @@
     <title>{{ .Site.Title }}</title>
     <meta name="description" content="{{ .Site.Params.description }}">
     <meta name="keywords" content="electrical contractor, security systems, home theater, surveillance, Battle Ground WA, low voltage, networking, Starlink">
-    
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Polos Electronics">
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ .Site.Title }}">
+    <meta property="og:description" content="{{ .Site.Params.description }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ .Site.Title }}">
+    <meta name="twitter:description" content="{{ .Site.Params.description }}">
+
     <!-- Load CSS -->
     {{ $style := resources.Get "css/custom.css" | resources.Minify }}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
@@ -191,7 +205,7 @@
                     <div class="contact-form-container">
                         <form name="contact" method="POST" action="https://formspree.io/f/xjkeqgvl">
                             <input type="hidden" name="_subject" value="New contact form submission from Polos Electronics">
-                            <input type="hidden" name="_next" value="https://keithah.github.io/polos-electronics/#contact">
+                            <input type="hidden" name="_next" value="https://poloselectronics.com/#contact">
 
                             <div class="form-row">
                                 <div class="form-group">
