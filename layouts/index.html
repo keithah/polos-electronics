@@ -300,10 +300,10 @@
 
                 {{ if .Site.Data.reviews }}
                 <div class="reviews-carousel">
-                    <button class="carousel-btn prev" aria-label="Previous review">‹</button>
+                    <button class="carousel-btn prev" aria-label="Previous reviews">‹</button>
 
-                    <div class="reviews-slider">
-                        <div class="reviews-track">
+                    <div class="reviews-container">
+                        <div class="reviews-grid">
                             {{ range .Site.Data.reviews.reviews }}
                                 {{ if eq (int .rating) 5 }}
                                 <div class="review-card">
@@ -324,7 +324,7 @@
                         </div>
                     </div>
 
-                    <button class="carousel-btn next" aria-label="Next review">›</button>
+                    <button class="carousel-btn next" aria-label="Next reviews">›</button>
                 </div>
 
                 <div class="carousel-dots"></div>
@@ -527,65 +527,84 @@
             });
         }
 
-        // Reviews Carousel
+        // Reviews Pagination
         const reviewsCarousel = document.querySelector('.reviews-carousel');
         if (reviewsCarousel) {
-            const track = reviewsCarousel.querySelector('.reviews-track');
-            const cards = Array.from(track.children);
+            const grid = reviewsCarousel.querySelector('.reviews-grid');
+            const cards = Array.from(grid.children);
             const prevBtn = reviewsCarousel.querySelector('.prev');
             const nextBtn = reviewsCarousel.querySelector('.next');
             const dotsContainer = document.querySelector('.carousel-dots');
 
-            if (cards.length > 0) {
-                let currentIndex = 0;
+            const cardsPerPage = 2; // Show 2 reviews at a time
+            const totalPages = Math.ceil(cards.length / cardsPerPage);
 
-                // Create dots
-                cards.forEach((_, index) => {
+            if (cards.length > 0) {
+                let currentPage = 0;
+
+                // Create dots for pages
+                for (let i = 0; i < totalPages; i++) {
                     const dot = document.createElement('span');
                     dot.classList.add('dot');
-                    if (index === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => goToSlide(index));
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToPage(i));
                     dotsContainer.appendChild(dot);
-                });
+                }
 
                 const dots = Array.from(dotsContainer.children);
 
                 function updateCarousel() {
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    // Hide all cards
+                    cards.forEach(card => card.style.display = 'none');
+
+                    // Show cards for current page
+                    const startIndex = currentPage * cardsPerPage;
+                    const endIndex = startIndex + cardsPerPage;
+                    for (let i = startIndex; i < endIndex && i < cards.length; i++) {
+                        cards[i].style.display = 'block';
+                    }
 
                     // Update dots
                     dots.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === currentIndex);
+                        dot.classList.toggle('active', index === currentPage);
                     });
+
+                    // Update button states
+                    prevBtn.disabled = currentPage === 0;
+                    nextBtn.disabled = currentPage === totalPages - 1;
                 }
 
-                function goToSlide(index) {
-                    currentIndex = index;
+                function goToPage(page) {
+                    currentPage = page;
                     updateCarousel();
                 }
 
-                function nextSlide() {
-                    currentIndex = (currentIndex + 1) % cards.length;
-                    updateCarousel();
+                function nextPage() {
+                    if (currentPage < totalPages - 1) {
+                        currentPage++;
+                        updateCarousel();
+                    }
                 }
 
-                function prevSlide() {
-                    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-                    updateCarousel();
+                function prevPage() {
+                    if (currentPage > 0) {
+                        currentPage--;
+                        updateCarousel();
+                    }
                 }
 
                 // Button events
-                nextBtn.addEventListener('click', nextSlide);
-                prevBtn.addEventListener('click', prevSlide);
+                nextBtn.addEventListener('click', nextPage);
+                prevBtn.addEventListener('click', prevPage);
 
                 // Keyboard navigation
                 document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowLeft') prevSlide();
-                    if (e.key === 'ArrowRight') nextSlide();
+                    if (e.key === 'ArrowLeft') prevPage();
+                    if (e.key === 'ArrowRight') nextPage();
                 });
 
-                // Auto-play (optional - every 10 seconds)
-                setInterval(nextSlide, 10000);
+                // Initial display
+                updateCarousel();
             }
         }
     </script>

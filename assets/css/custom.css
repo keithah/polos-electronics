@@ -740,20 +740,20 @@ body {
   gap: 20px;
 }
 
-.reviews-slider {
+.reviews-container {
   flex: 1;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
-.reviews-track {
+.reviews-grid {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.reviews-track .review-card {
-  min-width: 100%;
-  flex-shrink: 0;
+.reviews-grid .review-card {
+  width: 100%;
 }
 
 .carousel-btn {
@@ -781,6 +781,17 @@ body {
 
 .carousel-btn:active {
   transform: scale(0.95);
+}
+
+.carousel-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.carousel-btn:disabled:hover {
+  transform: none;
+  background: #ccc;
 }
 
 .carousel-dots {
