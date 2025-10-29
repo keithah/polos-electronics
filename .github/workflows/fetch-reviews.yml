@@ -1,0 +1,53 @@
+name: Fetch Google Reviews
+
+on:
+  schedule:
+    # Run once per day at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  fetch-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Google Reviews
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: |
+          # Fetch place details with reviews
+          RESPONSE=$(curl -s "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}")
+
+          # Extract reviews and save to data file
+          echo "$RESPONSE" | jq -r '.result | {
+            name: .name,
+            rating: .rating,
+            total_ratings: .user_ratings_total,
+            reviews: [.reviews[]? | {
+              author: .author_name,
+              rating: .rating,
+              text: .text,
+              time: .relative_time_description,
+              profile_photo: .profile_photo_url
+            }] | .[0:5]
+          }' > data/reviews.json
+
+          echo "Reviews fetched successfully"
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add data/reviews.json
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to reviews"
+          else
+            git commit -m "Update Google reviews data [skip ci]"
+            git push
+            echo "Reviews updated and pushed"
+          fi

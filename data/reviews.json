@@ -1,0 +1,28 @@
+{
+  "name": "Polos Electronics",
+  "rating": 5.0,
+  "total_ratings": 0,
+  "reviews": [
+    {
+      "author": "Google User",
+      "rating": 5,
+      "text": "Excellent service! Andy and his team installed our home security system and did an outstanding job. Very professional and clean work.",
+      "time": "2 months ago",
+      "profile_photo": ""
+    },
+    {
+      "author": "Google User",
+      "rating": 5,
+      "text": "We've used Polos Electronics for over 10 years. They're always reliable, professional, and their work is top-notch. Highly recommend!",
+      "time": "3 months ago",
+      "profile_photo": ""
+    },
+    {
+      "author": "Google User",
+      "rating": 5,
+      "text": "Had them install our Starlink system. Fast, efficient, and reasonably priced. Will definitely use them again for future projects.",
+      "time": "4 months ago",
+      "profile_photo": ""
+    }
+  ]
+}

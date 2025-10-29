@@ -295,34 +295,42 @@
             <div class="section-container">
                 <h2 class="section-title">What Our Customers Say</h2>
 
-                <div class="reviews-grid">
-                    <!-- Google Reviews Embed -->
-                    <div class="google-reviews-widget">
-                        <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-                        <div class="elfsight-app-c5d4e1c8-3c0e-4a51-8e5e-1e4c5b4d3a2b" data-elfsight-app-lazy></div>
-
-                        <!-- Fallback: Manual Reviews Display -->
-                        <div class="manual-reviews">
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-text">"Excellent service! Andy and his team installed our home security system and did an outstanding job. Very professional and clean work."</p>
-                                <p class="review-author">- Google Review</p>
-                            </div>
-
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-text">"We've used Polos Electronics for over 10 years. They're always reliable, professional, and their work is top-notch. Highly recommend!"</p>
-                                <p class="review-author">- Google Review</p>
-                            </div>
-
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-text">"Had them install our Starlink system. Fast, efficient, and reasonably priced. Will definitely use them again for future projects."</p>
-                                <p class="review-author">- Google Review</p>
-                            </div>
+                {{ if .Site.Data.reviews }}
+                <div class="reviews-stats">
+                    <div class="overall-rating">
+                        <span class="rating-number">{{ .Site.Data.reviews.rating }}</span>
+                        <div class="rating-stars">
+                            {{ $rating := .Site.Data.reviews.rating }}
+                            {{ range seq 5 }}
+                                {{ if le . $rating }}★{{ else }}☆{{ end }}
+                            {{ end }}
                         </div>
+                        <p class="rating-count">Based on {{ .Site.Data.reviews.total_ratings }} reviews</p>
                     </div>
                 </div>
+
+                <div class="reviews-grid">
+                    <div class="manual-reviews">
+                        {{ range first 3 .Site.Data.reviews.reviews }}
+                        <div class="review-card">
+                            <div class="review-header">
+                                {{ if .profile_photo }}
+                                <img src="{{ .profile_photo }}" alt="{{ .author }}" class="review-avatar">
+                                {{ end }}
+                                <div class="review-meta">
+                                    <p class="review-author">{{ .author }}</p>
+                                    <p class="review-time">{{ .time }}</p>
+                                </div>
+                            </div>
+                            <div class="review-stars">
+                                {{ range seq (int .rating) }}★{{ end }}{{ range seq (sub 5 (int .rating)) }}☆{{ end }}
+                            </div>
+                            <p class="review-text">"{{ .text }}"</p>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
 
                 <div class="reviews-cta">
                     <a href="https://share.google/D3mexUt7VZzi7gvWZ" target="_blank" rel="noopener" class="btn btn-primary">Read More Reviews on Google »</a>
