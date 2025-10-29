@@ -26,7 +26,7 @@ jobs:
           # Fetch place details with reviews
           RESPONSE=$(curl -s "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}")
 
-          # Extract reviews and save to data file
+          # Extract ALL reviews and save to data file
           echo "$RESPONSE" | jq -r '.result | {
             name: .name,
             rating: .rating,
@@ -37,7 +37,7 @@ jobs:
               text: .text,
               time: .relative_time_description,
               profile_photo: .profile_photo_url
-            }] | .[0:5]
+            }]
           }' > data/reviews.json
 
           echo "Reviews fetched successfully"

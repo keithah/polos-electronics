@@ -730,20 +730,78 @@ body {
   margin: 0;
 }
 
-.reviews-grid {
-  margin-bottom: 40px;
+/* Reviews Carousel */
+.reviews-carousel {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.google-reviews-widget {
-  max-width: 1200px;
-  margin: 0 auto;
+.reviews-slider {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
 }
 
-.manual-reviews {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 30px;
+.reviews-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.reviews-track .review-card {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+.carousel-btn {
+  background: #5a9fd4;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0;
+}
+
+.carousel-btn:hover {
+  background: #4a8bc2;
+  transform: scale(1.1);
+}
+
+.carousel-btn:active {
+  transform: scale(0.95);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #5a9fd4;
+  transform: scale(1.2);
 }
 
 .review-card {
@@ -1230,5 +1288,23 @@ body {
 
   .footer-contact h4 {
     font-size: 1.5rem;
+  }
+
+  .reviews-carousel {
+    gap: 10px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .review-card {
+    padding: 20px;
+  }
+
+  .review-text {
+    font-size: 0.95rem;
   }
 }

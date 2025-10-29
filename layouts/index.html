@@ -299,27 +299,35 @@
                 <h2 class="section-title">What Our Customers Say</h2>
 
                 {{ if .Site.Data.reviews }}
-                <div class="reviews-grid">
-                    <div class="manual-reviews">
-                        {{ range first 3 .Site.Data.reviews.reviews }}
-                        <div class="review-card">
-                            <div class="review-header">
-                                {{ if .profile_photo }}
-                                <img src="{{ .profile_photo }}" alt="{{ .author }}" class="review-avatar">
-                                {{ end }}
-                                <div class="review-meta">
-                                    <p class="review-author">{{ .author }}</p>
-                                    <p class="review-time">{{ .time }}</p>
+                <div class="reviews-carousel">
+                    <button class="carousel-btn prev" aria-label="Previous review">‹</button>
+
+                    <div class="reviews-slider">
+                        <div class="reviews-track">
+                            {{ range .Site.Data.reviews.reviews }}
+                                {{ if eq (int .rating) 5 }}
+                                <div class="review-card">
+                                    <div class="review-header">
+                                        {{ if .profile_photo }}
+                                        <img src="{{ .profile_photo }}" alt="{{ .author }}" class="review-avatar">
+                                        {{ end }}
+                                        <div class="review-meta">
+                                            <p class="review-author">{{ .author }}</p>
+                                            <p class="review-time">{{ .time }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="review-stars">★★★★★</div>
+                                    <p class="review-text">"{{ .text }}"</p>
                                 </div>
-                            </div>
-                            <div class="review-stars">
-                                {{ range seq (int .rating) }}★{{ end }}{{ range seq (sub 5 (int .rating)) }}☆{{ end }}
-                            </div>
-                            <p class="review-text">"{{ .text }}"</p>
+                                {{ end }}
+                            {{ end }}
                         </div>
-                        {{ end }}
                     </div>
+
+                    <button class="carousel-btn next" aria-label="Next review">›</button>
                 </div>
+
+                <div class="carousel-dots"></div>
                 {{ end }}
 
                 <div class="reviews-cta">
@@ -517,6 +525,68 @@
                 // Form will submit normally to Formspree
                 // The _next hidden field will redirect back to the contact section
             });
+        }
+
+        // Reviews Carousel
+        const reviewsCarousel = document.querySelector('.reviews-carousel');
+        if (reviewsCarousel) {
+            const track = reviewsCarousel.querySelector('.reviews-track');
+            const cards = Array.from(track.children);
+            const prevBtn = reviewsCarousel.querySelector('.prev');
+            const nextBtn = reviewsCarousel.querySelector('.next');
+            const dotsContainer = document.querySelector('.carousel-dots');
+
+            if (cards.length > 0) {
+                let currentIndex = 0;
+
+                // Create dots
+                cards.forEach((_, index) => {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (index === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(index));
+                    dotsContainer.appendChild(dot);
+                });
+
+                const dots = Array.from(dotsContainer.children);
+
+                function updateCarousel() {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+
+                function goToSlide(index) {
+                    currentIndex = index;
+                    updateCarousel();
+                }
+
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    updateCarousel();
+                }
+
+                function prevSlide() {
+                    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                    updateCarousel();
+                }
+
+                // Button events
+                nextBtn.addEventListener('click', nextSlide);
+                prevBtn.addEventListener('click', prevSlide);
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') prevSlide();
+                    if (e.key === 'ArrowRight') nextSlide();
+                });
+
+                // Auto-play (optional - every 10 seconds)
+                setInterval(nextSlide, 10000);
+            }
         }
     </script>
 </body>
