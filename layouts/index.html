@@ -38,7 +38,7 @@
                 <div class="header-info">
                     <div class="header-address">
                         <span class="icon">📍</span>
-                        <span>20810 NE 267th St, Battle Ground, WA 98604</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=20810+NE+267th+St%2C+Battle+Ground%2C+WA+98604" target="_blank" rel="noopener">20810 NE 267th St, Battle Ground, WA 98604</a>
                     </div>
                     <div class="header-hours">
                         <span class="icon">🕒</span>
@@ -80,7 +80,7 @@
                     <p class="hero-text">Polos Electronics is a locally owned and operated Low Voltage Electrical Contractor. We have been doing consistent business under one name and one family since 1979. If you are looking for a fresh, local company to trust with your home or business needs, your search is over. Contact Polos Electronics for a free quote today!</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">CONTACT US »</a>
-                        <a href="#services" class="btn btn-secondary">CALL FOR A FREE ESTIMATE »</a>
+                        <a href="tel:+13606873543" class="btn btn-secondary">CALL FOR A FREE ESTIMATE »</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -188,7 +188,7 @@
             <div class="cta-overlay">
                 <div class="cta-container">
                     <h2 class="cta-title">Not sure where to begin?<br>no need to worry, give us a call!</h2>
-                    <a href="#contact" class="btn btn-primary">CALL US NOW »</a>
+                    <a href="tel:+13606873543" class="btn btn-primary">CALL US NOW »</a>
                 </div>
             </div>
         </section>
@@ -269,11 +269,7 @@
             <div class="footer-contact">
                 <h4><a href="tel:{{ replace .Site.Params.phone " " "" }}">{{ .Site.Params.phone }}</a></h4>
                 <p><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
-                <p>{{ .Site.Params.address }}</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook">f</a>
-                    <a href="#" aria-label="LinkedIn">in</a>
-                </div>
+                <p><a href="https://www.google.com/maps/search/?api=1&query=20810+NE+267th+St%2C+Battle+Ground%2C+WA+98604" target="_blank" rel="noopener">{{ .Site.Params.address }}</a></p>
             </div>
         </div>
         <div class="footer-bottom">
