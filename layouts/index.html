@@ -299,19 +299,6 @@
                 <h2 class="section-title">What Our Customers Say</h2>
 
                 {{ if .Site.Data.reviews }}
-                <div class="reviews-stats">
-                    <div class="overall-rating">
-                        <span class="rating-number">{{ .Site.Data.reviews.rating }}</span>
-                        <div class="rating-stars">
-                            {{ $rating := .Site.Data.reviews.rating }}
-                            {{ range seq 5 }}
-                                {{ if le . $rating }}★{{ else }}☆{{ end }}
-                            {{ end }}
-                        </div>
-                        <p class="rating-count">Based on {{ .Site.Data.reviews.total_ratings }} reviews</p>
-                    </div>
-                </div>
-
                 <div class="reviews-grid">
                     <div class="manual-reviews">
                         {{ range first 3 .Site.Data.reviews.reviews }}
