@@ -810,6 +810,24 @@ body {
   margin-top: 40px;
 }
 
+.reviews-cta-text {
+  font-size: 1.1rem;
+  color: #323232;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.review-platforms {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.review-platforms .btn {
+  min-width: 150px;
+}
+
 /* Footer - WordPress Style */
 .site-footer {
   background: #ffffff;
