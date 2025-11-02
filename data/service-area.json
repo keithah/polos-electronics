@@ -1,0 +1,15 @@
+
+{
+    "title": "Our Service Area",
+    "paragraph": "While we are based in Southwest Washington, we are proud to offer our services to the entire state. Our primary focus is on Clark, Cowlitz, and Skamania counties, but we are always willing to travel to meet the needs of our clients. Whether you're in Vancouver, Tri-Cities, Camas, Seattle, Yakima or anywhere in between, Polos Electronics is here to help.",
+    "map": {
+        "url": "/images/service-area-map.png",
+        "alt": "Map of Southwest Washington, highlighting Clark, Cowlitz, and Skamania counties."
+    },
+    "cities": [
+        "Vancouver",
+        "Woodland",
+        "Camas",
+        "Longview"
+    ]
+}
