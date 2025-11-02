@@ -314,15 +314,9 @@
                     <div class="service-area-text">
                         <p>{{ .Site.Data.service_area.paragraph }}</p>
                         <p>Major cities we serve include:
-                            {{ range $index, $city := .Site.Data.service_area.cities }}
-                                {{ if eq $index 0 }}
-                                    {{ $city }}
-                                {{ else if eq (add $index 1) (len $.Site.Data.service_area.cities) }}
-                                    and {{ $city }}.
-                                {{ else }}
-                                    {{ $city }},
-                                {{ end }}
-                            {{ end }}
+                            {{- range $index, $city := .Site.Data.service_area.cities -}}
+                                {{- if eq $index 0 -}}{{ $city }}{{- else if eq (add $index 1) (len $.Site.Data.service_area.cities) -}} and {{ $city }}.{{- else -}}, {{ $city }}{{- end -}}
+                            {{- end -}}
                         </p>
                     </div>
                     <div class="service-area-map">
