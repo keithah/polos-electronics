@@ -181,6 +181,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#service-area">Service Area</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="nav-phone">
@@ -300,6 +301,32 @@
                             <div class="since-text">Since</div>
                             <div class="since-year">1979</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Area Section -->
+        <section id="service-area" class="service-area-section">
+            <div class="section-container">
+                <h2 class="section-title">{{ .Site.Data.service_area.title }}</h2>
+                <div class="service-area-content">
+                    <div class="service-area-text">
+                        <p>{{ .Site.Data.service_area.paragraph }}</p>
+                        <p>Major cities we serve include:
+                            {{ range $index, $city := .Site.Data.service_area.cities }}
+                                {{ if eq $index 0 }}
+                                    {{ $city }}
+                                {{ else if eq (add $index 1) (len $.Site.Data.service_area.cities) }}
+                                    and {{ $city }}.
+                                {{ else }}
+                                    {{ $city }},
+                                {{ end }}
+                            {{ end }}
+                        </p>
+                    </div>
+                    <div class="service-area-map">
+                        <img src="{{ .Site.Data.service_area.map.url | relURL }}" alt="{{ .Site.Data.service_area.map.alt }}">
                     </div>
                 </div>
             </div>
