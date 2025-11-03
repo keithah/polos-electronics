@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   fetch-reviews:
+    timeout-minutes: 8
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
