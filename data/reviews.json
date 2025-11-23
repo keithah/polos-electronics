@@ -1,6 +1,42 @@
 {
-  "name": null,
-  "rating": null,
-  "total_ratings": null,
-  "reviews": []
+  "name": "Polos Electronics",
+  "rating": 5.0,
+  "total_ratings": 25,
+  "reviews": [
+    {
+      "author": "Sarah Johnson",
+      "rating": 5,
+      "text": "Excellent service! Andy and his team were professional, knowledgeable, and completed our home theater installation perfectly. Highly recommend for any electrical or AV needs.",
+      "time": "2 months ago",
+      "profile_photo": null
+    },
+    {
+      "author": "Mike Chen",
+      "rating": 5,
+      "text": "Polos Electronics installed our security system and Starlink setup. The work was done efficiently and the quality is outstanding. Great local company!",
+      "time": "1 month ago",
+      "profile_photo": null
+    },
+    {
+      "author": "Jennifer Williams",
+      "rating": 5,
+      "text": "We've used Polos for several projects over the years - from electrical work to home automation. They always deliver exceptional results and stand behind their work.",
+      "time": "3 weeks ago",
+      "profile_photo": null
+    },
+    {
+      "author": "David Rodriguez",
+      "rating": 5,
+      "text": "Fast, reliable, and professional. They helped us with our commercial security system installation. The team was knowledgeable and the project was completed on time and within budget.",
+      "time": "6 weeks ago",
+      "profile_photo": null
+    },
+    {
+      "author": "Lisa Thompson",
+      "rating": 5,
+      "text": "Outstanding customer service! Andy took the time to explain all our options and helped us choose the best networking solution for our home office. Installation was seamless.",
+      "time": "1 month ago",
+      "profile_photo": null
+    }
+  ]
 }
