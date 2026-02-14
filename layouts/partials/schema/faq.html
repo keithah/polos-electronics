@@ -1,0 +1,28 @@
+{{- $faq := .Site.Data.faq -}}
+{{- $baseURL := .Site.BaseURL -}}
+
+{{- /* Build questions array */ -}}
+{{- $questions := slice -}}
+{{- range $faq.questions -}}
+  {{- $q := dict
+    "@type" "Question"
+    "name" .question
+    "acceptedAnswer" (dict
+      "@type" "Answer"
+      "text" .answer
+    )
+  -}}
+  {{- $questions = $questions | append $q -}}
+{{- end -}}
+
+{{- /* Build FAQPage schema */ -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "FAQPage"
+  "@id" (printf "%s#faq" $baseURL)
+  "mainEntity" $questions
+-}}
+
+<script type="application/ld+json">
+{{- $schema | jsonify | safeJS -}}
+</script>
