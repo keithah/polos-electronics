@@ -1,17 +1,16 @@
-name: Fetch Google Reviews
+name: Fetch Reviews
 
 on:
   schedule:
-    # Run once per day at midnight UTC
-    - cron: '0 0 * * *'
-  workflow_dispatch: # Allow manual trigger
+    - cron: '0 0 1 * *' # Monthly: first day of month at midnight UTC
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   fetch-reviews:
-    timeout-minutes: 8
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -19,29 +18,240 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install playwright
+          npx playwright install chromium --with-deps
+
+      - name: Extract platforms metadata
+        run: |
+          if [ -f data/reviews.json ]; then
+            jq '.platforms // {}' data/reviews.json > /tmp/platforms.json
+            echo "Preserved platforms metadata"
+          else
+            echo '{}' > /tmp/platforms.json
+            echo "No existing platforms metadata - will use empty object"
+          fi
+
       - name: Fetch Google Reviews
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
         run: |
-          # Fetch place details with reviews
-          RESPONSE=$(curl -s "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}")
+          RESPONSE=$(curl -sf "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}" || echo '{"result":{}}')
 
-          # Extract ALL reviews and save to data file
-          echo "$RESPONSE" | jq -r '.result | {
-            name: .name,
+          echo "$RESPONSE" | jq '{
+            overallRating: .result.rating,
+            totalReviews: .result.user_ratings_total
+          }' > /tmp/google-stats.json
+          echo "Google stats: rating=$(jq -r '.overallRating' /tmp/google-stats.json), total=$(jq -r '.totalReviews' /tmp/google-stats.json)"
+
+          echo "$RESPONSE" | jq '[.result.reviews[]? | select(.rating >= 4) | {
+            id: ("google-" + (.time | tostring)),
+            platform: "google",
+            author: .author_name,
             rating: .rating,
-            total_ratings: .user_ratings_total,
-            reviews: [.reviews[]? | {
-              author: .author_name,
-              rating: .rating,
-              text: .text,
-              time: .relative_time_description,
-              profile_photo: .profile_photo_url
-            }]
-          }' > data/reviews.json
+            text: .text,
+            date: .relative_time_description,
+            relativeTime: .relative_time_description,
+            profilePhoto: .profile_photo_url
+          }]' > /tmp/google-reviews.json
 
-          echo "Reviews fetched successfully"
+          echo "Fetched $(jq 'length' /tmp/google-reviews.json) Google reviews (4-5 stars)"
+
+      - name: Fetch Yelp Reviews
+        env:
+          YELP_API_KEY: ${{ secrets.YELP_API_KEY }}
+          YELP_BUSINESS_ID: ${{ secrets.YELP_BUSINESS_ID }}
+        run: |
+          if [ -z "$YELP_API_KEY" ]; then
+            echo "YELP_API_KEY not configured - skipping Yelp fetch"
+            echo "[]" > /tmp/yelp-reviews.json
+            exit 0
+          fi
+
+          BUSINESS_ID="${YELP_BUSINESS_ID:-polos-electronics-battle-ground}"
+
+          RESPONSE=$(curl -sf "https://api.yelp.com/v3/businesses/${BUSINESS_ID}/reviews" \
+            -H "Authorization: Bearer ${YELP_API_KEY}" || echo '{"reviews":[]}')
+
+          BUSINESS_RESPONSE=$(curl -sf "https://api.yelp.com/v3/businesses/${BUSINESS_ID}" \
+            -H "Authorization: Bearer ${YELP_API_KEY}" || echo '{}')
+          echo "$BUSINESS_RESPONSE" | jq '{
+            overallRating: .rating,
+            totalReviews: .review_count
+          }' > /tmp/yelp-stats.json
+          echo "Yelp stats: rating=$(jq -r '.overallRating' /tmp/yelp-stats.json), total=$(jq -r '.totalReviews' /tmp/yelp-stats.json)"
+
+          echo "$RESPONSE" | jq '[.reviews[]? | select(.rating >= 4) | {
+            id: .id,
+            platform: "yelp",
+            author: .user.name,
+            rating: .rating,
+            text: .text,
+            date: .time_created,
+            relativeTime: .time_created,
+            profilePhoto: .user.image_url
+          }]' > /tmp/yelp-reviews.json
+
+          echo "Fetched $(jq 'length' /tmp/yelp-reviews.json) Yelp reviews (4-5 stars)"
+
+      - name: Scrape HomeAdvisor Reviews
+        run: |
+          cat > /tmp/scrape-homeadvisor.js << 'EOF'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            const reviews = [];
+
+            try {
+              await page.goto('https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html', {
+                waitUntil: 'networkidle',
+                timeout: 30000
+              });
+
+              await page.waitForSelector('[data-testid="review-card"], .review-card, .pro-review', {
+                timeout: 10000
+              }).catch(() => console.log('Review selector not found, page may have different structure'));
+
+              const reviewElements = await page.$$('[data-testid="review-card"], .review-card, .pro-review, .review-item');
+
+              for (const el of reviewElements.slice(0, 10)) {
+                try {
+                  const author = await el.$eval('[class*="author"], [class*="name"], .reviewer-name', e => e.textContent?.trim()).catch(() => 'HomeAdvisor User');
+                  const rating = await el.$eval('[class*="rating"], [class*="stars"]', e => {
+                    const stars = e.querySelectorAll('[class*="filled"], .star-filled, [data-filled="true"]').length;
+                    return stars || parseInt(e.getAttribute('data-rating') || e.textContent?.match(/(\d)/)?.[1] || '5', 10);
+                  }).catch(() => 5);
+                  const text = await el.$eval('[class*="text"], [class*="content"], .review-text, .review-content', e => e.textContent?.trim()).catch(() => '');
+                  const date = await el.$eval('[class*="date"], time', e => e.textContent?.trim() || e.getAttribute('datetime')).catch(() => new Date().toISOString().split('T')[0]);
+
+                  if (text && rating >= 4) {
+                    reviews.push({
+                      id: 'homeadvisor-' + Date.now() + '-' + reviews.length,
+                      platform: 'homeadvisor',
+                      author,
+                      rating: parseInt(rating, 10),
+                      text,
+                      date,
+                      relativeTime: date,
+                      profilePhoto: null
+                    });
+                  }
+                } catch (error) {
+                  console.log('Error extracting review:', error.message);
+                }
+              }
+            } catch (error) {
+              console.error('HomeAdvisor scrape error:', error.message);
+            }
+
+            await browser.close();
+            console.log(JSON.stringify(reviews));
+          })();
+          EOF
+
+          node /tmp/scrape-homeadvisor.js > /tmp/homeadvisor-reviews.json 2>/tmp/homeadvisor-error.log || echo "[]" > /tmp/homeadvisor-reviews.json
+          echo "Scraped $(jq 'length' /tmp/homeadvisor-reviews.json) HomeAdvisor reviews (4-5 stars)"
+
+      - name: Scrape Nextdoor Reviews
+        run: |
+          cat > /tmp/scrape-nextdoor.js << 'EOF'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            const reviews = [];
+
+            try {
+              await page.goto('https://nextdoor.com/pages/polos-electronics-battle-ground-wa/', {
+                waitUntil: 'networkidle',
+                timeout: 30000
+              });
+
+              await page.waitForTimeout(3000);
+
+              const reviewElements = await page.$$('[class*="recommendation"], [class*="review"], [class*="testimonial"]');
+
+              for (const el of reviewElements.slice(0, 10)) {
+                try {
+                  const author = await el.$eval('[class*="author"], [class*="name"]', e => e.textContent?.trim()).catch(() => 'Neighbor');
+                  const text = await el.$eval('[class*="text"], [class*="content"], [class*="body"]', e => e.textContent?.trim()).catch(() => '');
+                  const date = await el.$eval('[class*="date"], time', e => e.textContent?.trim() || e.getAttribute('datetime')).catch(() => new Date().toISOString().split('T')[0]);
+
+                  if (text) {
+                    reviews.push({
+                      id: 'nextdoor-' + Date.now() + '-' + reviews.length,
+                      platform: 'nextdoor',
+                      author,
+                      rating: null,
+                      text,
+                      date,
+                      relativeTime: date,
+                      profilePhoto: null
+                    });
+                  }
+                } catch (error) {
+                  console.log('Error extracting review:', error.message);
+                }
+              }
+            } catch (error) {
+              console.error('Nextdoor scrape error:', error.message);
+            }
+
+            await browser.close();
+            console.log(JSON.stringify(reviews));
+          })();
+          EOF
+
+          node /tmp/scrape-nextdoor.js > /tmp/nextdoor-reviews.json 2>/tmp/nextdoor-error.log || echo "[]" > /tmp/nextdoor-reviews.json
+          echo "Scraped $(jq 'length' /tmp/nextdoor-reviews.json) Nextdoor recommendations"
+
+      - name: Update platforms with stats
+        run: |
+          if [ -f /tmp/google-stats.json ]; then
+            jq --slurpfile stats /tmp/google-stats.json '
+              .google = (.google // {}) + $stats[0]
+            ' /tmp/platforms.json > /tmp/platforms-updated.json
+            mv /tmp/platforms-updated.json /tmp/platforms.json
+          fi
+
+          if [ -f /tmp/yelp-stats.json ]; then
+            jq --slurpfile stats /tmp/yelp-stats.json '
+              .yelp = (.yelp // {}) + $stats[0]
+            ' /tmp/platforms.json > /tmp/platforms-updated.json
+            mv /tmp/platforms-updated.json /tmp/platforms.json
+          fi
+
+          echo "Updated platforms with stats:"
+          jq '.' /tmp/platforms.json
+
+      - name: Merge all reviews into data/reviews.json
+        run: |
+          jq -s '{
+            reviews: (.[0] + .[1] + .[2] + .[3]),
+            platforms: .[4],
+            lastUpdated: (now | strftime("%Y-%m-%dT%H:%M:%SZ"))
+          }' /tmp/google-reviews.json /tmp/yelp-reviews.json /tmp/homeadvisor-reviews.json /tmp/nextdoor-reviews.json /tmp/platforms.json > data/reviews.json
+
+          echo "Merged reviews:"
+          echo "  - Google: $(jq 'length' /tmp/google-reviews.json)"
+          echo "  - Yelp: $(jq 'length' /tmp/yelp-reviews.json)"
+          echo "  - HomeAdvisor: $(jq 'length' /tmp/homeadvisor-reviews.json)"
+          echo "  - Nextdoor: $(jq 'length' /tmp/nextdoor-reviews.json)"
+          echo "  - Total: $(jq '.reviews | length' data/reviews.json)"
+          echo "  - Platforms preserved: $(jq '.platforms | keys | length' data/reviews.json)"
+          echo "Platform stats captured:"
+          echo "  - Google: rating=$(jq -r '.platforms.google.overallRating // "N/A"' data/reviews.json), total=$(jq -r '.platforms.google.totalReviews // "N/A"' data/reviews.json)"
+          echo "  - Yelp: rating=$(jq -r '.platforms.yelp.overallRating // "N/A"' data/reviews.json), total=$(jq -r '.platforms.yelp.totalReviews // "N/A"' data/reviews.json)"
 
       - name: Commit and push if changed
         run: |
