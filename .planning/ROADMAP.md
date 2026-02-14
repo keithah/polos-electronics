@@ -9,7 +9,7 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 - ✅ **v1.0 Foundation** - Phases 1-3 (shipped 2026-02-14)
 - 🚧 **v1.1 Reliability & Visibility** - Phases 4-6 (in progress)
 - ✅ **v1.2 Interactive Coverage Map** - Phase 7 (shipped 2026-02-14)
-- ⏳ **v1.3 SEO Enhancement** - Phase 8 (planned)
+- ✅ **v1.3 SEO Enhancement** - Phase 8 (shipped 2026-02-14)
 
 ## Phases
 
@@ -44,11 +44,11 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 
 - [x] **Phase 7: Interactive Service Map** - Embed an interactive map (iframe) with robust static fallback
 
-### ⏳ v1.3 SEO Enhancement (Planned)
+### ✅ v1.3 SEO Enhancement (Shipped 2026-02-14)
 
 **Milestone Goal:** Maximize search visibility and click-through rates through structured data enhancements, rich snippets, and technical SEO improvements.
 
-- [ ] **Phase 8: SEO Enhancement** - Add AggregateRating schema, Review schema, optimized social images, and technical SEO improvements
+- [x] **Phase 8: SEO Enhancement** - Add AggregateRating schema, Review schema, optimized social images, and technical SEO improvements
 
 ## Phase Details
 
@@ -106,10 +106,11 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
   6. Images are optimized for page speed (lazy loading, proper sizing)
   7. FAQ answers include internal links to relevant sections
 **Plans**: 3 plans
+**Status**: ✓ Complete (2026-02-14)
 Plans:
-- [ ] 08-01-PLAN.md — Schema enhancement (AggregateRating, Review, GeoCircle)
-- [ ] 08-02-PLAN.md — Social image, sitemap config, FAQ internal links
-- [ ] 08-03-PLAN.md — Image lazy loading optimization
+- [x] 08-01-PLAN.md — Schema enhancement (AggregateRating, Review, GeoCircle)
+- [x] 08-02-PLAN.md — Social image, sitemap config, FAQ internal links
+- [x] 08-03-PLAN.md — Image lazy loading optimization
 
 ## Progress
 
@@ -125,4 +126,4 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7 > 8
 | 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
-| 8. SEO Enhancement | v1.3 | 0/3 | Not started | - |
+| 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |

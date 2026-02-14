@@ -35,22 +35,22 @@ Requirements for reliability and visibility. Each maps to roadmap phases 4-6.
 
 ### Structured Data & Rich Snippets
 
-- [ ] **SEO-01**: Google search results show star ratings via AggregateRating schema derived from real reviews
-- [ ] **SEO-02**: Individual reviews marked up with Review schema for potential rich snippet eligibility
-- [ ] **SEO-03**: Service area coverage enhanced with GeoCircle/GeoShape schema for local search
+- [x] **SEO-01**: Google search results show star ratings via AggregateRating schema derived from real reviews
+- [x] **SEO-02**: Individual reviews marked up with Review schema for potential rich snippet eligibility
+- [x] **SEO-03**: Service area coverage enhanced with GeoCircle/GeoShape schema for local search
 
 ### Social & Visual
 
-- [ ] **SEO-04**: Social shares display a branded designed image instead of just the logo
+- [x] **SEO-04**: Social shares display a branded designed image instead of just the logo
 
 ### Technical SEO
 
-- [ ] **SEO-05**: Sitemap.xml exists, is current, and properly configured for search engines
-- [ ] **SEO-06**: Images optimized for page speed (WebP format, lazy loading, proper dimensions)
+- [x] **SEO-05**: Sitemap.xml exists, is current, and properly configured for search engines
+- [x] **SEO-06**: Images optimized for page speed (WebP format, lazy loading, proper dimensions)
 
 ### Internal Linking
 
-- [ ] **SEO-07**: FAQ answers include contextual internal links to contact form, services, and service area sections
+- [x] **SEO-07**: FAQ answers include contextual internal links to contact form, services, and service area sections
 
 ## v2 Requirements
 
@@ -91,18 +91,18 @@ Which phases cover which requirements.
 | OPER-03 | Phase 6 | Pending |
 | IMAP-01 | Phase 7 | ✓ Complete |
 | IMAP-02 | Phase 7 | ✓ Complete |
-| SEO-01 | Phase 8 | Pending |
-| SEO-02 | Phase 8 | Pending |
-| SEO-03 | Phase 8 | Pending |
-| SEO-04 | Phase 8 | Pending |
-| SEO-05 | Phase 8 | Pending |
-| SEO-06 | Phase 8 | Pending |
-| SEO-07 | Phase 8 | Pending |
+| SEO-01 | Phase 8 | ✓ Complete |
+| SEO-02 | Phase 8 | ✓ Complete |
+| SEO-03 | Phase 8 | ✓ Complete |
+| SEO-04 | Phase 8 | ✓ Complete |
+| SEO-05 | Phase 8 | ✓ Complete |
+| SEO-06 | Phase 8 | ✓ Complete |
+| SEO-07 | Phase 8 | ✓ Complete |
 
 **Coverage:**
 - v1.1 requirements: 10 total (3 complete, 7 pending)
 - v1.2 requirements: 2 total (2 complete)
-- v1.3 requirements: 7 total (0 complete)
+- v1.3 requirements: 7 total (7 complete)
 
 ---
 *Requirements defined: 2026-02-14*
