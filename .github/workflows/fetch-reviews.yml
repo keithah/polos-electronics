@@ -70,7 +70,34 @@ jobs:
             exit 0
           fi
 
-          RESPONSE=$(curl -sf "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}" || echo '{"result":{}}')
+          GOOGLE_BODY="/tmp/google-response.json"
+          GOOGLE_HTTP_CODE=$(curl -sS -o "$GOOGLE_BODY" -w "%{http_code}" \
+            "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}")
+
+          if [ "$GOOGLE_HTTP_CODE" != "200" ]; then
+            echo "Google API request failed with HTTP ${GOOGLE_HTTP_CODE}."
+            echo "Likely causes: invalid key, key restrictions, billing disabled, or transient upstream issue."
+            exit 1
+          fi
+
+          GOOGLE_STATUS=$(jq -r '.status // "UNKNOWN"' "$GOOGLE_BODY")
+          GOOGLE_ERROR=$(jq -r '.error_message // empty' "$GOOGLE_BODY")
+
+          if [ "$GOOGLE_STATUS" = "REQUEST_DENIED" ] || [ "$GOOGLE_STATUS" = "INVALID_REQUEST" ] || [ "$GOOGLE_STATUS" = "OVER_DAILY_LIMIT" ]; then
+            echo "Google Places status=${GOOGLE_STATUS}."
+            if [ -n "$GOOGLE_ERROR" ]; then
+              echo "Google error: ${GOOGLE_ERROR}"
+            fi
+            echo "Likely key configuration issue (bad key, bad restriction, missing billing, or disabled API)."
+            exit 1
+          fi
+
+          if [ "$GOOGLE_STATUS" = "OVER_QUERY_LIMIT" ]; then
+            echo "Google Places quota exceeded (OVER_QUERY_LIMIT)."
+            exit 1
+          fi
+
+          RESPONSE=$(cat "$GOOGLE_BODY")
 
           echo "$RESPONSE" | jq '{
             overallRating: .result.rating,
@@ -105,11 +132,41 @@ jobs:
 
           BUSINESS_ID="${YELP_BUSINESS_ID:-polos-electronics-battle-ground}"
 
-          RESPONSE=$(curl -sf "https://api.yelp.com/v3/businesses/${BUSINESS_ID}/reviews" \
-            -H "Authorization: Bearer ${YELP_API_KEY}" || echo '{"reviews":[]}')
+          YELP_REVIEWS_BODY="/tmp/yelp-reviews-response.json"
+          YELP_REVIEWS_HTTP_CODE=$(curl -sS -o "$YELP_REVIEWS_BODY" -w "%{http_code}" \
+            "https://api.yelp.com/v3/businesses/${BUSINESS_ID}/reviews" \
+            -H "Authorization: Bearer ${YELP_API_KEY}")
 
-          BUSINESS_RESPONSE=$(curl -sf "https://api.yelp.com/v3/businesses/${BUSINESS_ID}" \
-            -H "Authorization: Bearer ${YELP_API_KEY}" || echo '{}')
+          if [ "$YELP_REVIEWS_HTTP_CODE" = "401" ] || [ "$YELP_REVIEWS_HTTP_CODE" = "403" ]; then
+            echo "Yelp API auth failed with HTTP ${YELP_REVIEWS_HTTP_CODE}."
+            echo "Likely bad or revoked YELP_API_KEY."
+            exit 1
+          fi
+
+          if [ "$YELP_REVIEWS_HTTP_CODE" = "404" ]; then
+            echo "Yelp business not found (HTTP 404)."
+            echo "Likely bad YELP_BUSINESS_ID: ${BUSINESS_ID}."
+            exit 1
+          fi
+
+          if [ "$YELP_REVIEWS_HTTP_CODE" != "200" ]; then
+            echo "Yelp Reviews API request failed with HTTP ${YELP_REVIEWS_HTTP_CODE}."
+            exit 1
+          fi
+
+          RESPONSE=$(cat "$YELP_REVIEWS_BODY")
+
+          YELP_BUSINESS_BODY="/tmp/yelp-business-response.json"
+          YELP_BUSINESS_HTTP_CODE=$(curl -sS -o "$YELP_BUSINESS_BODY" -w "%{http_code}" \
+            "https://api.yelp.com/v3/businesses/${BUSINESS_ID}" \
+            -H "Authorization: Bearer ${YELP_API_KEY}")
+
+          if [ "$YELP_BUSINESS_HTTP_CODE" != "200" ]; then
+            echo "Yelp Business API request failed with HTTP ${YELP_BUSINESS_HTTP_CODE}."
+            exit 1
+          fi
+
+          BUSINESS_RESPONSE=$(cat "$YELP_BUSINESS_BODY")
           echo "$BUSINESS_RESPONSE" | jq '{
             overallRating: .rating,
             totalReviews: .review_count
