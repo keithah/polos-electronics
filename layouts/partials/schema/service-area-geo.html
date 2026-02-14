@@ -1,0 +1,31 @@
+{{- /*
+  GeoCircle schema for service area coverage.
+  Defines an 80km radius from Battle Ground, WA coordinates.
+*/ -}}
+{{- $b := .Site.Data.business -}}
+{{- $baseURL := .Site.BaseURL -}}
+
+{{- $geoMidpoint := dict
+  "@type" "GeoCoordinates"
+  "latitude" $b.geo.latitude
+  "longitude" $b.geo.longitude
+-}}
+
+{{- $serviceArea := dict
+  "@type" "GeoCircle"
+  "geoMidpoint" $geoMidpoint
+  "geoRadius" "80000"
+-}}
+
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Service"
+  "provider" (dict "@id" (printf "%s#organization" $baseURL))
+  "areaServed" $serviceArea
+  "name" "Low Voltage Electrical Services"
+  "description" "Electrical installations, security systems, home theater, networking in Southwest Washington"
+-}}
+
+<script type="application/ld+json">
+{{- $schema | jsonify | safeJS -}}
+</script>
