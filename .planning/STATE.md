@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 ## Current Position
 
 Phase: 5 of 6 for v1.1 (Validation & CI Gates) - COMPLETE
-Plan: 1/1 plans complete
+Plan: 2/2 plans complete
 Status: Phase complete
-Last activity: 2026-02-14 — Completed 05-01-PLAN.md
+Last activity: 2026-02-14 — Completed 05-02-PLAN.md
 
-Progress: [██████░░░░] 60% (v1.1 in progress, 1 phase remaining)
+Progress: [███████░░░] 70% (v1.1 in progress, 1 phase remaining)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 16
 - Average duration: 2.6 min
-- Total execution time: 40 min
+- Total execution time: 42 min
 
 **By Phase:**
 
@@ -32,11 +32,11 @@ Progress: [██████░░░░] 60% (v1.1 in progress, 1 phase remain
 | 03-service-area-mapping | 3 | 4 min | 1.3 min |
 | 04-rendering-reliability | 2 | 12 min | 6.0 min |
 | 04.1-restore-rendering-reliability | 1 | 3 min | 3.0 min |
-| 05-validation-ci-gates | 1 | 1 min | 1.0 min |
+| 05-validation-ci-gates | 2 | 3 min | 1.5 min |
 | 08-seo-enhancement | 3 | 8 min | 2.7 min |
 
 **Recent Trend:**
-- Last 5 plans: 08-02 (3 min), 08-03 (1 min), 04.1-01 (3 min), 05-01 (1 min)
+- Last 5 plans: 08-03 (1 min), 04.1-01 (3 min), 05-01 (1 min), 05-02 (2 min)
 - Trend: Fast execution on CI/validation work
 
 ## Accumulated Context
@@ -53,6 +53,7 @@ Recent decisions affecting current work:
 - Hero image kept eager (no lazy loading) for good LCP score
 - 45-day stale threshold for review freshness indicator
 - Conditional fallback logic: use fallbackReviews ONLY when live reviews array is empty
+- Disabled taxonomy/term kinds in hugo.toml to eliminate warnings for single-page site
 
 ### Pending Todos
 
@@ -65,6 +66,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Completed 05-01-PLAN.md - Phase 5 complete
+Stopped at: Completed 05-02-PLAN.md - Phase 5 complete (all plans)
 Resume file: None
 Next action: `/gsd:discuss-phase 6` (Operations & Recovery)
