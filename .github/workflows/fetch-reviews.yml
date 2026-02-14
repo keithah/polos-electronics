@@ -93,15 +93,16 @@ jobs:
             Y_HTTP=$(curl -sS -o "$Y_BODY" -w "%{http_code}" \
               "https://api.yelp.com/v3/businesses/${BIZ_ID}" \
               -H "Authorization: Bearer ${YELP_API_KEY}")
+            Y_ERROR=$(jq -r '.error.description // .error.code // empty' "$Y_BODY" 2>/dev/null || true)
 
             if [ "$Y_HTTP" = "401" ] || [ "$Y_HTTP" = "403" ]; then
-              echo "::error::Yelp validation failed (http=${Y_HTTP}) invalid or unauthorized YELP_API_KEY."
+              echo "::error::Yelp validation failed (http=${Y_HTTP}) invalid or unauthorized YELP_API_KEY. ${Y_ERROR}"
               issues=$((issues + 1))
             elif [ "$Y_HTTP" = "404" ]; then
-              echo "::error::Yelp validation failed (http=404) invalid YELP_BUSINESS_ID: ${BIZ_ID}."
+              echo "::error::Yelp validation failed (http=404) invalid YELP_BUSINESS_ID: ${BIZ_ID}. ${Y_ERROR}"
               issues=$((issues + 1))
             elif [ "$Y_HTTP" != "200" ]; then
-              echo "::error::Yelp validation failed (http=${Y_HTTP}) unexpected upstream response."
+              echo "::error::Yelp validation failed (http=${Y_HTTP}) unexpected upstream response. ${Y_ERROR}"
               issues=$((issues + 1))
             else
               echo "Yelp validation ok (business=${BIZ_ID})."
