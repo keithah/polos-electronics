@@ -100,6 +100,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#service-area">Service Area</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="nav-phone">
@@ -305,6 +306,26 @@
                 <div class="cta-container">
                     <h2 class="cta-title">Not sure where to begin?<br>no need to worry, give us a call!</h2>
                     <a href="tel:+13606873543" class="btn btn-primary">CALL US NOW »</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <div class="section-container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    {{ range .Site.Data.faq.questions }}
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>{{ .question }}</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>{{ .answer }}</p>
+                        </div>
+                    </div>
+                    {{ end }}
                 </div>
             </div>
         </section>
@@ -564,6 +585,26 @@
                 updateCarousel();
             }
         }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isOpen = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+
+                // Open clicked item if it was closed
+                if (!isOpen) {
+                    item.classList.add('active');
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
     </script>
 </body>
 </html>
