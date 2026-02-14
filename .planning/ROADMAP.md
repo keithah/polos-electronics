@@ -73,7 +73,9 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
   1. Review fallback logic conditionally switches (not appends) when live reviews empty
   2. Freshness partial re-enabled with correct data contract fields
   3. `staleAfterDays` and `freshnessLabel` fields present in reviews.json
-**Plans**: 1 plan (04.1-01)
+**Plans**: 1 plan
+Plans:
+- [ ] 04.1-01-PLAN.md — Restore fallback logic and freshness metadata
 
 ### Phase 5: Validation & CI Gates
 **Goal**: Users are protected from silent homepage regressions because invalid inputs and broken output are blocked before publish
