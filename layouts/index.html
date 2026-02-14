@@ -282,15 +282,22 @@
             <div class="section-container">
                 <h2 class="section-title">What Our Customers Say</h2>
 
-                {{ if .Site.Data.reviews }}
+                {{ $reviewsData := .Site.Data.reviews | default dict }}
                 {{ $displayReviews := slice }}
-                {{ range .Site.Data.reviews.reviews }}
+                {{ range $reviewsData.reviews }}
                     {{ if or (ge (int (.rating | default 0)) 4) (eq .platform "nextdoor") }}
                         {{ $displayReviews = $displayReviews | append . }}
                     {{ end }}
                 {{ end }}
 
-                {{ if gt (len $displayReviews) 0 }}
+                {{ if eq (len $displayReviews) 0 }}
+                    {{ range $reviewsData.fallbackReviews }}
+                        {{ if or (ge (int (.rating | default 0)) 4) (eq .platform "nextdoor") }}
+                            {{ $displayReviews = $displayReviews | append . }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+
                 <div class="reviews-carousel">
                     <button class="carousel-btn prev" aria-label="Previous reviews">‹</button>
 
@@ -321,6 +328,15 @@
                                                  alt="{{ $review.platform | title }}"
                                                  class="platform-badge">
                                         </a>
+                                        {{ else }}
+                                        {{ with $review.profileUrl }}
+                                        <a href="{{ . }}" target="_blank" rel="noopener"
+                                           class="platform-badge-link" title="View on {{ $review.platform | title }}">
+                                            <img src="/images/platforms/{{ $review.platform }}-logo.svg"
+                                                 alt="{{ $review.platform | title }}"
+                                                 class="platform-badge">
+                                        </a>
+                                        {{ end }}
                                         {{ end }}
                                     </div>
 
@@ -342,6 +358,13 @@
                                        class="review-source-link">
                                         View on {{ .businessName | default ($review.platform | title) }}
                                     </a>
+                                    {{ else }}
+                                    {{ with $review.profileUrl }}
+                                    <a href="{{ . }}" target="_blank" rel="noopener"
+                                       class="review-source-link">
+                                        View on {{ $review.platform | title }}
+                                    </a>
+                                    {{ end }}
                                     {{ end }}
                                 </div>
                             {{ end }}
@@ -352,10 +375,6 @@
                 </div>
 
                 <div class="carousel-dots"></div>
-                {{ else }}
-                <p class="reviews-empty-state">Reviews are being refreshed. In the meantime, use the platform links below to read current customer feedback.</p>
-                {{ end }}
-                {{ end }}
 
                 <div class="reviews-cta">
                     <p class="reviews-cta-text">Leave us a review:</p>
