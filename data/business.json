@@ -1,0 +1,51 @@
+{
+  "type": "Electrician",
+  "name": "Polos Electronics",
+  "legalName": "Polos Electronics Inc.",
+  "description": "Locally owned and operated Low Voltage Electrical Contractor since 1979",
+  "telephone": "(360) 687-3543",
+  "email": "service@poloselectronics.com",
+  "url": "https://poloselectronics.com",
+  "address": {
+    "streetAddress": "20810 NE 267th St",
+    "addressLocality": "Battle Ground",
+    "addressRegion": "WA",
+    "postalCode": "98604",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "latitude": 45.7844,
+    "longitude": -122.5375
+  },
+  "foundingDate": "1979",
+  "priceRange": "$$",
+  "openingHours": {
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "16:00"
+  },
+  "areaServed": [
+    {
+      "name": "Clark County",
+      "state": "Washington",
+      "sameAs": "https://en.wikipedia.org/wiki/Clark_County,_Washington"
+    },
+    {
+      "name": "Cowlitz County",
+      "state": "Washington",
+      "sameAs": "https://en.wikipedia.org/wiki/Cowlitz_County,_Washington"
+    },
+    {
+      "name": "Skamania County",
+      "state": "Washington",
+      "sameAs": "https://en.wikipedia.org/wiki/Skamania_County,_Washington"
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/polos-electronics/",
+    "https://share.google/D3mexUt7VZzi7gvWZ",
+    "https://www.yelp.com/biz/polos-electronics-battle-ground",
+    "https://nextdoor.com/page/polos-electronics-battle-ground-wa",
+    "https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html"
+  ]
+}
