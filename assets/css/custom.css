@@ -696,6 +696,23 @@ body {
   background: #5a9fd4;
 }
 
+.reviews-reliability-meta {
+  text-align: center;
+  margin: -18px 0 30px;
+}
+
+.reviews-reliability-meta .reviews-freshness-meta {
+  color: #7b7b7b;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.reviews-reliability-meta .reviews-freshness-meta span,
+.reviews-reliability-meta--stale {
+  color: #8a8a8a;
+  font-size: 0.85rem;
+}
+
 .reviews-stats {
   text-align: center;
   margin-bottom: 50px;
@@ -1133,7 +1150,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: start;
 }
 
 .service-area-text p {
@@ -1143,35 +1160,73 @@ body {
   margin-bottom: 20px;
 }
 
-.service-area-map img {
+.service-area-map img,
+.service-area-map-image {
   width: 100%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+.service-area-map-fallback {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+}
+
+.service-area-map-fallback-context {
+  color: #323232;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.service-area-map-fallback-ctas {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.service-area-map-fallback-ctas .btn {
+  flex: 1 1 220px;
+  text-align: center;
+}
+
+.service-area-map-fallback-note {
+  color: #666;
+  font-size: 0.92rem;
+  margin-bottom: 0.35rem;
+}
+
+.service-area-map-fallback-note:last-child {
+  margin-bottom: 0;
+}
+
 /* Service Area Tiered Display */
 .service-area-tagline {
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   color: #fe3a46;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 2rem;
 }
 
 .service-area-primary {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .service-area-primary h3 {
   color: #323232;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.35rem;
 }
 
 .tier-description {
   color: #666;
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -1183,11 +1238,27 @@ body {
 }
 
 .city {
-  background: #f0f0f0;
+  background: #f1f4f8;
   padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+  border-radius: 999px;
+  border: 1px solid #dbe2ea;
   font-size: 0.9rem;
   color: #323232;
+}
+
+.county-group {
+  margin-bottom: 0.9rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.county-group strong {
+  color: #323232;
+  font-weight: 700;
+}
+
+.city-inline {
+  color: #4f4f4f;
 }
 
 .city.headquarters {
@@ -1196,42 +1267,16 @@ body {
   font-weight: 600;
 }
 
-.service-area-secondary {
-  margin-bottom: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #ddd;
-}
-
-.service-area-secondary h4 {
-  color: #323232;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.county-group {
-  margin-bottom: 0.75rem;
-  line-height: 1.6;
-}
-
-.county-group strong {
-  color: #fe3a46;
-}
-
-.city-inline {
-  color: #555;
-}
-
 .service-area-statewide {
   margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid #ddd;
-  color: #555;
+  color: #4a4a4a;
 }
 
 .service-area-cta {
-  margin-top: 1.5rem;
-  font-style: italic;
-  color: #666;
+  margin-top: 1rem;
+  color: #555;
   font-size: 1rem;
 }
 
@@ -1349,8 +1394,33 @@ body {
 }
 
 @media (max-width: 768px) {
+  .reviews-reliability-meta {
+    margin: -14px 0 24px;
+  }
+
+  .service-area-map-fallback {
+    padding: 1rem;
+  }
+
+  .service-area-map-fallback-context {
+    font-size: 0.95rem;
+  }
+
+  .service-area-map-fallback-ctas {
+    flex-direction: column;
+  }
+
+  .service-area-map-fallback-ctas .btn {
+    width: 100%;
+    max-width: none;
+  }
+
   .service-area-tagline {
     font-size: 1.1rem;
+  }
+
+  .county-group {
+    font-size: 0.98rem;
   }
 
   .city-list {

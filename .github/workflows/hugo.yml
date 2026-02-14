@@ -36,6 +36,22 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+      - name: Validate reliability inputs
+        run: |
+          jq -e '
+            (.reviews | type == "array") and
+            (.fallbackReviews | type == "array") and
+            ((.reviews | length) + (.fallbackReviews | length) >= 9) and
+            (.platforms | type == "object") and
+            (.lastUpdated | type == "string")
+          ' data/reviews.json > /dev/null
+
+          jq -e '
+            (.tiers | type == "array") and
+            (.map.url | type == "string") and
+            (.map.fallbackUrl | type == "string") and
+            (.map.fallbackContext | type == "string")
+          ' data/service_area.json > /dev/null
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
@@ -44,6 +60,12 @@ jobs:
           hugo \
             --gc \
             --minify
+      - name: Smoke check homepage output
+        run: |
+          test -f public/index.html
+          grep -q "What Our Customers Say" public/index.html
+          grep -q "Primary Service Areas" public/index.html
+          grep -q "service-area-map" public/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

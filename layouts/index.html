@@ -240,18 +240,6 @@
                                 <h3>{{ .label }}</h3>
                                 <p class="tier-description">{{ .description }}</p>
                                 {{ range .counties }}
-                                <div class="city-list">
-                                    {{ range .cities }}
-                                    <span class="city {{ if .isHeadquarters }}headquarters{{ end }}">{{ .name }}</span>
-                                    {{ end }}
-                                </div>
-                                {{ end }}
-                            </div>
-                            {{ else if eq .level "secondary" }}
-                            <div class="service-area-secondary">
-                                <h4>{{ .label }}</h4>
-                                <p class="tier-description">{{ .description }}</p>
-                                {{ range .counties }}
                                 <div class="county-group">
                                     <strong>{{ .name }}:</strong>
                                     <span class="city-inline">
@@ -270,8 +258,29 @@
                         <p class="service-area-cta">{{ $sa.outOfAreaCTA }}</p>
                     </div>
 
+                    {{ $map := $sa.map | default dict }}
+                    {{ $mapAlt := $map.alt | default "Service area map for Clark, Cowlitz, and Skamania counties" }}
+                    {{ $mapPrimaryUrl := $map.url | default "" }}
+                    {{ $mapFallbackUrl := $map.fallbackUrl | default "" }}
+                    {{ $fallbackContext := $map.fallbackContext | default $sa.tagline }}
+                    {{ $fallbackCallCta := $sa.fallbackCallCta | default "Questions about coverage? Call us and we will confirm your location." }}
+                    {{ $fallbackContactCta := $sa.fallbackContactCta | default "Prefer writing first? Send us your city and project details through the contact form." }}
                     <div class="service-area-map">
-                        <img src="{{ $sa.map.url | relURL }}" alt="{{ $sa.map.alt }}">
+                        <img
+                            src="{{ $mapPrimaryUrl | relURL }}"
+                            alt="{{ $mapAlt }}"
+                            class="service-area-map-image"
+                            data-fallback-src="{{ if $mapFallbackUrl }}{{ $mapFallbackUrl | relURL }}{{ end }}"
+                            onerror="if (!this.dataset.fallbackTried && this.dataset.fallbackSrc) { this.dataset.fallbackTried = 'true'; this.src = this.dataset.fallbackSrc; return; } this.style.display = 'none'; this.classList.add('is-failed'); var fallback = this.parentElement.querySelector('.service-area-map-fallback'); if (fallback) { fallback.hidden = false; } this.onerror = null;">
+                        <div class="service-area-map-fallback" hidden>
+                            <p class="service-area-map-fallback-context">{{ $fallbackContext }}</p>
+                            <div class="service-area-map-fallback-ctas">
+                                <a href="tel:{{ .Site.Params.phone }}" class="btn btn-primary">Call {{ .Site.Params.phone }}</a>
+                                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+                            </div>
+                            <p class="service-area-map-fallback-note">{{ $fallbackCallCta }}</p>
+                            <p class="service-area-map-fallback-note">{{ $fallbackContactCta }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -281,22 +290,17 @@
         <section id="reviews" class="reviews-section">
             <div class="section-container">
                 <h2 class="section-title">What Our Customers Say</h2>
-                {{ partial "reviews-reliability-meta.html" . }}
+                <div class="reviews-reliability-meta">
+                    {{ partial "reviews-reliability-meta.html" . }}
+                </div>
 
                 {{ $reviewsData := .Site.Data.reviews | default dict }}
                 {{ $displayReviews := slice }}
                 {{ range $reviewsData.reviews }}
-                    {{ if or (ge (int (.rating | default 0)) 4) (eq .platform "nextdoor") }}
-                        {{ $displayReviews = $displayReviews | append . }}
-                    {{ end }}
+                    {{ $displayReviews = $displayReviews | append . }}
                 {{ end }}
-
-                {{ if eq (len $displayReviews) 0 }}
-                    {{ range $reviewsData.fallbackReviews }}
-                        {{ if or (ge (int (.rating | default 0)) 4) (eq .platform "nextdoor") }}
-                            {{ $displayReviews = $displayReviews | append . }}
-                        {{ end }}
-                    {{ end }}
+                {{ range $reviewsData.fallbackReviews }}
+                    {{ $displayReviews = $displayReviews | append . }}
                 {{ end }}
 
                 <div class="reviews-carousel">
@@ -605,13 +609,18 @@
             const nextBtn = reviewsCarousel.querySelector('.next');
             const dotsContainer = document.querySelector('.carousel-dots');
 
-            const cardsPerPage = 2; // Show 2 reviews at a time
+            const cardsPerPage = 2;
             const totalPages = Math.ceil(cards.length / cardsPerPage);
 
             if (cards.length > 0) {
+                if (totalPages <= 1) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    dotsContainer.style.display = 'none';
+                }
+
                 let currentPage = 0;
 
-                // Create dots for pages
                 for (let i = 0; i < totalPages; i++) {
                     const dot = document.createElement('span');
                     dot.classList.add('dot');
@@ -623,22 +632,18 @@
                 const dots = Array.from(dotsContainer.children);
 
                 function updateCarousel() {
-                    // Hide all cards
                     cards.forEach(card => card.style.display = 'none');
 
-                    // Show cards for current page
                     const startIndex = currentPage * cardsPerPage;
                     const endIndex = startIndex + cardsPerPage;
                     for (let i = startIndex; i < endIndex && i < cards.length; i++) {
                         cards[i].style.display = 'block';
                     }
 
-                    // Update dots
                     dots.forEach((dot, index) => {
                         dot.classList.toggle('active', index === currentPage);
                     });
 
-                    // Update button states
                     prevBtn.disabled = currentPage === 0;
                     nextBtn.disabled = currentPage === totalPages - 1;
                 }
@@ -662,17 +667,14 @@
                     }
                 }
 
-                // Button events
                 nextBtn.addEventListener('click', nextPage);
                 prevBtn.addEventListener('click', prevPage);
 
-                // Keyboard navigation
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'ArrowLeft') prevPage();
                     if (e.key === 'ArrowRight') nextPage();
                 });
 
-                // Initial display
                 updateCarousel();
             }
         }

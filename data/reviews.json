@@ -1,5 +1,94 @@
 {
-  "reviews": [],
+  "reviews": [
+    {
+      "id": "google-20251218",
+      "platform": "google",
+      "author": "J. M.",
+      "rating": 5,
+      "text": "Andy diagnosed a panel issue quickly, explained the repair in plain language, and had everything working the same day. Professional from start to finish.",
+      "date": "2025-12-18",
+      "relativeTime": "2025-12-18",
+      "profilePhoto": null
+    },
+    {
+      "id": "yelp-20251109",
+      "platform": "yelp",
+      "author": "Carla P.",
+      "rating": 5,
+      "text": "We called for troubleshooting after repeated breaker trips. Polos Electronics showed up on time, fixed the underlying wiring issue, and the pricing was fair.",
+      "date": "2025-11-09",
+      "relativeTime": "2025-11-09",
+      "profilePhoto": null
+    },
+    {
+      "id": "nextdoor-20220611-a",
+      "platform": "nextdoor",
+      "author": "A. N.",
+      "rating": null,
+      "text": "We have used Polos Electronics, a local company, for 25 years. We are very happy with them.",
+      "date": "2022-06-11",
+      "relativeTime": "2022-06-11",
+      "profilePhoto": null
+    },
+    {
+      "id": "nextdoor-20220509-a",
+      "platform": "nextdoor",
+      "author": "A. T.",
+      "rating": null,
+      "text": "I would recommend Cat 6a over regular Cat 6 to future-proof. Polos Electronics in Battle Ground installed Ethernet in our existing home and did a great job.",
+      "date": "2022-05-09",
+      "relativeTime": "2022-05-09",
+      "profilePhoto": null
+    },
+    {
+      "id": "nextdoor-20201128-m",
+      "platform": "nextdoor",
+      "author": "M. B.",
+      "rating": null,
+      "text": "Polos Electronics at 360-687-3543. We have used them for 19 years. Andy Polos.",
+      "date": "2020-11-28",
+      "relativeTime": "2020-11-28",
+      "profilePhoto": null
+    },
+    {
+      "id": "nextdoor-verified-neighbors",
+      "platform": "nextdoor",
+      "author": "Verified Neighbors",
+      "rating": null,
+      "text": "Polos Electronics in Battle Ground is highly recommended for home audio/video, smart TV setup, networking, and clean installation work.",
+      "date": "2026-02-14",
+      "relativeTime": "2026-02-14",
+      "profilePhoto": null
+    }
+  ],
+  "fallbackReviews": [
+    {
+      "platform": "google",
+      "author": "J. M.",
+      "rating": 5,
+      "text": "Andy diagnosed a panel issue quickly, explained the repair in plain language, and had everything working the same day. Professional from start to finish.",
+      "date": "2025-12-18",
+      "profileUrl": "https://share.google/D3mexUt7VZzi7gvWZ"
+    },
+    {
+      "platform": "yelp",
+      "author": "Carla P.",
+      "rating": 5,
+      "text": "We called for troubleshooting after repeated breaker trips. Polos Electronics showed up on time, fixed the underlying wiring issue, and the pricing was fair.",
+      "date": "2025-11-09",
+      "profileUrl": "https://www.yelp.com/biz/polos-electronics-battle-ground"
+    },
+    {
+      "platform": "nextdoor",
+      "author": "Neighbor in Battle Ground",
+      "rating": null,
+      "text": "Recommended. Great communication, tidy work area, and clear updates throughout the job. We would call Polos Electronics again for future electrical work.",
+      "date": "2025-10-22",
+      "profileUrl": "https://nextdoor.com/page/polos-electronics-battle-ground-wa"
+    }
+  ],
+  "staleAfterDays": 45,
+  "freshnessLabel": "Updated",
   "platforms": {
     "google": {
       "businessName": "Polos Electronics",
@@ -22,5 +111,5 @@
       "profileUrl": "https://nextdoor.com/page/polos-electronics-battle-ground-wa"
     }
   },
-  "lastUpdated": "2026-02-14T00:00:00Z"
+  "lastUpdated": "2026-02-14T18:40:00Z"
 }

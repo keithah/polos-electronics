@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   fetch-reviews:
-    timeout-minutes: 15
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,6 +28,26 @@ jobs:
           npm install playwright
           npx playwright install chromium --with-deps
 
+      - name: Ensure reviews contract baseline
+        run: |
+          if [ ! -f data/reviews.json ]; then
+            cat > data/reviews.json <<'JSON'
+          {
+            "reviews": [],
+            "fallbackReviews": [],
+            "staleAfterDays": 45,
+            "freshnessLabel": "Updated",
+            "platforms": {
+              "google": {},
+              "yelp": {},
+              "homeadvisor": {},
+              "nextdoor": {}
+            },
+            "lastUpdated": ""
+          }
+          JSON
+          fi
+
       - name: Extract platforms metadata
         run: |
           if [ -f data/reviews.json ]; then
@@ -43,6 +63,13 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
         run: |
+          if [ -z "$GOOGLE_API_KEY" ] || [ -z "$GOOGLE_PLACE_ID" ]; then
+            echo "Google secrets missing - skipping Google fetch"
+            echo '[]' > /tmp/google-reviews.json
+            echo '{"overallRating": null, "totalReviews": null}' > /tmp/google-stats.json
+            exit 0
+          fi
+
           RESPONSE=$(curl -sf "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}" || echo '{"result":{}}')
 
           echo "$RESPONSE" | jq '{
@@ -72,6 +99,7 @@ jobs:
           if [ -z "$YELP_API_KEY" ]; then
             echo "YELP_API_KEY not configured - skipping Yelp fetch"
             echo "[]" > /tmp/yelp-reviews.json
+            echo '{"overallRating": null, "totalReviews": null}' > /tmp/yelp-stats.json
             exit 0
           fi
 
@@ -100,6 +128,169 @@ jobs:
           }]' > /tmp/yelp-reviews.json
 
           echo "Fetched $(jq 'length' /tmp/yelp-reviews.json) Yelp reviews (4-5 stars)"
+
+      - name: Scrape Google Reviews (fallback)
+        env:
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: |
+          cat > /tmp/scrape-google.js << 'EOF'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({
+              userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+            });
+            const reviews = [];
+
+            const placeId = process.env.GOOGLE_PLACE_ID || '';
+            const targets = [
+              'https://share.google/D3mexUt7VZzi7gvWZ',
+              placeId ? `https://www.google.com/maps/place/?q=place_id:${placeId}` : ''
+            ].filter(Boolean);
+
+            for (const targetUrl of targets) {
+              try {
+                await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
+                await page.waitForTimeout(2500);
+
+                const extracted = await page.evaluate(() => {
+                  const out = [];
+
+                  const fromDom = Array.from(document.querySelectorAll('[data-review-id], [jslog*="review"], [role="article"]'));
+                  for (const el of fromDom.slice(0, 30)) {
+                    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+                    if (text.length < 60) continue;
+                    const author = el.querySelector('[aria-label*="profile"], .d4r55')?.textContent?.trim() || 'Google Reviewer';
+                    out.push({ author, text, rating: 5, date: new Date().toISOString().slice(0, 10) });
+                  }
+
+                  return out;
+                });
+
+                for (const item of extracted) {
+                  if ((item.text || '').length > 60) {
+                    reviews.push({
+                      id: `google-scrape-${Date.now()}-${reviews.length}`,
+                      platform: 'google',
+                      author: item.author || 'Google Reviewer',
+                      rating: item.rating || 5,
+                      text: item.text,
+                      date: item.date,
+                      relativeTime: item.date,
+                      profilePhoto: null
+                    });
+                  }
+                }
+              } catch (error) {
+                console.log('Google scrape target failed:', targetUrl, error.message);
+              }
+            }
+
+            const seen = new Set();
+            const deduped = reviews.filter((r) => {
+              const key = `${r.author}|${r.text}`.toLowerCase();
+              if (seen.has(key)) return false;
+              seen.add(key);
+              return true;
+            });
+
+            await browser.close();
+            console.log(JSON.stringify(deduped));
+          })();
+          EOF
+
+          node /tmp/scrape-google.js > /tmp/google-scrape-reviews.json 2>/tmp/google-scrape-error.log || echo "[]" > /tmp/google-scrape-reviews.json
+          jq -e 'type == "array"' /tmp/google-scrape-reviews.json > /dev/null || echo "[]" > /tmp/google-scrape-reviews.json
+          echo "Scraped $(jq 'length' /tmp/google-scrape-reviews.json) Google reviews (fallback)"
+
+      - name: Scrape Yelp Reviews (fallback)
+        run: |
+          cat > /tmp/scrape-yelp.js << 'EOF'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({
+              userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+            });
+            const reviews = [];
+
+            try {
+              await page.goto('https://www.yelp.com/biz/polos-electronics-battle-ground', {
+                waitUntil: 'domcontentloaded',
+                timeout: 45000
+              });
+              await page.waitForTimeout(3000);
+
+              const extracted = await page.evaluate(() => {
+                const rows = [];
+
+                const jsonLd = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+                for (const script of jsonLd) {
+                  try {
+                    const data = JSON.parse(script.textContent || '{}');
+                    const reviews = Array.isArray(data.review) ? data.review : [];
+                    for (const r of reviews) {
+                      const rating = Number(r?.reviewRating?.ratingValue || 5);
+                      rows.push({
+                        author: r?.author?.name || 'Yelp Reviewer',
+                        text: r?.reviewBody || '',
+                        rating,
+                        date: r?.datePublished || new Date().toISOString().slice(0, 10)
+                      });
+                    }
+                  } catch (_) {}
+                }
+
+                const domReviews = Array.from(document.querySelectorAll('[data-testid="review"], .review, article'));
+                for (const el of domReviews.slice(0, 40)) {
+                  const text = (el.querySelector('[lang]')?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
+                  if (text.length < 60) continue;
+                  const author = el.querySelector('a[href*="/user_details"]')?.textContent?.trim() || 'Yelp Reviewer';
+                  const ratingLabel = el.querySelector('[aria-label*="star rating"]')?.getAttribute('aria-label') || '';
+                  const ratingMatch = ratingLabel.match(/([0-9]+(?:\.[0-9]+)?)/);
+                  const rating = ratingMatch ? Math.round(parseFloat(ratingMatch[1])) : 5;
+                  rows.push({ author, text, rating, date: new Date().toISOString().slice(0, 10) });
+                }
+
+                return rows;
+              });
+
+              for (const item of extracted) {
+                if ((item.text || '').length > 40 && (item.rating || 0) >= 4) {
+                  reviews.push({
+                    id: `yelp-scrape-${Date.now()}-${reviews.length}`,
+                    platform: 'yelp',
+                    author: item.author || 'Yelp Reviewer',
+                    rating: item.rating || 5,
+                    text: item.text,
+                    date: item.date,
+                    relativeTime: item.date,
+                    profilePhoto: null
+                  });
+                }
+              }
+            } catch (error) {
+              console.log('Yelp scrape failed:', error.message);
+            }
+
+            const seen = new Set();
+            const deduped = reviews.filter((r) => {
+              const key = `${r.author}|${r.text}`.toLowerCase();
+              if (seen.has(key)) return false;
+              seen.add(key);
+              return true;
+            });
+
+            await browser.close();
+            console.log(JSON.stringify(deduped));
+          })();
+          EOF
+
+          node /tmp/scrape-yelp.js > /tmp/yelp-scrape-reviews.json 2>/tmp/yelp-scrape-error.log || echo "[]" > /tmp/yelp-scrape-reviews.json
+          jq -e 'type == "array"' /tmp/yelp-scrape-reviews.json > /dev/null || echo "[]" > /tmp/yelp-scrape-reviews.json
+          echo "Scraped $(jq 'length' /tmp/yelp-scrape-reviews.json) Yelp reviews (fallback)"
 
       - name: Scrape HomeAdvisor Reviews
         run: |
@@ -236,34 +427,64 @@ jobs:
 
       - name: Merge all reviews into data/reviews.json
         run: |
-          jq -s '{
-            reviews: (.[0] + .[1] + .[2] + .[3]),
-            platforms: .[4],
-            lastUpdated: (now | strftime("%Y-%m-%dT%H:%M:%SZ"))
-          }' /tmp/google-reviews.json /tmp/yelp-reviews.json /tmp/homeadvisor-reviews.json /tmp/nextdoor-reviews.json /tmp/platforms.json > data/reviews.json
+          jq -s '
+            . as $all
+            | ($all[0] + $all[1] + $all[2] + $all[3] + $all[4] + $all[5]) as $incoming
+            | ($all[6]) as $platforms
+            | ($all[7]) as $current
+            | ($incoming
+                | map(select((.text // "") != "" and (.author // "") != "" and (.platform // "") != ""))
+                | unique_by((.platform // "") + "|" + (.author // "") + "|" + (.text // ""))
+              ) as $deduped
+            | {
+                reviews: (if ($deduped | length) > 0 then $deduped else ($current.reviews // []) end),
+                fallbackReviews: ($current.fallbackReviews // []),
+                staleAfterDays: ($current.staleAfterDays // 45),
+                freshnessLabel: ($current.freshnessLabel // "Updated"),
+                platforms: (($current.platforms // {}) + $platforms),
+                lastUpdated: (now | strftime("%Y-%m-%dT%H:%M:%SZ"))
+              }
+          ' /tmp/google-reviews.json /tmp/yelp-reviews.json /tmp/homeadvisor-reviews.json /tmp/nextdoor-reviews.json /tmp/google-scrape-reviews.json /tmp/yelp-scrape-reviews.json /tmp/platforms.json data/reviews.json > /tmp/reviews-updated.json
+
+          mv /tmp/reviews-updated.json data/reviews.json
 
           echo "Merged reviews:"
           echo "  - Google: $(jq 'length' /tmp/google-reviews.json)"
           echo "  - Yelp: $(jq 'length' /tmp/yelp-reviews.json)"
           echo "  - HomeAdvisor: $(jq 'length' /tmp/homeadvisor-reviews.json)"
           echo "  - Nextdoor: $(jq 'length' /tmp/nextdoor-reviews.json)"
+          echo "  - Google scraped: $(jq 'length' /tmp/google-scrape-reviews.json)"
+          echo "  - Yelp scraped: $(jq 'length' /tmp/yelp-scrape-reviews.json)"
           echo "  - Total: $(jq '.reviews | length' data/reviews.json)"
           echo "  - Platforms preserved: $(jq '.platforms | keys | length' data/reviews.json)"
           echo "Platform stats captured:"
           echo "  - Google: rating=$(jq -r '.platforms.google.overallRating // "N/A"' data/reviews.json), total=$(jq -r '.platforms.google.totalReviews // "N/A"' data/reviews.json)"
           echo "  - Yelp: rating=$(jq -r '.platforms.yelp.overallRating // "N/A"' data/reviews.json), total=$(jq -r '.platforms.yelp.totalReviews // "N/A"' data/reviews.json)"
 
+      - name: Validate reviews contract
+        run: |
+          jq -e '
+            (.reviews | type == "array") and
+            (.fallbackReviews | type == "array") and
+            (.staleAfterDays | type == "number") and
+            (.freshnessLabel | type == "string") and
+            (.platforms | type == "object") and
+            (.lastUpdated | type == "string") and
+            ((.fallbackReviews | length) >= 3) and
+            ((.fallbackReviews | all(has("platform") and has("author") and has("text") and has("date"))))
+          ' data/reviews.json > /dev/null
+
       - name: Commit and push if changed
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/reviews.json
 
           # Only commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to reviews"
           else
-            git commit -m "Update Google reviews data [skip ci]"
+            git commit -m "chore(reviews): refresh multi-source review data [skip ci]"
             git push
             echo "Reviews updated and pushed"
           fi

@@ -1,54 +1,62 @@
 {
   "heading": "Our Coverage Area",
-  "tagline": "Proudly serving Clark County since 1979",
+  "tagline": "Proudly serving Washington since 1979",
   "tiers": [
     {
       "level": "primary",
-      "label": "Clark County",
-      "description": "Our home base and primary service area",
+      "label": "Primary Service Areas",
+      "description": "Trusted local coverage built from decades of project experience",
       "counties": [
         {
           "name": "Clark County",
           "state": "WA",
           "sameAs": "https://en.wikipedia.org/wiki/Clark_County,_Washington",
           "cities": [
+            {"name": "Amboy", "type": "unincorporated"},
             {"name": "Battle Ground", "type": "city", "isHeadquarters": true},
-            {"name": "Vancouver", "type": "city"},
-            {"name": "Camas", "type": "city"},
-            {"name": "Washougal", "type": "city"},
-            {"name": "Ridgefield", "type": "city"},
-            {"name": "La Center", "type": "city"},
-            {"name": "Yacolt", "type": "city"},
             {"name": "Brush Prairie", "type": "unincorporated"},
-            {"name": "Hockinson", "type": "unincorporated"},
-            {"name": "Hazel Dell", "type": "unincorporated"},
-            {"name": "Orchards", "type": "unincorporated"},
-            {"name": "Salmon Creek", "type": "unincorporated"},
-            {"name": "Five Corners", "type": "unincorporated"},
+            {"name": "Camas", "type": "city"},
             {"name": "Felida", "type": "unincorporated"},
-            {"name": "Minnehaha", "type": "unincorporated"},
-            {"name": "Mill Plain", "type": "unincorporated"},
+            {"name": "Five Corners", "type": "unincorporated"},
+            {"name": "Hazel Dell", "type": "unincorporated"},
+            {"name": "Hockinson", "type": "unincorporated"},
+            {"name": "La Center", "type": "city"},
             {"name": "Meadow Glade", "type": "unincorporated"},
-            {"name": "Amboy", "type": "unincorporated"}
+            {"name": "Mill Plain", "type": "unincorporated"},
+            {"name": "Minnehaha", "type": "unincorporated"},
+            {"name": "Orchards", "type": "unincorporated"},
+            {"name": "Ridgefield", "type": "city"},
+            {"name": "Salmon Creek", "type": "unincorporated"},
+            {"name": "Vancouver", "type": "city"},
+            {"name": "Washougal", "type": "city"},
+            {"name": "Yacolt", "type": "city"}
           ]
-        }
-      ]
-    },
-    {
-      "level": "secondary",
-      "label": "Also Serving",
-      "description": "Bordering counties we regularly serve",
-      "counties": [
+        },
         {
           "name": "Cowlitz County",
           "state": "WA",
           "sameAs": "https://en.wikipedia.org/wiki/Cowlitz_County,_Washington",
           "cities": [
-            {"name": "Longview", "type": "city"},
-            {"name": "Kelso", "type": "city"},
-            {"name": "Woodland", "type": "city"},
+            {"name": "Castle Rock", "type": "city"},
             {"name": "Kalama", "type": "city"},
-            {"name": "Castle Rock", "type": "city"}
+            {"name": "Kelso", "type": "city"},
+            {"name": "Longview", "type": "city"},
+            {"name": "Toutle", "type": "unincorporated"},
+            {"name": "Woodland", "type": "city"}
+          ]
+        },
+        {
+          "name": "Lewis County",
+          "state": "WA",
+          "sameAs": "https://en.wikipedia.org/wiki/Lewis_County,_Washington",
+          "cities": [
+            {"name": "Centralia", "type": "city"},
+            {"name": "Chehalis", "type": "city"},
+            {"name": "Morton", "type": "city"},
+            {"name": "Mossyrock", "type": "city"},
+            {"name": "Napavine", "type": "city"},
+            {"name": "Toledo", "type": "city"},
+            {"name": "Winlock", "type": "city"}
           ]
         },
         {
@@ -56,22 +64,28 @@
           "state": "WA",
           "sameAs": "https://en.wikipedia.org/wiki/Skamania_County,_Washington",
           "cities": [
-            {"name": "Stevenson", "type": "city"},
+            {"name": "Carson", "type": "unincorporated"},
             {"name": "North Bonneville", "type": "city"},
-            {"name": "Carson", "type": "unincorporated"}
+            {"name": "Stevenson", "type": "city"},
+            {"name": "Underwood", "type": "unincorporated"},
+            {"name": "White Salmon", "type": "city"}
           ]
         }
       ]
     },
     {
       "level": "statewide",
-      "label": "Licensed Statewide",
-      "description": "Licensed to serve all of Washington State"
+      "label": "Licensed Across Washington",
+      "description": "We're licensed statewide for residential and commercial projects across Washington."
     }
   ],
-  "outOfAreaCTA": "Not in our primary area? Call us - we may still be able to help!",
+  "outOfAreaCTA": "Tell us where your project is located in Washington and we'll confirm next steps.",
+  "fallbackCallCta": "Questions about coverage? Call us and we will confirm your location.",
+  "fallbackContactCta": "Prefer writing first? Send us your city and project details through the contact form.",
   "map": {
-    "url": "/images/service-area-map.png",
-    "alt": "Service area map showing Clark County highlighted in red, with Cowlitz and Skamania counties in lighter red, within Washington state"
+    "url": "/images/service-area-map.svg",
+    "fallbackUrl": "/images/service-area-map.png",
+    "alt": "Washington state service map with major city markers and Battle Ground highlighted",
+    "fallbackContext": "We serve primary Southwest Washington communities and support projects across the state with statewide licensing."
   }
 }
