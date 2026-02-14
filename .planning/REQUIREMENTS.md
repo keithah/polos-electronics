@@ -15,10 +15,10 @@ Requirements for reliability and visibility. Each maps to roadmap phases 4-6.
 
 ### Validation & CI Gates
 
-- [ ] **VALD-01**: User benefits from validated review data contracts before site build
-- [ ] **VALD-02**: User benefits from validated service-area data and required map assets before deploy
-- [ ] **VALD-03**: User is protected from regressions by strict Hugo build checks that fail on warnings/path issues
-- [ ] **VALD-04**: User is protected from invisible homepage regressions by smoke checks asserting reviews/map presence in built output
+- [x] **VALD-01**: User benefits from validated review data contracts before site build
+- [x] **VALD-02**: User benefits from validated service-area data and required map assets before deploy
+- [x] **VALD-03**: User is protected from regressions by strict Hugo build checks that fail on warnings/path issues
+- [x] **VALD-04**: User is protected from invisible homepage regressions by smoke checks asserting reviews/map presence in built output
 
 ### Operations & Recovery
 
@@ -82,10 +82,10 @@ Which phases cover which requirements.
 | REND-01 | Phase 4 | ✓ Complete |
 | REND-02 | Phase 4 | ✓ Complete |
 | REND-03 | Phase 4 | ✓ Complete |
-| VALD-01 | Phase 5 | Pending |
-| VALD-02 | Phase 5 | Pending |
-| VALD-03 | Phase 5 | Pending |
-| VALD-04 | Phase 5 | Pending |
+| VALD-01 | Phase 5 | ✓ Complete |
+| VALD-02 | Phase 5 | ✓ Complete |
+| VALD-03 | Phase 5 | ✓ Complete |
+| VALD-04 | Phase 5 | ✓ Complete |
 | OPER-01 | Phase 6 | Pending |
 | OPER-02 | Phase 6 | Pending |
 | OPER-03 | Phase 6 | Pending |
@@ -100,10 +100,10 @@ Which phases cover which requirements.
 | SEO-07 | Phase 8 | ✓ Complete |
 
 **Coverage:**
-- v1.1 requirements: 10 total (3 complete, 7 pending)
+- v1.1 requirements: 10 total (7 complete, 3 pending)
 - v1.2 requirements: 2 total (2 complete)
 - v1.3 requirements: 7 total (7 complete)
 
 ---
 *Requirements defined: 2026-02-14*
-*Last updated: 2026-02-14 after adding v1.3 SEO requirements*
+*Last updated: 2026-02-14 after completing Phase 5 (VALD-01 through VALD-04)*

@@ -36,7 +36,7 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 
 - [x] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
 - [x] **Phase 4.1: Restore Rendering Reliability** - Fix Phase 4 regressions (fallback logic, freshness metadata)
-- [ ] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
+- [x] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
 - [ ] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
 
 ### ✅ v1.2 Interactive Coverage Map (Shipped 2026-02-14)
@@ -90,8 +90,9 @@ Plans:
   4. Built homepage output is automatically checked for reviews and service-area/map presence before deployment can continue
 **Plans**: 2 plans
 Plans:
-- [ ] 05-01-PLAN.md — Pre-build validation gates (data contracts, asset existence)
-- [ ] 05-02-PLAN.md — Build hardening and smoke checks (strict mode, error messages)
+- [x] 05-01-PLAN.md — Pre-build validation gates (data contracts, asset existence)
+- [x] 05-02-PLAN.md — Build hardening and smoke checks (strict mode, error messages)
+**Status**: ✓ Complete (2026-02-14)
 
 ### Phase 6: Operations & Recovery
 **Goal**: Users continue seeing credible review/service visibility while operators can quickly diagnose and recover reliability incidents
@@ -145,7 +146,7 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 4.1 > 5 > 6 > 7 > 8
 | 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete (regressed) | 2026-02-14 |
 | 4.1. Restore Rendering Reliability | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
-| 5. Validation & CI Gates | v1.1 | 0/2 | Not started | - |
+| 5. Validation & CI Gates | v1.1 | 2/2 | ✓ Complete | 2026-02-14 |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
