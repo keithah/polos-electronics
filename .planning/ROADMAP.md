@@ -46,7 +46,7 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
   1. User always sees a Reviews section, even when live review ingestion is empty or stale
   2. User always sees a Service Area section with map context, even when the primary map asset fails
   3. User can see when review data was last updated and whether review data is stale
-**Plans**: TBD
+**Plans**: 3 plans (04-01 to 04-03)
 
 ### Phase 5: Validation & CI Gates
 **Goal**: Users are protected from silent homepage regressions because invalid inputs and broken output are blocked before publish
@@ -79,6 +79,6 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6
 | 1. Schema & Local SEO | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 2. Review Aggregation | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
-| 4. Rendering Reliability | v1.1 | 0/TBD | Not started | - |
+| 4. Rendering Reliability | v1.1 | 2/3 | In progress | - |
 | 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
