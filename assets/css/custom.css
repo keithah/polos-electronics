@@ -1150,6 +1150,91 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+/* Service Area Tiered Display */
+.service-area-tagline {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #fe3a46;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.service-area-primary {
+  margin-bottom: 2rem;
+}
+
+.service-area-primary h3 {
+  color: #323232;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tier-description {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.city-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.city {
+  background: #f0f0f0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #323232;
+}
+
+.city.headquarters {
+  background: #fe3a46;
+  color: #fff;
+  font-weight: 600;
+}
+
+.service-area-secondary {
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.service-area-secondary h4 {
+  color: #323232;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.county-group {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.county-group strong {
+  color: #fe3a46;
+}
+
+.city-inline {
+  color: #555;
+}
+
+.service-area-statewide {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  color: #555;
+}
+
+.service-area-cta {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #666;
+  font-size: 1rem;
+}
+
 /* FAQ Section */
 .faq-section {
   background: #ffffff;
@@ -1256,6 +1341,24 @@ body {
 
   .service-area-map {
     order: -1; /* Puts the map above the text on smaller screens */
+  }
+
+  .city-list {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-area-tagline {
+    font-size: 1.1rem;
+  }
+
+  .city-list {
+    justify-content: center;
+  }
+
+  .city {
+    font-size: 0.85rem;
   }
 }
 
