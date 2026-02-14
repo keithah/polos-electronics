@@ -1,0 +1,25 @@
+{{- /*
+  Individual Review schema for each review with a rating.
+  Links to LocalBusiness via @id reference.
+*/ -}}
+{{- $baseURL := .Site.BaseURL -}}
+{{- range .Site.Data.reviews.reviews -}}
+{{- if .rating -}}
+{{- $review := dict
+  "@context" "https://schema.org"
+  "@type" "Review"
+  "itemReviewed" (dict "@id" (printf "%s#organization" $baseURL))
+  "author" (dict "@type" "Person" "name" .author)
+  "reviewRating" (dict
+    "@type" "Rating"
+    "ratingValue" (printf "%.1f" .rating)
+    "bestRating" "5"
+    "worstRating" "1"
+  )
+  "reviewBody" .text
+-}}
+<script type="application/ld+json">
+{{- $review | jsonify | safeJS -}}
+</script>
+{{- end -}}
+{{- end -}}
