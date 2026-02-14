@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Schema & SEO Foundation
 
-- [ ] **SCHM-01**: Upgrade LocalBusiness schema to ElectricalContractor subtype
-- [ ] **SCHM-02**: Add areaServed property with Clark, Cowlitz, and Skamania counties
-- [ ] **SCHM-03**: Conduct NAP (Name/Address/Phone) consistency audit across website, schema, Google Business Profile, Yelp, and review platforms
-- [ ] **SCHM-04**: Add Service schema for each electrical service offering
-- [ ] **SCHM-05**: Create FAQ section with Schema.org FAQPage markup
+- [x] **SCHM-01**: Upgrade LocalBusiness schema to ElectricalContractor subtype
+- [x] **SCHM-02**: Add areaServed property with Clark, Cowlitz, and Skamania counties
+- [x] **SCHM-03**: Conduct NAP (Name/Address/Phone) consistency audit across website, schema, Google Business Profile, Yelp, and review platforms
+- [x] **SCHM-04**: Add Service schema for each electrical service offering
+- [x] **SCHM-05**: Create FAQ section with Schema.org FAQPage markup
 
 ### Review Aggregation
 
@@ -67,11 +67,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCHM-01 | Phase 1 | Pending |
-| SCHM-02 | Phase 1 | Pending |
-| SCHM-03 | Phase 1 | Pending |
-| SCHM-04 | Phase 1 | Pending |
-| SCHM-05 | Phase 1 | Pending |
+| SCHM-01 | Phase 1 | Complete |
+| SCHM-02 | Phase 1 | Complete |
+| SCHM-03 | Phase 1 | Complete |
+| SCHM-04 | Phase 1 | Complete |
+| SCHM-05 | Phase 1 | Complete |
 | REVW-01 | Phase 2 | Pending |
 | REVW-02 | Phase 2 | Pending |
 | REVW-03 | Phase 2 | Pending |
@@ -91,4 +91,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after roadmap creation*
+*Last updated: 2026-02-14 after Phase 1 completion*
