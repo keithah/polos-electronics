@@ -51,91 +51,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "{{ .Site.BaseURL }}",
-      "name": "{{ .Site.Title }}",
-      "description": "{{ .Site.Params.description }}",
-      "url": "{{ .Site.BaseURL }}",
-      "telephone": "{{ .Site.Params.phone }}",
-      "email": "{{ .Site.Params.email }}",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "20810 NE 267th St",
-        "addressLocality": "Battle Ground",
-        "addressRegion": "WA",
-        "postalCode": "98604",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "45.7844",
-        "longitude": "-122.5375"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "16:00"
-        }
-      ],
-      "priceRange": "$$",
-      "image": "{{ "images/logo.png" | absURL }}",
-      "logo": "{{ "images/logo.png" | absURL }}",
-      "foundingDate": "1979",
-      "sameAs": [
-        "https://www.linkedin.com/company/polos-electronics/",
-        "https://share.google/D3mexUt7VZzi7gvWZ",
-        "https://www.yelp.com/biz/polos-electronics-battle-ground",
-        "https://nextdoor.com/page/polos-electronics-battle-ground-wa",
-        "https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Low Voltage Electrical Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Starlink Installation"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Security Systems Installation"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Surveillance Systems"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Home Theater Systems"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Networking Services"
-            }
-          }
-        ]
-      }
-    }
-    </script>
+    {{ partial "schema/local-business.html" . }}
+    {{ partial "schema/services.html" . }}
+    {{ partial "schema/faq.html" . }}
 
     <!-- Google Analytics -->
     {{ if .Site.Params.google_analytics }}
