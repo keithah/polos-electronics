@@ -1,0 +1,24 @@
+{
+  "name": "polos-electronics",
+  "version": "1.0.0",
+  "description": "A Hugo static site recreating the WordPress website for Polos Electronics - a locally owned and operated Low Voltage Electrical Contractor serving Battle Ground, WA since 1979.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keithah/polos-electronics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/keithah/polos-electronics/issues"
+  },
+  "homepage": "https://github.com/keithah/polos-electronics#readme",
+  "devDependencies": {
+    "puppeteer": "^24.37.3"
+  }
+}
