@@ -1,0 +1,65 @@
+{{- $b := .Site.Data.business -}}
+{{- $baseURL := .Site.BaseURL -}}
+
+{{- /* Build address object */ -}}
+{{- $address := dict
+  "@type" "PostalAddress"
+  "streetAddress" $b.address.streetAddress
+  "addressLocality" $b.address.addressLocality
+  "addressRegion" $b.address.addressRegion
+  "postalCode" $b.address.postalCode
+  "addressCountry" $b.address.addressCountry
+-}}
+
+{{- /* Build geo object */ -}}
+{{- $geo := dict
+  "@type" "GeoCoordinates"
+  "latitude" $b.geo.latitude
+  "longitude" $b.geo.longitude
+-}}
+
+{{- /* Build opening hours */ -}}
+{{- $hours := dict
+  "@type" "OpeningHoursSpecification"
+  "dayOfWeek" $b.openingHours.days
+  "opens" $b.openingHours.opens
+  "closes" $b.openingHours.closes
+-}}
+
+{{- /* Build areaServed array with @id for cross-referencing */ -}}
+{{- $areas := slice -}}
+{{- range $b.areaServed -}}
+  {{- $kebabName := .name | lower | replaceRE " " "-" -}}
+  {{- $area := dict
+    "@type" "AdministrativeArea"
+    "@id" (printf "%s#area-%s" $baseURL $kebabName)
+    "name" (printf "%s, %s" .name .state)
+    "sameAs" .sameAs
+  -}}
+  {{- $areas = $areas | append $area -}}
+{{- end -}}
+
+{{- /* Build main schema */ -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" $b.type
+  "@id" (printf "%s#organization" $baseURL)
+  "name" $b.name
+  "description" $b.description
+  "url" $b.url
+  "telephone" $b.telephone
+  "email" $b.email
+  "address" $address
+  "geo" $geo
+  "openingHoursSpecification" (slice $hours)
+  "priceRange" $b.priceRange
+  "foundingDate" $b.foundingDate
+  "image" (printf "%simages/logo.png" $baseURL)
+  "logo" (printf "%simages/logo.png" $baseURL)
+  "areaServed" $areas
+  "sameAs" $b.sameAs
+-}}
+
+<script type="application/ld+json">
+{{- $schema | jsonify | safeJS -}}
+</script>
