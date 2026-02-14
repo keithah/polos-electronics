@@ -45,10 +45,12 @@ Plans:
   3. HomeAdvisor and Nextdoor reviews appear via manual curation process
   4. Review data stored in normalized format in data/reviews.json with platform source field
   5. Deep links to each review platform allow customers to leave new reviews
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — Data foundation & platform badges (reviews.json schema, SVG logos)
+- [ ] 02-02-PLAN.md — GitHub Actions workflow (Google + Yelp API automation)
+- [ ] 02-03-PLAN.md — Hugo template & CSS (multi-platform display with attribution)
 
 ### Phase 3: Service Area Mapping
 **Goal**: Visitors instantly understand whether Polos Electronics serves their location
@@ -72,5 +74,5 @@ Phases execute in numeric order: 1 > 2 > 3 (Phase 3 can optionally run parallel 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Schema & Local SEO | 3/3 | ✓ Complete | 2026-02-14 |
-| 2. Review Aggregation | 0/TBD | Not started | - |
+| 2. Review Aggregation | 0/3 | Not started | - |
 | 3. Service Area Mapping | 0/TBD | Not started | - |
