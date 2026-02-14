@@ -79,7 +79,8 @@ jobs:
         run: |
           hugo \
             --gc \
-            --minify
+            --minify \
+            --panicOnWarning
       - name: Smoke check homepage output
         run: |
           test -f public/index.html
