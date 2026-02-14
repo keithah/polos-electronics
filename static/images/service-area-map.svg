@@ -10,8 +10,9 @@
   <!-- Other Counties (simplified shapes for visual context) -->
   <!-- Pacific County -->
   <path d="M20,280 L50,260 L80,280 L70,320 L40,340 L20,320 Z" fill="#e0e0e0" stroke="#ffffff" stroke-width="1"/>
-  <!-- Lewis County -->
-  <path d="M120,280 L200,270 L220,320 L180,350 L120,340 Z" fill="#e0e0e0" stroke="#ffffff" stroke-width="1"/>
+  <!-- Lewis County (north of Clark/Cowlitz) -->
+  <path id="lewis" d="M100,230 L200,220 L280,230 L290,270 L220,290 L150,290 L120,270 Z" fill="#e0e0e0" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="190" y="260" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Lewis</text>
   <!-- Wahkiakum County -->
   <path d="M50,320 L100,310 L110,340 L80,360 L50,350 Z" fill="#e0e0e0" stroke="#ffffff" stroke-width="1"/>
 
