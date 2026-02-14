@@ -34,7 +34,8 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 
 **Milestone Goal:** Reviews and service-area credibility signals reliably render and remain visible across ingestion failures, build regressions, and deploy drift.
 
-- [ ] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
+- [x] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
+- [ ] **Phase 4.1: Restore Rendering Reliability** - Fix Phase 4 regressions (fallback logic, freshness metadata)
 - [ ] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
 - [ ] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
 
@@ -61,27 +62,41 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
   2. User always sees a Service Area section with map context, even when the primary map asset fails
   3. User can see when review data was last updated and whether review data is stale
 **Plans**: 3 plans (04-01 to 04-03)
+**Status**: ✓ Complete (original), but regressions found in audit
+
+### Phase 4.1: Restore Rendering Reliability
+**Goal**: Fix Phase 4 regressions identified in milestone audit so REND-01 and REND-03 are fully satisfied
+**Depends on**: Phase 4
+**Requirements**: REND-01, REND-03
+**Gap Closure**: Closes gaps from v1.1-MILESTONE-AUDIT.md
+**Success Criteria** (what must be TRUE):
+  1. Review fallback logic conditionally switches (not appends) when live reviews empty
+  2. Freshness partial re-enabled with correct data contract fields
+  3. `staleAfterDays` and `freshnessLabel` fields present in reviews.json
+**Plans**: 1 plan (04.1-01)
 
 ### Phase 5: Validation & CI Gates
 **Goal**: Users are protected from silent homepage regressions because invalid inputs and broken output are blocked before publish
-**Depends on**: Phase 4
+**Depends on**: Phase 4.1
 **Requirements**: VALD-01, VALD-02, VALD-03, VALD-04
+**Gap Closure**: Closes gaps from v1.1-MILESTONE-AUDIT.md
 **Success Criteria** (what must be TRUE):
   1. Invalid review data contracts are rejected before site build, preventing malformed review content from reaching production
   2. Invalid service-area data or missing required map assets are rejected before deploy
   3. Hugo build/deploy pipeline fails on warnings and path issues instead of publishing risky output
   4. Built homepage output is automatically checked for reviews and service-area/map presence before deployment can continue
-**Plans**: TBD
+**Plans**: TBD (1-2 plans expected)
 
 ### Phase 6: Operations & Recovery
 **Goal**: Users continue seeing credible review/service visibility while operators can quickly diagnose and recover reliability incidents
 **Depends on**: Phase 5
 **Requirements**: OPER-01, OPER-02, OPER-03
+**Gap Closure**: Closes gaps from v1.1-MILESTONE-AUDIT.md
 **Success Criteria** (what must be TRUE):
   1. Users still see credible review content from last-known-good data when ingestion fails
   2. Operators can trigger a documented manual recovery run that restores review/map reliability without code changes
   3. CI runs provide review/map health diagnostics that make reliability incidents faster to identify and resolve
-**Plans**: TBD
+**Plans**: TBD (1-2 plans expected)
 
 ### Phase 7: Interactive Service Map
 **Goal**: Users can explore coverage context via an embedded interactive map while the Service Area section remains reliable through a static fallback
@@ -115,14 +130,15 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7 > 8
+Phases execute in numeric order: 1 > 2 > 3 > 4 > 4.1 > 5 > 6 > 7 > 8
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. Schema & Local SEO | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 2. Review Aggregation | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
-| 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete | 2026-02-14 |
+| 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete (regressed) | 2026-02-14 |
+| 4.1. Restore Rendering Reliability | v1.1 | 0/1 | Not started | - |
 | 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
