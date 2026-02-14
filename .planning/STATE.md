@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 ## Current Position
 
 Phase: 8 of 8 (SEO Enhancement)
-Plan: 08-02 complete (sitemap, social image, FAQ links)
+Plan: 08-03 complete (image lazy loading)
 Status: In progress
-Last activity: 2026-02-14 — completed 08-02 sitemap and social meta
+Last activity: 2026-02-14 — completed 08-03 image lazy loading
 
-Progress: [█████████░] 90%
+Progress: [█████████░] 92%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
-- Average duration: 2.8 min
-- Total execution time: 35 min
+- Total plans completed: 13
+- Average duration: 2.7 min
+- Total execution time: 36 min
 
 **By Phase:**
 
@@ -33,7 +33,7 @@ Progress: [█████████░] 90%
 | 04-rendering-reliability | 2 | 12 min | 6.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (4 min), 04-02 (8 min), 08-01 (4 min), 08-02 (3 min)
+- Last 5 plans: 04-02 (8 min), 08-01 (4 min), 08-02 (3 min), 08-03 (1 min)
 - Trend: Phase 8 SEO work progressing smoothly
 
 *v1.3 phase metrics updated as plans complete*
@@ -49,6 +49,7 @@ Recent decisions affecting current work:
 - Phase boundaries for v1.1 are requirement-driven: rendering reliability, validation gates, then operations/recovery
 - Every v1.1 requirement (REND-*, VALD-*, OPER-*) is mapped exactly once in ROADMAP and traceability
 - Used existing hero-image.jpg (1500x1000) for social sharing instead of creating new og-share.jpg
+- Hero image kept eager (no lazy loading) for good LCP score
 
 ### Pending Todos
 
@@ -60,6 +61,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-14T21:48:00Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-02-14T22:24:32Z
+Stopped at: Completed 08-03-PLAN.md
 Resume file: None
