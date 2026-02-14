@@ -958,6 +958,14 @@ body {
   margin-top: 40px;
 }
 
+.reviews-empty-state {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+}
+
 .reviews-cta-text {
   font-size: 1.1rem;
   color: #323232;
