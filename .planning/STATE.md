@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 ## Current Position
 
 Phase: 8 of 8 (SEO Enhancement)
-Plan: 08-01 complete (schema enhancements)
+Plan: 08-02 complete (sitemap, social image, FAQ links)
 Status: In progress
-Last activity: 2026-02-14 — completed 08-01 SEO schema enhancement
+Last activity: 2026-02-14 — completed 08-02 sitemap and social meta
 
-Progress: [████████░░] 85%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 12
 - Average duration: 2.8 min
-- Total execution time: 28 min
+- Total execution time: 35 min
 
 **By Phase:**
 
@@ -33,10 +33,10 @@ Progress: [████████░░] 85%
 | 04-rendering-reliability | 2 | 12 min | 6.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (1 min), 03-01 (1 min), 03-02 (1 min), 03-03 (2 min), 04-01 (4 min), 04-02 (8 min)
-- Trend: Phase 4 work is heavier but progressing without blockers
+- Last 5 plans: 04-01 (4 min), 04-02 (8 min), 08-01 (4 min), 08-02 (3 min)
+- Trend: Phase 8 SEO work progressing smoothly
 
-*v1.1 phase metrics populate as plans complete*
+*v1.3 phase metrics updated as plans complete*
 
 ## Accumulated Context
 
@@ -48,6 +48,7 @@ Recent decisions affecting current work:
 - v1.1 starts at Phase 4 to preserve continuous numbering after shipped phases 1-3
 - Phase boundaries for v1.1 are requirement-driven: rendering reliability, validation gates, then operations/recovery
 - Every v1.1 requirement (REND-*, VALD-*, OPER-*) is mapped exactly once in ROADMAP and traceability
+- Used existing hero-image.jpg (1500x1000) for social sharing instead of creating new og-share.jpg
 
 ### Pending Todos
 
@@ -59,6 +60,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-14T21:24:00Z
-Stopped at: Completed 08-01-PLAN.md
+Last session: 2026-02-14T21:48:00Z
+Stopped at: Completed 08-02-PLAN.md
 Resume file: None
