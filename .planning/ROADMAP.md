@@ -61,10 +61,12 @@ Plans:
   2. Bordering counties (Cowlitz, Skamania) show in lighter color with visual hierarchy
   3. Text listing organizes service areas by priority: Clark County primary, bordering counties secondary, statewide coverage tertiary
   4. data/service-area.json contains comprehensive county and city data consumed by templates
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — Data foundation (tiered service-area.json with comprehensive city listings)
+- [ ] 03-02-PLAN.md — Map image creation (SVG styling and PNG export with visual hierarchy)
+- [ ] 03-03-PLAN.md — Hugo template & CSS (tiered service area display)
 
 ## Progress
 
@@ -75,4 +77,4 @@ Phases execute in numeric order: 1 > 2 > 3 (Phase 3 can optionally run parallel 
 |-------|----------------|--------|-----------|
 | 1. Schema & Local SEO | 3/3 | ✓ Complete | 2026-02-14 |
 | 2. Review Aggregation | 0/3 | Not started | - |
-| 3. Service Area Mapping | 0/TBD | Not started | - |
+| 3. Service Area Mapping | 0/3 | Not started | - |
