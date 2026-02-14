@@ -281,6 +281,7 @@
         <section id="reviews" class="reviews-section">
             <div class="section-container">
                 <h2 class="section-title">What Our Customers Say</h2>
+                {{ partial "reviews-reliability-meta.html" . }}
 
                 {{ $reviewsData := .Site.Data.reviews | default dict }}
                 {{ $displayReviews := slice }}
