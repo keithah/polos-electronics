@@ -19,8 +19,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **REVW-01**: Extend GitHub Actions workflow to fetch Google reviews via Places API
 - [ ] **REVW-02**: Add GitHub Actions workflow to fetch Yelp reviews via Fusion API (free tier)
-- [ ] **REVW-03**: Implement manual curation process for HomeAdvisor reviews
-- [ ] **REVW-04**: Implement manual curation process for Nextdoor reviews
+- [ ] **REVW-03**: Implement web scraping automation for HomeAdvisor reviews
+- [ ] **REVW-04**: Implement web scraping automation for Nextdoor reviews
 - [ ] **REVW-05**: Create unified review display component with platform-specific attribution
 - [ ] **REVW-06**: Add deep links to review platforms for customers to leave reviews
 - [ ] **REVW-07**: Normalize review data structure across all platforms in data/reviews.json

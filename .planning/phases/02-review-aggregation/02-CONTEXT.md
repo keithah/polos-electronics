@@ -16,7 +16,7 @@ Display authentic customer reviews from multiple platforms (Google Business Prof
 ### Review display & layout
 - All platforms mixed together in a single stream (not grouped by platform)
 - Visual format: Claude's discretion (choose format matching site's design system)
-- Excerpt with 'Read more' expansion (first 2-3 sentences visible, expand on click)
+- Full review text displayed (no truncation)
 - Metadata per review: star rating, reviewer name, review date, platform logo/badge
 
 ### Data sourcing & updates
@@ -28,12 +28,11 @@ Display authentic customer reviews from multiple platforms (Google Business Prof
 ### Platform compliance & attribution
 - Yelp: Official Yelp badge + required links (full compliance with Yelp TOS)
 - Platform logos appear on each individual review (not just section headers)
-- 'Read more' links go to business profile page on each platform (not individual review deep links)
+- 'View on Platform' links go to business profile page on each platform (not individual review deep links)
 - No disclaimers needed (platform badges and links provide sufficient attribution)
 
 ### Claude's Discretion
 - Visual format choice (cards vs list vs quotes) based on site design system
-- Exact review text truncation length (first 2-3 sentences)
 - Review sorting within the mixed stream (by date, rating, or platform rotation)
 - Error handling for API failures or scraping issues
 - Handling reviews without star ratings (some platforms)
