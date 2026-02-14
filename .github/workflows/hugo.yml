@@ -38,20 +38,34 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Validate reliability inputs
         run: |
+          # Validate reviews.json data contract
           jq -e '
             (.reviews | type == "array") and
             (.fallbackReviews | type == "array") and
             ((.reviews | length) + (.fallbackReviews | length) >= 9) and
             (.platforms | type == "object") and
             (.lastUpdated | type == "string")
-          ' data/reviews.json > /dev/null
+          ' data/reviews.json > /dev/null || { echo "ERROR: reviews.json missing required fields (reviews, fallbackReviews, platforms, lastUpdated) or insufficient review count"; exit 1; }
 
+          jq -e '
+            (.staleAfterDays | type == "number")
+          ' data/reviews.json > /dev/null || { echo "ERROR: reviews.json missing staleAfterDays (must be number)"; exit 1; }
+
+          jq -e '
+            (.freshnessLabel | type == "string")
+          ' data/reviews.json > /dev/null || { echo "ERROR: reviews.json missing freshnessLabel (must be string)"; exit 1; }
+
+          # Validate service_area.json data contract
           jq -e '
             (.tiers | type == "array") and
             (.map.url | type == "string") and
             (.map.fallbackUrl | type == "string") and
             (.map.fallbackContext | type == "string")
-          ' data/service_area.json > /dev/null
+          ' data/service_area.json > /dev/null || { echo "ERROR: service_area.json missing required fields (tiers, map.url, map.fallbackUrl, map.fallbackContext)"; exit 1; }
+
+          jq -e '
+            (.tiers | length >= 1)
+          ' data/service_area.json > /dev/null || { echo "ERROR: service_area.json tiers array must have at least 1 entry"; exit 1; }
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
