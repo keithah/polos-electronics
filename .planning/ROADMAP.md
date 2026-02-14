@@ -28,10 +28,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. NAP (Name/Address/Phone) matches exactly across website, schema, and external listings
   4. Each electrical service has corresponding Service schema visible in page source
   5. FAQ section displays on page with FAQPage schema markup validated
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md - Data Foundation (business.json, services.json, faq.json)
+- [ ] 01-02-PLAN.md - Schema Partials (local-business, services, faq)
+- [ ] 01-03-PLAN.md - Template Integration & FAQ Display
 
 ### Phase 2: Review Aggregation
 **Goal**: Visitors see authentic customer reviews from multiple platforms, building trust before contact
@@ -69,6 +71,6 @@ Phases execute in numeric order: 1 > 2 > 3 (Phase 3 can optionally run parallel 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Schema & Local SEO | 0/TBD | Not started | - |
+| 1. Schema & Local SEO | 0/3 | Planned | - |
 | 2. Review Aggregation | 0/TBD | Not started | - |
 | 3. Service Area Mapping | 0/TBD | Not started | - |
