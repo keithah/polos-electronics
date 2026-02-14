@@ -1,6 +1,26 @@
 {
-  "name": null,
-  "rating": null,
-  "total_ratings": null,
-  "reviews": []
+  "reviews": [],
+  "platforms": {
+    "google": {
+      "businessName": "Polos Electronics",
+      "profileUrl": "https://share.google/D3mexUt7VZzi7gvWZ",
+      "overallRating": null,
+      "totalReviews": null
+    },
+    "yelp": {
+      "businessName": "Polos Electronics",
+      "profileUrl": "https://www.yelp.com/biz/polos-electronics-battle-ground",
+      "overallRating": null,
+      "totalReviews": null
+    },
+    "homeadvisor": {
+      "businessName": "Polos Electronics Inc.",
+      "profileUrl": "https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html"
+    },
+    "nextdoor": {
+      "businessName": "Polos Electronics",
+      "profileUrl": "https://nextdoor.com/page/polos-electronics-battle-ground-wa"
+    }
+  },
+  "lastUpdated": "2026-02-14T00:00:00Z"
 }
