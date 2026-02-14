@@ -88,7 +88,10 @@ Plans:
   2. Invalid service-area data or missing required map assets are rejected before deploy
   3. Hugo build/deploy pipeline fails on warnings and path issues instead of publishing risky output
   4. Built homepage output is automatically checked for reviews and service-area/map presence before deployment can continue
-**Plans**: TBD (1-2 plans expected)
+**Plans**: 2 plans
+Plans:
+- [ ] 05-01-PLAN.md — Pre-build validation gates (data contracts, asset existence)
+- [ ] 05-02-PLAN.md — Build hardening and smoke checks (strict mode, error messages)
 
 ### Phase 6: Operations & Recovery
 **Goal**: Users continue seeing credible review/service visibility while operators can quickly diagnose and recover reliability incidents
@@ -142,7 +145,7 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 4.1 > 5 > 6 > 7 > 8
 | 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete (regressed) | 2026-02-14 |
 | 4.1. Restore Rendering Reliability | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
-| 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
+| 5. Validation & CI Gates | v1.1 | 0/2 | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
