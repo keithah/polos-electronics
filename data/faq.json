@@ -2,11 +2,11 @@
   "questions": [
     {
       "question": "What low voltage services does Polos Electronics provide?",
-      "answer": "We provide comprehensive low voltage electrical services including security system installation, surveillance cameras, home theater setup, whole house audio, networking and structured cabling, Starlink satellite internet installation, door access control systems, and cable management. We serve both residential and commercial customers."
+      "answer": "We provide comprehensive low voltage electrical services including security system installation, surveillance cameras, home theater setup, whole house audio, networking and structured cabling, Starlink satellite internet installation, door access control systems, and cable management. We serve both residential and commercial customers. Visit our <a href=\"#services\">services section</a> for the complete list."
     },
     {
       "question": "What areas does Polos Electronics serve?",
-      "answer": "Our primary service area includes Clark, Cowlitz, and Skamania counties in Southwest Washington. We are based in Battle Ground, WA and regularly serve Vancouver, Camas, Woodland, and Longview. We are licensed to work throughout Washington state and travel statewide for larger projects."
+      "answer": "Our primary service area includes Clark, Cowlitz, and Skamania counties in Southwest Washington. We are based in Battle Ground, WA and regularly serve Vancouver, Camas, Woodland, and Longview. See our <a href=\"#service-area\">service area map</a> for coverage details. We are licensed to work throughout Washington state and travel statewide for larger projects."
     },
     {
       "question": "Is Polos Electronics licensed and insured?",
@@ -14,7 +14,7 @@
     },
     {
       "question": "How do I get a free estimate?",
-      "answer": "Contact us by phone at (360) 687-3543 or use the contact form on our website. We will discuss your project needs and schedule a convenient time to provide a free estimate. We respond to inquiries promptly and are happy to answer any questions about your project."
+      "answer": "Contact us by phone at (360) 687-3543 or use the <a href=\"#contact\">contact form</a> on our website. We will discuss your project needs and schedule a convenient time to provide a free estimate. We respond to inquiries promptly and are happy to answer any questions about your project."
     },
     {
       "question": "Can you install Starlink satellite internet?",

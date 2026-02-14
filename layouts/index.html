@@ -54,6 +54,7 @@
     {{ partial "schema/local-business.html" . }}
     {{ partial "schema/services.html" . }}
     {{ partial "schema/faq.html" . }}
+    {{ partial "schema/reviews.html" . }}
 
     <!-- Google Analytics -->
     {{ if .Site.Params.google_analytics }}
@@ -449,7 +450,7 @@
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>{{ .answer }}</p>
+                            <p>{{ .answer | safeHTML }}</p>
                         </div>
                     </div>
                     {{ end }}

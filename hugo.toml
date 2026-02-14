@@ -13,3 +13,8 @@ title = 'Polos Electronics'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
