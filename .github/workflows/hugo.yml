@@ -83,10 +83,17 @@ jobs:
             --panicOnWarning
       - name: Smoke check homepage output
         run: |
-          test -f public/index.html
-          grep -q "What Our Customers Say" public/index.html
-          grep -q "Primary Service Areas" public/index.html
-          grep -q "service-area-map" public/index.html
+          test -f public/index.html || \
+            { echo "ERROR: index.html not built"; exit 1; }
+
+          grep -q "What Our Customers Say" public/index.html || \
+            { echo "ERROR: Reviews section missing from homepage"; exit 1; }
+
+          grep -q "Primary Service Areas" public/index.html || \
+            { echo "ERROR: Service area section missing from homepage"; exit 1; }
+
+          grep -q "service-area-map" public/index.html || \
+            { echo "ERROR: Service area map missing from homepage"; exit 1; }
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
