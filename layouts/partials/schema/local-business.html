@@ -1,6 +1,30 @@
 {{- $b := .Site.Data.business -}}
 {{- $baseURL := .Site.BaseURL -}}
 
+{{- /* Calculate aggregate rating from reviews */ -}}
+{{- $reviews := .Site.Data.reviews.reviews -}}
+{{- $ratingSum := 0.0 -}}
+{{- $reviewCount := 0 -}}
+{{- range $reviews -}}
+  {{- if .rating -}}
+    {{- $ratingSum = add $ratingSum .rating -}}
+    {{- $reviewCount = add $reviewCount 1 -}}
+  {{- end -}}
+{{- end -}}
+{{- $ratingValue := 0.0 -}}
+{{- if gt $reviewCount 0 -}}
+  {{- $ratingValue = div $ratingSum $reviewCount -}}
+{{- end -}}
+
+{{- /* Build aggregateRating object */ -}}
+{{- $aggregateRating := dict
+  "@type" "AggregateRating"
+  "ratingValue" (printf "%.2f" $ratingValue)
+  "reviewCount" $reviewCount
+  "bestRating" "5"
+  "worstRating" "1"
+-}}
+
 {{- /* Build address object */ -}}
 {{- $address := dict
   "@type" "PostalAddress"
@@ -58,6 +82,7 @@
   "logo" (printf "%simages/logo.png" $baseURL)
   "areaServed" $areas
   "sameAs" $b.sameAs
+  "aggregateRating" $aggregateRating
 -}}
 
 <script type="application/ld+json">
