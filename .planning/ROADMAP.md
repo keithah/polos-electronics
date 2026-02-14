@@ -13,8 +13,8 @@ This roadmap delivers three enhancement areas to the existing Polos Electronics 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Schema & Local SEO** - Establish correct schema patterns and NAP consistency before adding review content
-- [ ] **Phase 2: Review Aggregation** - Fetch reviews from multiple platforms and display with proper attribution
-- [ ] **Phase 3: Service Area Mapping** - Visual map and text listing of coverage areas
+- [x] **Phase 2: Review Aggregation** - Fetch reviews from multiple platforms and display with proper attribution
+- [x] **Phase 3: Service Area Mapping** - Visual map and text listing of coverage areas
 
 ## Phase Details
 
@@ -60,13 +60,13 @@ Plans:
   1. Static map image displays showing Washington state with Battle Ground starred and Clark County highlighted
   2. Bordering counties (Cowlitz, Skamania) show in lighter color with visual hierarchy
   3. Text listing organizes service areas by priority: Clark County primary, bordering counties secondary, statewide coverage tertiary
-  4. data/service-area.json contains comprehensive county and city data consumed by templates
+  4. data/service_area.json contains comprehensive county and city data consumed by templates
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Data foundation (tiered service-area.json with comprehensive city listings)
-- [ ] 03-02-PLAN.md — Map image creation (SVG styling and PNG export with visual hierarchy)
-- [ ] 03-03-PLAN.md — Hugo template & CSS (tiered service area display)
+- [x] 03-01-PLAN.md — Data foundation (tiered service_area.json with comprehensive city listings)
+- [x] 03-02-PLAN.md — Map image creation (SVG styling and PNG export with visual hierarchy)
+- [x] 03-03-PLAN.md — Hugo template & CSS (tiered service area display)
 
 ## Progress
 
@@ -76,5 +76,5 @@ Phases execute in numeric order: 1 > 2 > 3 (Phase 3 can optionally run parallel 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Schema & Local SEO | 3/3 | ✓ Complete | 2026-02-14 |
-| 2. Review Aggregation | 0/3 | Not started | - |
-| 3. Service Area Mapping | 0/3 | Not started | - |
+| 2. Review Aggregation | 3/3 | ✓ Complete | 2026-02-14 |
+| 3. Service Area Mapping | 3/3 | ✓ Complete | 2026-02-14 |

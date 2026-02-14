@@ -27,10 +27,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Service Area Mapping
 
-- [ ] **AREA-01**: Generate static map image using Geoapify API showing Washington state
-- [ ] **AREA-02**: Implement visual hierarchy on map (Battle Ground starred, Clark County highlighted, bordering counties lighter color)
-- [ ] **AREA-03**: Create text-based service area listing organized by priority (Clark County primary, bordering counties secondary, statewide coverage)
-- [ ] **AREA-04**: Populate data/service-area.json with comprehensive county and city data
+- [x] **AREA-01**: Generate static map image showing Washington state (custom SVG approach)
+- [x] **AREA-02**: Implement visual hierarchy on map (Battle Ground pin, Clark County highlighted, bordering counties lighter color)
+- [x] **AREA-03**: Create text-based service area listing organized by priority (Clark County primary, bordering counties secondary, statewide coverage)
+- [x] **AREA-04**: Populate data/service_area.json with comprehensive county and city data
 
 ## v2 Requirements
 
@@ -79,10 +79,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | REVW-05 | Phase 2 | Pending |
 | REVW-06 | Phase 2 | Pending |
 | REVW-07 | Phase 2 | Pending |
-| AREA-01 | Phase 3 | Pending |
-| AREA-02 | Phase 3 | Pending |
-| AREA-03 | Phase 3 | Pending |
-| AREA-04 | Phase 3 | Pending |
+| AREA-01 | Phase 3 | Complete |
+| AREA-02 | Phase 3 | Complete |
+| AREA-03 | Phase 3 | Complete |
+| AREA-04 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 16 total
