@@ -874,6 +874,85 @@ body {
   margin: 2px 0 0 0;
 }
 
+/* Platform Badge */
+.platform-badge-link {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.platform-badge {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.platform-badge-link:hover .platform-badge {
+  transform: scale(1.15);
+}
+
+/* Avatar placeholder for reviews without photos */
+.review-avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #5a9fd4;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Nextdoor Recommended badge */
+.review-recommended {
+  color: #00b246;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.review-recommended::before {
+  content: "\2713 ";
+}
+
+/* Review text container */
+.review-text-container {
+  margin-bottom: 15px;
+}
+
+/* Source link to platform */
+.review-source-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #5a9fd4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.review-source-link:hover {
+  color: #4a8bc2;
+  text-decoration: underline;
+}
+
+/* Platform-specific styling */
+.review-card[data-platform="google"] .review-source-link { color: #4285f4; }
+.review-card[data-platform="yelp"] .review-source-link { color: #d32323; }
+.review-card[data-platform="homeadvisor"] .review-source-link { color: #ff6600; }
+.review-card[data-platform="nextdoor"] .review-source-link { color: #00b246; }
+
+/* CTA review platform buttons */
+.review-platform-btn[data-platform="google"] { background: #4285f4; border-color: #4285f4; }
+.review-platform-btn[data-platform="yelp"] { background: #d32323; border-color: #d32323; }
+.review-platform-btn[data-platform="homeadvisor"] { background: #ff6600; border-color: #ff6600; }
+.review-platform-btn[data-platform="nextdoor"] { background: #00b246; border-color: #00b246; }
+
+.review-platform-btn:hover {
+  filter: brightness(1.1);
+}
+
 .reviews-cta {
   text-align: center;
   margin-top: 40px;
@@ -1374,6 +1453,15 @@ body {
 
   .services-list li {
     font-size: 0.95rem;
+  }
+
+  .platform-badge {
+    width: 20px;
+    height: 20px;
+  }
+
+  .review-source-link {
+    font-size: 0.8rem;
   }
 }
 
