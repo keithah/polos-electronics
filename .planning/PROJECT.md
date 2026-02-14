@@ -8,6 +8,15 @@ A series of targeted improvements to the existing Polos Electronics Hugo static 
 
 Potential customers can quickly verify Polos Electronics' credibility through authentic reviews and understand whether they're in the service area — before picking up the phone.
 
+## Current Milestone: v1.1 Reliability & Visibility
+
+**Goal:** Restore reliable production and local rendering for reviews and service-area map so credibility and coverage signals are consistently visible.
+
+**Target features:**
+- End-to-end review ingestion and template rendering reliability
+- Service-area map asset generation and rendering reliability
+- Runtime/build-time safeguards so missing data/assets fail loudly instead of silently
+
 ## Requirements
 
 ### Validated
@@ -25,24 +34,20 @@ Existing capabilities already working in production:
 - ✓ Automated deployment via GitHub Actions — existing
 - ✓ Data structure for service areas (`data/service-area.json`) — existing
 - ✓ Sample reviews section with placeholder content — existing
+- ✓ Multi-platform review aggregation workflow and normalized review data model — v1.0
+- ✓ Unified review display with platform attribution and CTA links — v1.0
+- ✓ Tiered service-area map and listing experience — v1.0
+- ✓ Enhanced schema coverage for business, services, FAQ, and service areas — v1.0
 
 ### Active
 
 New capabilities to build:
 
-- [ ] Aggregate and display reviews from Google Business Profile
-- [ ] Aggregate and display reviews from Yelp
-- [ ] Aggregate and display reviews from Nextdoor
-- [ ] Aggregate and display reviews from HomeAdvisor
-- [ ] Unified review display showing source platform for each review
-- [ ] Static coverage map image showing Washington state with visual hierarchy
-- [ ] Text-based service area listing organized by priority (Clark County, bordering counties, statewide)
-- [ ] Enhanced Schema.org markup for reviews (AggregateRating, Review entities)
-- [ ] Enhanced Schema.org markup for service areas (GeoShape, areaServed)
-- [ ] Enhanced Schema.org markup for services offered (Service, OfferCatalog)
-- [ ] Improved meta descriptions for local electrical service keywords
-- [ ] Local SEO optimization with location-specific content and keywords
-- [ ] Service area emphasis on Clark County as primary market
+- [ ] Ensure review data fetch jobs produce deployable `data/reviews.json` content on schedule
+- [ ] Ensure reviews render in both local Hugo builds and production deploys
+- [ ] Ensure service-area map asset is generated/resolved and always renders in local and production
+- [ ] Add validation checks that fail CI when reviews or map prerequisites are missing
+- [ ] Add visible fallback states plus diagnostics for review/map sections to prevent silent regressions
 
 ### Out of Scope
 
@@ -106,4 +111,4 @@ New capabilities to build:
 | Enhanced Schema.org over basic markup | Rich results in search improve click-through; proper structured data signals trust to AI search engines | — Pending |
 
 ---
-*Last updated: 2026-02-13 after initialization*
+*Last updated: 2026-02-14 after starting milestone v1.1*
