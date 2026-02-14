@@ -53,22 +53,22 @@ Which phases cover which requirements. To be populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| REND-01 | TBD | Pending |
-| REND-02 | TBD | Pending |
-| REND-03 | TBD | Pending |
-| VALD-01 | TBD | Pending |
-| VALD-02 | TBD | Pending |
-| VALD-03 | TBD | Pending |
-| VALD-04 | TBD | Pending |
-| OPER-01 | TBD | Pending |
-| OPER-02 | TBD | Pending |
-| OPER-03 | TBD | Pending |
+| REND-01 | Phase 4 | Pending |
+| REND-02 | Phase 4 | Pending |
+| REND-03 | Phase 4 | Pending |
+| VALD-01 | Phase 5 | Pending |
+| VALD-02 | Phase 5 | Pending |
+| VALD-03 | Phase 5 | Pending |
+| VALD-04 | Phase 5 | Pending |
+| OPER-01 | Phase 6 | Pending |
+| OPER-02 | Phase 6 | Pending |
+| OPER-03 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 10 total
-- Mapped to phases: 0
-- Unmapped: 10
+- Mapped to phases: 10
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-14*
-*Last updated: 2026-02-14 after v1.1 requirement scoping*
+*Last updated: 2026-02-14 after v1.1 roadmap mapping*

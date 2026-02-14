@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Potential customers can quickly verify Polos Electronics' credibility through authentic reviews and understand whether they're in the service area — before picking up the phone.
-**Current focus:** Milestone v1.1 Reliability & Visibility
+**Current focus:** Milestone v1.1 Reliability & Visibility (Phase 4 planning)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-14 — Milestone v1.1 started
+Phase: 4 of 6 (Rendering Reliability)
+Plan: — (ready for /gsd-plan-phase 4)
+Status: Ready to plan
+Last activity: 2026-02-14 — v1.1 roadmap created with phases 4-6
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
@@ -35,7 +35,7 @@ Progress: [░░░░░░░░░░] 0%
 - Last 5 plans: 02-01 (4 min), 02-03 (4 min), 02-02 (1 min), 03-01 (1 min), 03-02 (1 min), 03-03 (2 min)
 - Trend: Phase 3 plans completed efficiently
 
-*Updated after each plan completion*
+*v1.1 phase metrics populate as plans complete*
 
 ## Accumulated Context
 
@@ -44,25 +44,9 @@ Progress: [░░░░░░░░░░] 0%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- Used Electrician type (not generic LocalBusiness) per research recommendation
-- areaServed structured with Wikipedia sameAs links for county disambiguation
-- FAQ answers kept to 40-60 words for optimal AI extraction
-- areaServed includes @id for Service schema cross-reference
-- Each Service outputs separate script tag (not array) for clarity
-- FAQPage kept as separate entity (no org reference needed)
-- FAQ section positioned between CTA and Contact sections
-- Footer NAP reads from Site.Data.business for schema/display consistency
-- Keep review records as flat `reviews[]` with per-review `platform` field
-- Include per-platform `profileUrl` metadata now for downstream CTA/template linking
-- Generate review CTA buttons directly from `Site.Data.reviews.platforms` to avoid hardcoded links
-- Guard review carousel rendering with an empty-state fallback when no eligible reviews exist
-- Preserve `platforms` metadata during review fetch workflow merges to prevent profile URL regressions
-- Use monthly API+Playwright multi-source ingestion with per-source fallback JSON to keep automation resilient
-- 18 Clark County locations in service-area.json: 7 cities + 11 unincorporated communities
-- Battle Ground marked isHeadquarters: true for template differentiation
-- Primary tier (Clark County) displays as pill/tag grid layout
-- Secondary tier (Cowlitz/Skamania) displays inline with county:cities format
-- Headquarters highlighting uses brand red (#fe3a46) background
+- v1.1 starts at Phase 4 to preserve continuous numbering after shipped phases 1-3
+- Phase boundaries for v1.1 are requirement-driven: rendering reliability, validation gates, then operations/recovery
+- Every v1.1 requirement (REND-*, VALD-*, OPER-*) is mapped exactly once in ROADMAP and traceability
 
 ### Pending Todos
 
@@ -75,5 +59,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-14T17:20:43Z
-Stopped at: New milestone initialized; moving through requirements and roadmap
+Stopped at: Roadmap created; next step is phase planning for Phase 4
 Resume file: None

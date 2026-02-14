@@ -2,79 +2,83 @@
 
 ## Overview
 
-This roadmap delivers three enhancement areas to the existing Polos Electronics Hugo site: enhanced schema markup and local SEO, multi-platform review aggregation with display, and visual service area mapping. The phasing prioritizes schema foundation first (to avoid deploying invalid markup), then review aggregation (the primary credibility driver), then service area mapping (can proceed independently).
+This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundation work is complete (phases 1-3), and v1.1 focuses on reliability and visibility so reviews and service-area signals remain consistently present in local and production output. The phase sequence follows dependency order: deterministic rendering first, then validation/deploy gates, then operations and recovery hardening.
+
+## Milestones
+
+- ✅ **v1.0 Foundation** - Phases 1-3 (shipped 2026-02-14)
+- 🚧 **v1.1 Reliability & Visibility** - Phases 4-6 (planned)
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
-
-Decimal phases appear between their surrounding integers in numeric order.
-
-- [x] **Phase 1: Schema & Local SEO** - Establish correct schema patterns and NAP consistency before adding review content
-- [x] **Phase 2: Review Aggregation** - Fetch reviews from multiple platforms and display with proper attribution
-- [x] **Phase 3: Service Area Mapping** - Visual map and text listing of coverage areas
-
-## Phase Details
+<details>
+<summary>✅ v1.0 Foundation (Phases 1-3) - SHIPPED 2026-02-14</summary>
 
 ### Phase 1: Schema & Local SEO
 **Goal**: Search engines understand Polos Electronics as a verified local electrical contractor with defined service areas
-**Depends on**: Nothing (first phase)
-**Requirements**: SCHM-01, SCHM-02, SCHM-03, SCHM-04, SCHM-05
-**Success Criteria** (what must be TRUE):
-  1. Google Rich Results Test validates LocalBusiness schema with ElectricalContractor subtype
-  2. Schema includes areaServed property listing Clark, Cowlitz, and Skamania counties
-  3. NAP (Name/Address/Phone) matches exactly across website, schema, and external listings
-  4. Each electrical service has corresponding Service schema visible in page source
-  5. FAQ section displays on page with FAQPage schema markup validated
 **Plans**: 3 plans
-
-Plans:
-- [x] 01-01-PLAN.md - Data Foundation (business.json, services.json, faq.json)
-- [x] 01-02-PLAN.md - Schema Partials (local-business, services, faq)
-- [x] 01-03-PLAN.md - Template Integration & FAQ Display
 
 ### Phase 2: Review Aggregation
 **Goal**: Visitors see authentic customer reviews from multiple platforms, building trust before contact
-**Depends on**: Phase 1 (schema foundation established)
-**Requirements**: REVW-01, REVW-02, REVW-03, REVW-04, REVW-05, REVW-06, REVW-07
-**Success Criteria** (what must be TRUE):
-  1. Reviews from Google Business Profile display on the website with platform attribution
-  2. Reviews from Yelp display with required badges and "Read More" links (TOS compliance)
-  3. HomeAdvisor and Nextdoor reviews appear via manual curation process
-  4. Review data stored in normalized format in data/reviews.json with platform source field
-  5. Deep links to each review platform allow customers to leave new reviews
 **Plans**: 3 plans
-
-Plans:
-- [ ] 02-01-PLAN.md — Data foundation & platform badges (reviews.json schema, SVG logos)
-- [ ] 02-02-PLAN.md — GitHub Actions workflow (Google + Yelp API automation)
-- [ ] 02-03-PLAN.md — Hugo template & CSS (multi-platform display with attribution)
 
 ### Phase 3: Service Area Mapping
 **Goal**: Visitors instantly understand whether Polos Electronics serves their location
-**Depends on**: Nothing (can run parallel to Phase 2 after Phase 1 complete)
-**Requirements**: AREA-01, AREA-02, AREA-03, AREA-04
-**Success Criteria** (what must be TRUE):
-  1. Static map image displays showing Washington state with Battle Ground starred and Clark County highlighted
-  2. Bordering counties (Cowlitz, Skamania) show in lighter color with visual hierarchy
-  3. Text listing organizes service areas by priority: Clark County primary, bordering counties secondary, statewide coverage tertiary
-  4. data/service_area.json contains comprehensive county and city data consumed by templates
 **Plans**: 3 plans
 
-Plans:
-- [x] 03-01-PLAN.md — Data foundation (tiered service_area.json with comprehensive city listings)
-- [x] 03-02-PLAN.md — Map image creation (SVG styling and PNG export with visual hierarchy)
-- [x] 03-03-PLAN.md — Hugo template & CSS (tiered service area display)
+</details>
+
+### 🚧 v1.1 Reliability & Visibility (In Progress)
+
+**Milestone Goal:** Reviews and service-area credibility signals reliably render and remain visible across ingestion failures, build regressions, and deploy drift.
+
+- [ ] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
+- [ ] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
+- [ ] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
+
+## Phase Details
+
+### Phase 4: Rendering Reliability
+**Goal**: Users consistently see credibility and coverage sections even when upstream data or primary assets are degraded
+**Depends on**: Phase 3
+**Requirements**: REND-01, REND-02, REND-03
+**Success Criteria** (what must be TRUE):
+  1. User always sees a Reviews section, even when live review ingestion is empty or stale
+  2. User always sees a Service Area section with map context, even when the primary map asset fails
+  3. User can see when review data was last updated and whether review data is stale
+**Plans**: TBD
+
+### Phase 5: Validation & CI Gates
+**Goal**: Users are protected from silent homepage regressions because invalid inputs and broken output are blocked before publish
+**Depends on**: Phase 4
+**Requirements**: VALD-01, VALD-02, VALD-03, VALD-04
+**Success Criteria** (what must be TRUE):
+  1. Invalid review data contracts are rejected before site build, preventing malformed review content from reaching production
+  2. Invalid service-area data or missing required map assets are rejected before deploy
+  3. Hugo build/deploy pipeline fails on warnings and path issues instead of publishing risky output
+  4. Built homepage output is automatically checked for reviews and service-area/map presence before deployment can continue
+**Plans**: TBD
+
+### Phase 6: Operations & Recovery
+**Goal**: Users continue seeing credible review/service visibility while operators can quickly diagnose and recover reliability incidents
+**Depends on**: Phase 5
+**Requirements**: OPER-01, OPER-02, OPER-03
+**Success Criteria** (what must be TRUE):
+  1. Users still see credible review content from last-known-good data when ingestion fails
+  2. Operators can trigger a documented manual recovery run that restores review/map reliability without code changes
+  3. CI runs provide review/map health diagnostics that make reliability incidents faster to identify and resolve
+**Plans**: TBD
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 > 2 > 3 (Phase 3 can optionally run parallel to Phase 2)
+Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6
 
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Schema & Local SEO | 3/3 | ✓ Complete | 2026-02-14 |
-| 2. Review Aggregation | 3/3 | ✓ Complete | 2026-02-14 |
-| 3. Service Area Mapping | 3/3 | ✓ Complete | 2026-02-14 |
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1. Schema & Local SEO | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
+| 2. Review Aggregation | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
+| 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
+| 4. Rendering Reliability | v1.1 | 0/TBD | Not started | - |
+| 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
+| 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
