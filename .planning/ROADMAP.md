@@ -35,7 +35,7 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 **Milestone Goal:** Reviews and service-area credibility signals reliably render and remain visible across ingestion failures, build regressions, and deploy drift.
 
 - [x] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
-- [ ] **Phase 4.1: Restore Rendering Reliability** - Fix Phase 4 regressions (fallback logic, freshness metadata)
+- [x] **Phase 4.1: Restore Rendering Reliability** - Fix Phase 4 regressions (fallback logic, freshness metadata)
 - [ ] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
 - [ ] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
 
@@ -75,7 +75,8 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
   3. `staleAfterDays` and `freshnessLabel` fields present in reviews.json
 **Plans**: 1 plan
 Plans:
-- [ ] 04.1-01-PLAN.md — Restore fallback logic and freshness metadata
+- [x] 04.1-01-PLAN.md — Restore fallback logic and freshness metadata
+**Status**: ✓ Complete (2026-02-14)
 
 ### Phase 5: Validation & CI Gates
 **Goal**: Users are protected from silent homepage regressions because invalid inputs and broken output are blocked before publish
@@ -140,7 +141,7 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 4.1 > 5 > 6 > 7 > 8
 | 2. Review Aggregation | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete (regressed) | 2026-02-14 |
-| 4.1. Restore Rendering Reliability | v1.1 | 0/1 | Not started | - |
+| 4.1. Restore Rendering Reliability | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
 | 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |

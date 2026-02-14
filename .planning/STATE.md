@@ -66,4 +66,4 @@ None.
 Last session: 2026-02-14
 Stopped at: Completed 04.1-01-PLAN.md - Phase 4.1 complete
 Resume file: None
-Next action: `/gsd:execute-phase 5` (Validation Gates)
+Next action: `/gsd:discuss-phase 5` (Validation & CI Gates)
