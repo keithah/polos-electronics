@@ -347,11 +347,14 @@
 
                 {{ $reviewsData := .Site.Data.reviews | default dict }}
                 {{ $displayReviews := slice }}
-                {{ range $reviewsData.reviews }}
-                    {{ $displayReviews = $displayReviews | append . }}
-                {{ end }}
-                {{ range $reviewsData.fallbackReviews }}
-                    {{ $displayReviews = $displayReviews | append . }}
+                {{ if gt (len ($reviewsData.reviews | default slice)) 0 }}
+                    {{ range $reviewsData.reviews }}
+                        {{ $displayReviews = $displayReviews | append . }}
+                    {{ end }}
+                {{ else }}
+                    {{ range $reviewsData.fallbackReviews }}
+                        {{ $displayReviews = $displayReviews | append . }}
+                    {{ end }}
                 {{ end }}
 
                 <div class="reviews-carousel">
