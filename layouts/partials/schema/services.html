@@ -1,0 +1,25 @@
+{{- $services := .Site.Data.services -}}
+{{- $baseURL := .Site.BaseURL -}}
+
+{{- /* Build areaServed references to match local-business.html @ids */ -}}
+{{- $areaRefs := slice
+  (dict "@id" (printf "%s#area-clark-county" $baseURL))
+  (dict "@id" (printf "%s#area-cowlitz-county" $baseURL))
+  (dict "@id" (printf "%s#area-skamania-county" $baseURL))
+-}}
+
+{{- range $services.services -}}
+{{- $service := dict
+  "@context" "https://schema.org"
+  "@type" "Service"
+  "@id" (printf "%s#service-%s" $baseURL .id)
+  "name" .name
+  "description" .description
+  "serviceType" .serviceType
+  "provider" (dict "@id" (printf "%s#organization" $baseURL))
+  "areaServed" $areaRefs
+-}}
+<script type="application/ld+json">
+{{- $service | jsonify | safeJS -}}
+</script>
+{{- end -}}
