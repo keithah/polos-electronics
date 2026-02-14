@@ -7,7 +7,9 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 ## Milestones
 
 - ✅ **v1.0 Foundation** - Phases 1-3 (shipped 2026-02-14)
-- 🚧 **v1.1 Reliability & Visibility** - Phases 4-6 (planned)
+- 🚧 **v1.1 Reliability & Visibility** - Phases 4-6 (in progress)
+- ✅ **v1.2 Interactive Coverage Map** - Phase 7 (shipped 2026-02-14)
+- ⏳ **v1.3 SEO Enhancement** - Phase 8 (planned)
 
 ## Phases
 
@@ -35,6 +37,18 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 - [ ] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
 - [ ] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
 - [ ] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
+
+### ✅ v1.2 Interactive Coverage Map (Shipped 2026-02-14)
+
+**Milestone Goal:** Replace the static service-area image with an embedded interactive map for exploration while preserving a static SVG/image fallback for reliability.
+
+- [x] **Phase 7: Interactive Service Map** - Embed an interactive map (iframe) with robust static fallback
+
+### ⏳ v1.3 SEO Enhancement (Planned)
+
+**Milestone Goal:** Maximize search visibility and click-through rates through structured data enhancements, rich snippets, and technical SEO improvements.
+
+- [ ] **Phase 8: SEO Enhancement** - Add AggregateRating schema, Review schema, optimized social images, and technical SEO improvements
 
 ## Phase Details
 
@@ -69,16 +83,42 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
   3. CI runs provide review/map health diagnostics that make reliability incidents faster to identify and resolve
 **Plans**: TBD
 
+### Phase 7: Interactive Service Map
+**Goal**: Users can explore coverage context via an embedded interactive map while the Service Area section remains reliable through a static fallback
+**Depends on**: Phase 4
+**Requirements**: IMAP-01, IMAP-02
+**Success Criteria** (what must be TRUE):
+  1. Service Area section renders with an interactive embedded map when available (no paid JS API required)
+  2. If the embed is blocked/unavailable, a static SVG/image fallback renders automatically so users still see map context
+  3. Users have a clear "Open in Google Maps" link as an escape hatch
+**Status**: ✓ Complete (2026-02-14)
+
+### Phase 8: SEO Enhancement
+**Goal**: Maximize search visibility through rich snippets, structured data, and technical SEO so Polos Electronics stands out in local search results
+**Depends on**: Phase 7
+**Requirements**: SEO-01, SEO-02, SEO-03, SEO-04, SEO-05, SEO-06, SEO-07
+**Success Criteria** (what must be TRUE):
+  1. Google search results show star ratings via AggregateRating schema
+  2. Individual reviews are marked up with Review schema for potential rich snippets
+  3. Service area coverage uses GeoCircle/GeoShape schema for local SEO
+  4. Social share image is a designed branded image (not just logo)
+  5. Sitemap.xml exists and is properly configured
+  6. Images are optimized for page speed (WebP, lazy loading, proper sizing)
+  7. FAQ answers include internal links to relevant sections
+**Plans**: TBD
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6
+Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7 > 8
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. Schema & Local SEO | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 2. Review Aggregation | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
 | 3. Service Area Mapping | v1.0 | 3/3 | ✓ Complete | 2026-02-14 |
-| 4. Rendering Reliability | v1.1 | 2/3 | In progress | - |
+| 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete | 2026-02-14 |
 | 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
+| 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
+| 8. SEO Enhancement | v1.3 | 0/TBD | Not started | - |

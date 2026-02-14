@@ -1,11 +1,11 @@
-# Requirements: Polos Electronics Website Enhancements (Milestone v1.1)
+# Requirements: Polos Electronics Website Enhancements
 
 **Defined:** 2026-02-14
 **Core Value:** Potential customers can quickly verify Polos Electronics' credibility through authentic reviews and understand whether they're in the service area - before picking up the phone.
 
-## v1 Requirements
+## v1.1 Requirements (Reliability & Visibility)
 
-Requirements for milestone v1.1 (Reliability & Visibility). Each maps to new roadmap phases.
+Requirements for reliability and visibility. Each maps to roadmap phases 4-6.
 
 ### Rendering Reliability
 
@@ -25,6 +25,32 @@ Requirements for milestone v1.1 (Reliability & Visibility). Each maps to new roa
 - [ ] **OPER-01**: User is protected from prolonged outages because operators can trigger a documented manual recovery run
 - [ ] **OPER-02**: User benefits from faster incident resolution through CI diagnostics for review/map health
 - [ ] **OPER-03**: User still sees credible review content when ingestion fails by using last-known-good fallback data
+
+## v1.2 Requirements (Interactive Map)
+
+- [x] **IMAP-01**: User can explore service coverage via interactive embedded map
+- [x] **IMAP-02**: User always sees map context even when embed is blocked (static fallback)
+
+## v1.3 Requirements (SEO Enhancement)
+
+### Structured Data & Rich Snippets
+
+- [ ] **SEO-01**: Google search results show star ratings via AggregateRating schema derived from real reviews
+- [ ] **SEO-02**: Individual reviews marked up with Review schema for potential rich snippet eligibility
+- [ ] **SEO-03**: Service area coverage enhanced with GeoCircle/GeoShape schema for local search
+
+### Social & Visual
+
+- [ ] **SEO-04**: Social shares display a branded designed image instead of just the logo
+
+### Technical SEO
+
+- [ ] **SEO-05**: Sitemap.xml exists, is current, and properly configured for search engines
+- [ ] **SEO-06**: Images optimized for page speed (WebP format, lazy loading, proper dimensions)
+
+### Internal Linking
+
+- [ ] **SEO-07**: FAQ answers include contextual internal links to contact form, services, and service area sections
 
 ## v2 Requirements
 
@@ -49,13 +75,13 @@ Explicitly excluded from milestone v1.1.
 
 ## Traceability
 
-Which phases cover which requirements. To be populated during roadmap creation.
+Which phases cover which requirements.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| REND-01 | Phase 4 | Pending |
-| REND-02 | Phase 4 | Pending |
-| REND-03 | Phase 4 | Pending |
+| REND-01 | Phase 4 | ✓ Complete |
+| REND-02 | Phase 4 | ✓ Complete |
+| REND-03 | Phase 4 | ✓ Complete |
 | VALD-01 | Phase 5 | Pending |
 | VALD-02 | Phase 5 | Pending |
 | VALD-03 | Phase 5 | Pending |
@@ -63,12 +89,21 @@ Which phases cover which requirements. To be populated during roadmap creation.
 | OPER-01 | Phase 6 | Pending |
 | OPER-02 | Phase 6 | Pending |
 | OPER-03 | Phase 6 | Pending |
+| IMAP-01 | Phase 7 | ✓ Complete |
+| IMAP-02 | Phase 7 | ✓ Complete |
+| SEO-01 | Phase 8 | Pending |
+| SEO-02 | Phase 8 | Pending |
+| SEO-03 | Phase 8 | Pending |
+| SEO-04 | Phase 8 | Pending |
+| SEO-05 | Phase 8 | Pending |
+| SEO-06 | Phase 8 | Pending |
+| SEO-07 | Phase 8 | Pending |
 
 **Coverage:**
-- v1 requirements: 10 total
-- Mapped to phases: 10
-- Unmapped: 0
+- v1.1 requirements: 10 total (3 complete, 7 pending)
+- v1.2 requirements: 2 total (2 complete)
+- v1.3 requirements: 7 total (0 complete)
 
 ---
 *Requirements defined: 2026-02-14*
-*Last updated: 2026-02-14 after v1.1 roadmap mapping*
+*Last updated: 2026-02-14 after adding v1.3 SEO requirements*
