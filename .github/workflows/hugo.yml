@@ -66,6 +66,12 @@ jobs:
           jq -e '
             (.tiers | length >= 1)
           ' data/service_area.json > /dev/null || { echo "ERROR: service_area.json tiers array must have at least 1 entry"; exit 1; }
+      - name: Validate required assets
+        run: |
+          test -f static/images/service-area-map.svg || \
+            { echo "ERROR: Missing service-area-map.svg"; exit 1; }
+          test -f static/images/service-area-map.png || \
+            { echo "ERROR: Missing service-area-map.png (fallback)"; exit 1; }
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
