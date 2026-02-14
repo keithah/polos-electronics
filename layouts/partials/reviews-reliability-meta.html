@@ -1,1 +1,15 @@
-{{/* Reviews freshness meta - disabled */}}
+{{ $reviewsData := .Site.Data.reviews | default dict }}
+{{ $staleAfterDays := int ($reviewsData.staleAfterDays | default 45) }}
+{{ $freshnessLabel := $reviewsData.freshnessLabel | default "Updated" }}
+
+{{ with $reviewsData.lastUpdated }}
+{{ $lastUpdated := time.AsTime . }}
+{{ $ageSeconds := sub (time.Now.Unix) $lastUpdated.Unix }}
+{{ $ageDays := div $ageSeconds 86400 }}
+<p class="review-time reviews-freshness-meta">
+    {{ $freshnessLabel }} {{ $lastUpdated.Format "Jan 2, 2006" }}
+    {{ if gt $ageDays $staleAfterDays }}
+    <span>&middot; Refresh in progress</span>
+    {{ end }}
+</p>
+{{ end }}
