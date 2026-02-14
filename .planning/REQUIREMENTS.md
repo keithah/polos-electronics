@@ -67,28 +67,28 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCHM-01 | TBD | Pending |
-| SCHM-02 | TBD | Pending |
-| SCHM-03 | TBD | Pending |
-| SCHM-04 | TBD | Pending |
-| SCHM-05 | TBD | Pending |
-| REVW-01 | TBD | Pending |
-| REVW-02 | TBD | Pending |
-| REVW-03 | TBD | Pending |
-| REVW-04 | TBD | Pending |
-| REVW-05 | TBD | Pending |
-| REVW-06 | TBD | Pending |
-| REVW-07 | TBD | Pending |
-| AREA-01 | TBD | Pending |
-| AREA-02 | TBD | Pending |
-| AREA-03 | TBD | Pending |
-| AREA-04 | TBD | Pending |
+| SCHM-01 | Phase 1 | Pending |
+| SCHM-02 | Phase 1 | Pending |
+| SCHM-03 | Phase 1 | Pending |
+| SCHM-04 | Phase 1 | Pending |
+| SCHM-05 | Phase 1 | Pending |
+| REVW-01 | Phase 2 | Pending |
+| REVW-02 | Phase 2 | Pending |
+| REVW-03 | Phase 2 | Pending |
+| REVW-04 | Phase 2 | Pending |
+| REVW-05 | Phase 2 | Pending |
+| REVW-06 | Phase 2 | Pending |
+| REVW-07 | Phase 2 | Pending |
+| AREA-01 | Phase 3 | Pending |
+| AREA-02 | Phase 3 | Pending |
+| AREA-03 | Phase 3 | Pending |
+| AREA-04 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 16 total
-- Mapped to phases: 0 (roadmap not yet created)
-- Unmapped: 16 ⚠️
+- Mapped to phases: 16
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after initial definition*
+*Last updated: 2026-02-13 after roadmap creation*
