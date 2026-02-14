@@ -228,24 +228,50 @@
         <!-- Service Area Section -->
         <section id="service-area" class="service-area-section">
             <div class="section-container">
-                <h2 class="section-title">{{ .Site.Data.service_area.title }}</h2>
+                {{ $sa := .Site.Data.service_area }}
+                <h2 class="section-title">{{ $sa.heading }}</h2>
+                <p class="service-area-tagline">{{ $sa.tagline }}</p>
+
                 <div class="service-area-content">
                     <div class="service-area-text">
-                        <p>{{ .Site.Data.service_area.paragraph }}</p>
-                        <p>Major cities we serve include:
-                            {{ range $index, $city := .Site.Data.service_area.cities }}
-                                {{ if eq $index 0 }}
-                                    {{ $city }}
-                                {{ else if eq (add $index 1) (len $.Site.Data.service_area.cities) }}
-                                    and {{ $city }}.
-                                {{ else }}
-                                    {{ $city }},
+                        {{ range $sa.tiers }}
+                            {{ if eq .level "primary" }}
+                            <div class="service-area-primary">
+                                <h3>{{ .label }}</h3>
+                                <p class="tier-description">{{ .description }}</p>
+                                {{ range .counties }}
+                                <div class="city-list">
+                                    {{ range .cities }}
+                                    <span class="city {{ if .isHeadquarters }}headquarters{{ end }}">{{ .name }}</span>
+                                    {{ end }}
+                                </div>
                                 {{ end }}
+                            </div>
+                            {{ else if eq .level "secondary" }}
+                            <div class="service-area-secondary">
+                                <h4>{{ .label }}</h4>
+                                <p class="tier-description">{{ .description }}</p>
+                                {{ range .counties }}
+                                <div class="county-group">
+                                    <strong>{{ .name }}:</strong>
+                                    <span class="city-inline">
+                                        {{ range $index, $city := .cities }}{{ if $index }}, {{ end }}{{ $city.name }}{{ end }}
+                                    </span>
+                                </div>
+                                {{ end }}
+                            </div>
+                            {{ else if eq .level "statewide" }}
+                            <div class="service-area-statewide">
+                                <p><strong>{{ .label }}:</strong> {{ .description }}</p>
+                            </div>
                             {{ end }}
-                        </p>
+                        {{ end }}
+
+                        <p class="service-area-cta">{{ $sa.outOfAreaCTA }}</p>
                     </div>
+
                     <div class="service-area-map">
-                        <img src="{{ .Site.Data.service_area.map.url | relURL }}" alt="{{ .Site.Data.service_area.map.alt }}">
+                        <img src="{{ $sa.map.url | relURL }}" alt="{{ $sa.map.alt }}">
                     </div>
                 </div>
             </div>
