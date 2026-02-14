@@ -1,288 +1,262 @@
 # Pitfalls Research
 
-**Domain:** Review aggregation, service area mapping, and local SEO for static sites
-**Researched:** 2026-02-13
-**Confidence:** HIGH (verified with Google official documentation and multiple authoritative sources)
+**Domain:** Reliability hardening for existing Hugo + GitHub Actions static pipeline (missing data/assets)
+**Researched:** 2026-02-14
+**Confidence:** HIGH (Hugo docs + GitHub official docs), with a few LOW confidence operational heuristics called out
 
 ## Critical Pitfalls
 
-### Pitfall 1: Self-Serving Review Schema Markup
+### Pitfall 1: Treating `data/` as a Public Runtime Endpoint
 
 **What goes wrong:**
-Adding `AggregateRating` or `Review` structured data for reviews displayed on your own business website. Google explicitly prohibits "self-serving reviews" — reviews about entity A placed on entity A's website are ineligible for rich result star ratings.
+Teams move map/review JSON into `data/*.json` and then try to fetch it in browser JS (`/data/reviews.json`). In Hugo, `data/` is template input, not a published static directory, so runtime fetches 404 and widgets render empty.
 
 **Why it happens:**
-Developers see competitors with star ratings in search results and assume adding review schema will achieve the same effect. They don't realize Google distinguishes between first-party (self-serving) and third-party review contexts.
+During hardening, teams centralize data quickly and forget that Hugo only exposes `data` through `.Site.Data` at build time.
 
 **How to avoid:**
-- Do NOT add `AggregateRating` schema to LocalBusiness reviews on poloselectronics.com
-- Display reviews visually for users without schema markup
-- Focus Schema.org markup on LocalBusiness details (address, phone, services, areaServed) where it IS eligible for rich results
-- Consider reviews as "social proof for humans, not search engines"
+- If browser must fetch JSON at runtime, store it in `static/` or publish a built resource to `public/`.
+- If build-time rendering is enough, read from `.Site.Data` in templates and render HTML directly.
+- Add a CI check that fails if frontend code references `/data/` URLs.
 
 **Warning signs:**
-- Google Rich Results Test shows review markup is "valid" but you never see stars in SERPs
-- Competitors using widgets from BrightLocal/Yotpo have stars but your custom implementation doesn't
-- Google Search Console shows "review" structured data detected but no impressions for rich results
+- Network tab shows `404` for `/data/*.json`.
+- Local `hugo server` and production both show missing widgets with no template errors.
+- Built `public/` has no `data/` directory.
 
 **Phase to address:**
-Schema.org implementation phase — establish the rule early that reviews get NO schema markup for LocalBusiness sites
-
-**Source:** [Google Search Central - Making Review Rich Results more helpful](https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful)
+Phase 1 - Data and Asset Audit Baseline
 
 ---
 
-### Pitfall 2: Yelp Display Requirements Violations
+### Pitfall 2: Asset Pipeline Files Never Published
 
 **What goes wrong:**
-Displaying Yelp reviews without proper attribution, "Read More" links, or by mixing Yelp ratings with other sources. Yelp's API Terms of Service explicitly prohibit blending star ratings from Yelp with ratings from other platforms.
+Map/review JS or CSS sits in `assets/` and is transformed, but template never calls `.RelPermalink`, `.Permalink`, or `.Publish`, so file is never emitted to `public/`.
 
 **Why it happens:**
-Developers create a unified "overall rating" by averaging Google, Yelp, and other sources. Or they strip Yelp branding to match site design. Both violate Yelp TOS.
+In existing sites, teams refactor to Hugo Pipes incrementally and assume `resources.Get` alone publishes output.
 
 **How to avoid:**
-- Display each platform's reviews in SEPARATE sections with clear attribution
-- Include "Read more on Yelp" links to full reviews
-- Use Yelp's required attribution badges
-- Never calculate "combined average" across platforms
-- Cache Yelp data for maximum 24 hours (TOS requirement)
-- Contact api@yelp.com for display requirement exceptions if needed
+- Standardize one partial for asset inclusion that always emits `RelPermalink`.
+- Add a build assertion script that checks expected files exist in `public/` after `hugo --minify`.
+- For critical assets (map/reviews), keep an integration test that requests emitted URLs from built output.
 
 **Warning signs:**
-- "Overall rating: 4.8 stars (from 150 reviews)" combining multiple sources
-- Missing Yelp logo or attribution on Yelp-sourced reviews
-- Review excerpts without "Read more" links to Yelp
-- Cached data older than 24 hours being displayed
+- No build failure, but 404 on `/js/map.js` or `/css/reviews.css` in deployed site.
+- `public/` missing expected hashed files after successful build.
+- Feature works only when manually loading source file in dev.
 
 **Phase to address:**
-Review aggregation phase — design separate display components per platform from the start
-
-**Source:** [Yelp Display Requirements](https://terms.yelp.com/developers/display_requirements/)
+Phase 2 - Build Output Integrity Gates
 
 ---
 
-### Pitfall 3: Hugo JSON-LD Escaping Issues
+### Pitfall 3: Base URL and Leading Slash Path Bugs
 
 **What goes wrong:**
-Hugo escapes special characters in JSON-LD output, producing invalid structured data. URLs become `https:\/\/example.com` instead of `https://example.com`. Forward-slashes get backslash-escaped, breaking JSON-LD validation.
+Hardcoded leading-slash links (`/images/...`, `/js/...`) work in one environment and fail in another (project path, preview URL, or custom-domain transition), causing selective missing assets.
 
 **Why it happens:**
-Hugo's templating system automatically escapes output for HTML safety. When building JSON-LD in templates using string interpolation, these escaping rules corrupt the JSON structure.
+Reliability fixes often patch one broken path at a time instead of normalizing URL generation site-wide.
 
 **How to avoid:**
-- Use Hugo's `dict` function to build data structures in memory
-- Pipe final output through `jsonify` with the `safeJS` filter
-- Test JSON-LD output with Schema.org Validator AND Google Rich Results Test
-- Avoid string interpolation for URLs in JSON-LD templates
+- Use Hugo URL helpers (`relURL`/`RelPermalink`) consistently instead of hardcoded absolute paths.
+- Build with the same `--baseURL` strategy as deployment workflow.
+- Add link checking against built `public/` and reject unresolved local assets.
 
 **Warning signs:**
-- Backslashes appearing in URL strings in page source
-- JSON-LD validates in code but fails in validators
-- Schema.org validator shows "Invalid JSON" errors
-- URLs in structured data don't match actual page URLs
+- Asset URLs differ between local and production HTML.
+- Broken assets are concentrated on nested routes.
+- Changing domain or path prefix causes sudden map/review breakage.
 
 **Phase to address:**
-Schema.org implementation phase — create reusable JSON-LD partials using `dict` pattern from the start
-
-**Source:** [Hugo discourse - JSON-LD markup](https://discourse.gohugo.io/t/marking-up-json-ld/1154)
+Phase 2 - Build Output Integrity Gates
 
 ---
 
-### Pitfall 4: NAP Inconsistency Across Schema and Review Platforms
+### Pitfall 4: Workflow Artifact Miswiring (Deploying Wrong Folder)
 
 **What goes wrong:**
-Business Name, Address, and Phone (NAP) differ between website Schema.org markup, Google Business Profile, Yelp listing, and other platforms. Example: "St." in schema but "Street" in GBP, or "(360) 687-3543" vs "360-687-3543".
+GitHub Actions succeeds, but deploys wrong directory (repo root instead of `public/`, or stale/empty artifact). Site goes live without map/review assets despite green pipeline.
 
 **Why it happens:**
-Information was entered separately on each platform over years. Website displays "pretty" formatted address while schema uses different format. Phone number formatting varies.
+Teams retrofit reliability into an existing workflow and accidentally change `upload-pages-artifact` path or `deploy` job dependency wiring.
 
 **How to avoid:**
-- Create a single source of truth (`data/business-info.json`) for NAP
-- Use Hugo partials to render NAP from this single source everywhere
-- Audit all platform listings (GBP, Yelp, HomeAdvisor, Nextdoor) for exact match
-- Use EXACT format: "20810 NE 267th St" not "Street", "(360) 687-3543" not "360.687.3543"
-- Include in Schema.org: exact NAP matching GBP listing
+- Build job must upload `path: ./public` only.
+- Deploy job must `needs: build`, and have `pages: write` + `id-token: write`.
+- Keep a post-build manifest (`public/_integrity.json`) and verify it before artifact upload.
 
 **Warning signs:**
-- Google Business Profile shows "Suggest an edit" for address/phone
-- Different formats in footer vs structured data vs review platforms
-- AI search engines show wrong or conflicting business information
-- Local pack ranking drops unexpectedly
+- Workflow is green, but deployed HTML is old or missing newly added files.
+- Pages artifact contains source files (`layouts/`, `content/`) instead of static output.
+- Deploy job logs show retries waiting for artifact.
 
 **Phase to address:**
-Local SEO phase — NAP audit and standardization BEFORE implementing enhanced schema
-
-**Source:** [BrightLocal - What is NAP?](https://www.brightlocal.com/learn/what-is-nap/)
+Phase 3 - CI/CD Hardening and Deployment Guardrails
 
 ---
 
-### Pitfall 5: API Rate Limits Breaking GitHub Actions Builds
+### Pitfall 5: Checkout Defaults Dropping Required Files (Submodules/LFS)
 
 **What goes wrong:**
-Scheduled review-fetching workflow makes too many API calls, hits rate limits, and fails. Or API response times cause GitHub Actions timeout (10-minute deployment limit). Build artifacts exceed size limits.
+Build runner checks out repo without submodules or LFS objects, so images/data files referenced by map/review features are missing only in CI.
 
 **Why it happens:**
-Fetching fresh reviews from Google Places API (600 calls/minute limit), Yelp, and other platforms during every build. No caching between builds. Large image assets in repository.
+`actions/checkout` defaults (`submodules: false`, `lfs: false`) are fine until hardening introduces external asset repos or LFS-managed media.
 
 **How to avoid:**
-- Fetch reviews in SEPARATE scheduled workflow (not during Hugo build)
-- Store reviews in `data/reviews-*.json` files committed to repo
-- Use GitHub Actions cache for API responses between runs
-- Implement exponential backoff for rate-limited APIs
-- Set `timeout: 20000` in Hugo config for slow API shortcodes (if any)
-- Keep build artifacts under deployment limits
+- Explicitly set checkout options needed by repo (`submodules: recursive`, `lfs: true` when applicable).
+- Add a CI "required files" step to assert presence of known critical files before running Hugo.
+- Document repository storage expectations in pipeline README.
 
 **Warning signs:**
-- "Page build timed out" errors in GitHub Actions
-- 429 (rate limited) errors in workflow logs
-- Build times increasing significantly
-- Intermittent deployment failures
+- Local build works, CI build misses only large images or submodule content.
+- Build logs reference missing files that do exist locally.
+- Missing assets are concentrated in one directory tree.
 
 **Phase to address:**
-Review aggregation phase — design fetch-and-store workflow SEPARATE from Hugo build
-
-**Source:** [Hugo GitHub Issue #1604](https://github.com/gohugoio/hugo/issues/1604)
+Phase 3 - CI/CD Hardening and Deployment Guardrails
 
 ---
 
-### Pitfall 6: Stale Review Data Without Refresh Strategy
+### Pitfall 6: Dev/Prod Build Drift (`hugo server` != `hugo`)
 
 **What goes wrong:**
-Reviews fetched once during initial implementation become months old. New reviews never appear. Old negative reviews persist after being resolved. Displayed review counts don't match platform counts.
+Map/review components appear in dev preview but disappear in production build due to environment/config differences (draft/future content, environment-specific params, minification side effects).
 
 **Why it happens:**
-No automated refresh workflow. Manual "fetch reviews" step forgotten. Scheduled workflow fails silently. No monitoring for freshness.
+Teams validate fixes in `hugo server` only and skip parity checks with production build flags.
 
 **How to avoid:**
-- Create GitHub Actions workflow scheduled for weekly review refresh
-- Add "Reviews last updated: {date}" visible on site
-- Set up workflow failure notifications
-- Keep `reviewCount` in schema matching actual displayed reviews
-- Document manual refresh procedure as fallback
+- Make `hugo --gc --minify` (same flags as CI) the required pre-merge verification command.
+- Add snapshot checks over built `public/index.html` and map/review partial output.
+- Keep environment-sensitive params explicit and tested in both `development` and `production`.
 
 **Warning signs:**
-- "Reviews last updated" date is months old
-- Visible reviews don't match what customers see on Google/Yelp
-- Schema `reviewCount` doesn't match displayed review count
-- Customers mention reviews that aren't showing
+- "Works locally" but fails only after deploy.
+- Missing sections correlate with draft/future or env-driven conditions.
+- Production HTML differs materially from local server output.
 
 **Phase to address:**
-Review aggregation phase — build refresh workflow WITH the initial fetch workflow
+Phase 1 - Data and Asset Audit Baseline
+
+---
+
+### Pitfall 7: Silent Remote Data Failure and Stale Caches
+
+**What goes wrong:**
+Remote review/map data fetch fails (network, 404, schema change), but template fallback hides error, resulting in empty UI or stale content for long periods.
+
+**Why it happens:**
+In hardening projects, teams optimize for "site always builds" and downgrade all fetch errors to warnings without observability.
+
+**How to avoid:**
+- Use `try` with explicit error handling around `resources.GetRemote`.
+- Fail build for critical data sources; warn only for non-critical enrichments.
+- Stamp rendered output with `last_updated` and source status.
+- Add scheduled synthetic checks that verify map/review selectors have data in published HTML.
+
+**Warning signs:**
+- Build remains green while map/review blocks are empty.
+- Same review count/date persists across many deploys.
+- Logs contain repeated remote fetch warnings ignored by team.
+
+**Phase to address:**
+Phase 4 - Observability and Synthetic Verification
 
 ---
 
 ## Technical Debt Patterns
 
-Shortcuts that seem reasonable but create long-term problems.
-
 | Shortcut | Immediate Benefit | Long-term Cost | When Acceptable |
 |----------|-------------------|----------------|-----------------|
-| Hardcoding review data | No API complexity | Manual updates required forever; data becomes stale | Never for active business |
-| Single combined rating | "Cleaner" display | Yelp TOS violation; misleading aggregate | Never |
-| Skipping validation | Faster development | Invalid schema goes live; no rich results | Never |
-| Copy-paste location pages | Quick multi-location support | Duplicate content penalty; thin content | Never |
-| Embedding Google Maps API | Interactive map | API costs; requires key management; slows page load | Only if interactivity required |
+| Hotfixing broken paths inline in templates | Fast restoration | Path logic fragments and regresses on next deploy | Only as emergency patch; refactor same sprint |
+| Swallowing all remote fetch errors | Fewer broken builds | Silent data outages, stale reviews | Never for critical homepage widgets |
+| Keeping dual asset locations (`static/` and `assets/`) without rules | Team flexibility | Ambiguous source of truth, accidental 404s | Acceptable only with documented ownership matrix |
+| Deploying without artifact content check | Simpler workflow | Green pipeline, broken site | Never |
 
 ## Integration Gotchas
 
-Common mistakes when connecting to external services.
-
 | Integration | Common Mistake | Correct Approach |
 |-------------|----------------|------------------|
-| Google Places API | Making calls during Hugo build | Pre-fetch in separate workflow; store in data files |
-| Yelp Fusion API | Missing attribution/badges | Follow Display Requirements exactly; include "Read more" links |
-| Google Business Profile | Using deprecated GMB API | Use Google Business Profile API; consider manual export if API access restricted |
-| HomeAdvisor/Angi | Expecting public API | No public API; manual export or screenshot approach required |
-| Nextdoor | Expecting review API | No review API; display Nextdoor badge/link instead of reviews |
+| Hugo `data/` + browser JS | Fetching `/data/*.json` at runtime | Render via `.Site.Data` or publish JSON through `static/`/resources |
+| Hugo Pipes + templates | Using `resources.Get` without publish/permalink call | Always emit `.RelPermalink`/`.Permalink`/`.Publish` |
+| GitHub Pages actions | Uploading wrong artifact path | Upload only `./public` and deploy that artifact |
+| `actions/checkout` | Relying on default `submodules`/`lfs` behavior | Declare required checkout settings explicitly |
+| GitHub Pages custom domain | Assuming `CNAME` file alone updates domain settings | Configure domain in Pages settings/API and rebuild |
 
-## Performance Traps
-
-Patterns that work at small scale but fail as usage grows.
+## Performance Traps (Reliability-Relevant)
 
 | Trap | Symptoms | Prevention | When It Breaks |
 |------|----------|------------|----------------|
-| Large inline Schema.org | Works fine initially | Schema in external `.json` linked via `<link>` | >50KB of structured data |
-| All reviews on single page | Loads quickly with 10 reviews | Pagination or "Show more" button | >50 reviews |
-| Static map as huge PNG | Looks good | Optimize image; use SVG where possible | Image >500KB slows mobile |
-| Fetching all platforms in one Action | Simple workflow | Separate workflows per platform; independent failure | Any single platform outage breaks all |
+| Artifact near Pages size/time limits | Partial deploys, timeouts | Keep site and artifact under limits; optimize assets | Near 1 GB site or long deploy step |
+| Expensive remote fetch during build | Intermittent missing sections | Pre-fetch/cache data and gate freshness | During network/API instability |
+| Excessive image processing in critical path | Builds fail sporadically | Cache image pipeline and pin cache dir in CI | During high-commit bursts |
 
-## Security Mistakes
-
-Domain-specific security issues beyond general web security.
+## Security/Operational Mistakes That Cause Reliability Incidents
 
 | Mistake | Risk | Prevention |
 |---------|------|------------|
-| Committing API keys to repo | Keys exposed in git history; quota abuse | Use GitHub Secrets; never commit `.env` files |
-| Displaying reviewer email addresses | Privacy violation; spam risk | Strip PII from review data before storing |
-| Client-side API calls | API keys visible in browser | Server-side/build-time only; never client-side |
-
-## UX Pitfalls
-
-Common user experience mistakes in this domain.
-
-| Pitfall | User Impact | Better Approach |
-|---------|-------------|-----------------|
-| Reviews without dates | Can't tell if reviews are recent | Show "Posted [date]" on each review |
-| No indication of review source | Confusion about authenticity | Clear platform badges (Google, Yelp icons) |
-| Service area as text-only list | Hard to visualize coverage | Static map WITH text list; visual + accessible |
-| Missing "Review us" CTAs | Lost opportunity for new reviews | Add "Review us on Google" buttons linking to review pages |
-| Reviews carousel auto-advancing | Users can't read at their pace | Manual navigation; pause on hover |
+| Exposing fallback API keys client-side to "fix" missing data | Key abuse + forced shutdown of integration | Keep fetch/build-time server-side only |
+| Skipping domain/DNS verification during outage response | Intermittent 404 and mixed-content errors | Use a fixed runbook for DNS + domain checks |
+| Manual emergency edits on `gh-pages` output | Drift from source and repeat outages | Treat generated output as immutable artifact |
 
 ## "Looks Done But Isn't" Checklist
 
-Things that appear complete but are missing critical pieces.
-
-- [ ] **Schema.org:** Often missing `areaServed` — verify GeoShape or AdministrativeArea for service coverage
-- [ ] **Reviews:** Often missing reviewer name/date — verify each review has attribution and timestamp
-- [ ] **NAP:** Often differs between footer and schema — verify EXACT match character-by-character
-- [ ] **Service area map:** Often missing alt text — verify descriptive alt for accessibility
-- [ ] **Meta descriptions:** Often generic — verify location-specific keywords in each page's meta
-- [ ] **Open Graph images:** Often missing for service area — verify social sharing shows correct preview
-- [ ] **Mobile review display:** Often truncated poorly — verify reviews readable on 320px width
-- [ ] **Schema validation:** Often skips Google test — verify Rich Results Test (not just schema.org validator)
+- [ ] **Map data:** `public/` contains expected map data or rendered HTML markers, not just source JSON in `data/`.
+- [ ] **Review block:** Synthetic check confirms non-zero rendered review cards on deployed URL.
+- [ ] **Critical assets:** `public/` contains map/review JS and CSS paths referenced by HTML.
+- [ ] **Workflow wiring:** `deploy` job depends on `build` and uses Pages permissions (`pages: write`, `id-token: write`).
+- [ ] **Path safety:** No hardcoded root-relative asset paths that bypass Hugo URL helpers.
+- [ ] **Parity:** `hugo --gc --minify` output tested locally before merge.
 
 ## Recovery Strategies
 
-When pitfalls occur despite prevention, how to recover.
-
 | Pitfall | Recovery Cost | Recovery Steps |
 |---------|---------------|----------------|
-| Self-serving review schema deployed | LOW | Remove `AggregateRating`/`Review` schema; redeploy; no penalty |
-| Yelp TOS violation | MEDIUM | Redesign display components; re-fetch with proper attribution; potential API access revocation |
-| NAP inconsistencies indexed | HIGH | Update ALL platforms simultaneously; request re-crawl; wait for propagation (weeks) |
-| API keys committed to repo | HIGH | Rotate keys immediately; add to `.gitignore`; consider repo history cleanup |
-| Hugo JSON-LD invalid | LOW | Fix template; redeploy; request reindexing in Search Console |
-| Review data 6+ months stale | MEDIUM | Re-run fetch workflows; verify data; redeploy; add monitoring to prevent recurrence |
+| `data/` runtime fetch misuse | LOW | Move JSON to `static/` or switch to `.Site.Data` rendering; redeploy |
+| Missing published asset from pipes | LOW | Add permalink/publish call in partial; rebuild; verify emitted files |
+| Wrong artifact deployed | MEDIUM | Fix artifact path/wiring, re-run workflow, validate deployed manifest |
+| CI missing submodule/LFS assets | MEDIUM | Update checkout config and add file presence preflight |
+| Silent remote data failure | MEDIUM | Promote critical fetch failures to hard errors; add freshness monitor |
 
 ## Pitfall-to-Phase Mapping
 
-How roadmap phases should address these pitfalls.
-
 | Pitfall | Prevention Phase | Verification |
 |---------|------------------|--------------|
-| Self-serving review schema | Schema.org implementation | Rich Results Test shows NO review warnings for LocalBusiness |
-| Yelp display violations | Review aggregation | Manual audit against Yelp Display Requirements checklist |
-| Hugo JSON-LD escaping | Schema.org implementation | Valid JSON-LD in page source; passes both validators |
-| NAP inconsistency | Local SEO (BEFORE schema) | Audit spreadsheet comparing all platforms matches 100% |
-| API rate limits | Review aggregation | Workflow logs show no 429 errors over 1-week period |
-| Stale review data | Review aggregation | "Last updated" date less than 7 days old after scheduled refresh |
+| `data/` treated as public endpoint | Phase 1 - Data and Asset Audit Baseline | No browser requests to `/data/*`; widgets render from built output |
+| Asset not published from `assets/` | Phase 2 - Build Output Integrity Gates | Expected files exist in `public/` and load with 200 status |
+| Base URL/path regressions | Phase 2 - Build Output Integrity Gates | Link checker passes across nested routes and production baseURL |
+| Pages artifact miswiring | Phase 3 - CI/CD Hardening and Deployment Guardrails | Artifact contains only built site and deploy job consumes it |
+| Checkout missing submodule/LFS files | Phase 3 - CI/CD Hardening and Deployment Guardrails | Required-file preflight passes in CI |
+| Dev/prod drift | Phase 1 - Data and Asset Audit Baseline | Local production-mode build matches CI behavior |
+| Silent remote data failure | Phase 4 - Observability and Synthetic Verification | Freshness and non-empty-content checks alert within one run |
 
 ## Sources
 
-- [Google Search Central - Review Snippet Structured Data](https://developers.google.com/search/docs/appearance/structured-data/review-snippet)
-- [Google Search Central - LocalBusiness Structured Data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
-- [Google - Making Review Rich Results more helpful](https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful)
-- [BrightLocal - Can local businesses use review schema?](https://www.brightlocal.com/learn/review-schema/)
-- [Yelp Display Requirements](https://terms.yelp.com/developers/display_requirements/)
-- [Yelp API Terms of Use](https://terms.yelp.com/developers/api_terms/20190327_en_us/)
-- [Hugo JSON-LD Discussion](https://discourse.gohugo.io/t/marking-up-json-ld/1154)
-- [Whitespark - LocalBusiness AggregateRating Schema](https://whitespark.ca/blog/how-to-use-aggregate-review-schema-to-get-stars-in-the-serps/)
-- [BrightLocal - What is NAP?](https://www.brightlocal.com/learn/what-is-nap/)
-- [Google Places API Usage and Billing](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing)
-- [GitHub Hugo Issue #1604 - Build Timeouts](https://github.com/gohugoio/hugo/issues/1604)
-- [Agile Digital - Service Area Business SEO Mistakes](https://www.agiledigitalagency.com/blog/service-area-businesses-seo-mistakes/)
-- [Connectica - 18 Local SEO Mistakes 2026](https://www.connecticallc.com/local-seo-mistakes/)
+### HIGH confidence (official)
+- Hugo Data Sources: https://gohugo.io/content-management/data-sources/
+- Hugo Pipes introduction (asset publishing behavior): https://gohugo.io/hugo-pipes/introduction/
+- Hugo `Resource.Publish`: https://gohugo.io/methods/resource/publish/
+- Hugo URL helper `urls.RelURL`: https://gohugo.io/functions/urls/relurl/
+- Hugo host on GitHub Pages workflow reference: https://gohugo.io/host-and-deploy/host-on-github-pages/
+- Hugo configuration defaults (`baseURL`, `buildDrafts`, `environment`, etc.): https://gohugo.io/configuration/all/
+- Hugo `hugo server` flags: https://gohugo.io/commands/hugo_server/
+- Hugo `resources.GetRemote` error handling/caching: https://gohugo.io/functions/resources/getremote/
+- GitHub Pages custom workflows requirements: https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+- GitHub Pages publishing source behavior and `.nojekyll` notes: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+- GitHub Pages limits (1 GB, 10-minute deploy timeout): https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
+- GitHub Pages 404 troubleshooting (entry file location, case sensitivity): https://docs.github.com/en/pages/getting-started-with-github-pages/troubleshooting-404-errors-for-github-pages-sites
+- GitHub Pages creation/static generator behavior: https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
+- `actions/upload-pages-artifact` validation constraints: https://github.com/actions/upload-pages-artifact
+- `actions/deploy-pages` requirements and behavior: https://github.com/actions/deploy-pages
+- `actions/checkout` defaults (`lfs`, `submodules`): https://github.com/actions/checkout
+
+### LOW confidence (validate in implementation)
+- Case-sensitive path incidents between macOS local development and Linux runners are common in practice, but not documented in one canonical Hugo/GitHub source; keep this as an operational test requirement.
 
 ---
-*Pitfalls research for: Review aggregation, service area mapping, and local SEO on static Hugo sites*
-*Researched: 2026-02-13*
+*Pitfalls research for: Reliability hardening of existing Hugo + GitHub Actions map/review pipeline*
+*Researched: 2026-02-14*
