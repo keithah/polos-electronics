@@ -1,15 +1,77 @@
-
 {
-    "title": "Our Service Area",
-    "paragraph": "While we are based in Southwest Washington, we are proud to offer our services to the entire state. Our primary focus is on Clark, Cowlitz, and Skamania counties, but we are always willing to travel to meet the needs of our clients. Whether you're in Vancouver, Tri-Cities, Camas, Seattle, Yakima or anywhere in between, Polos Electronics is here to help.",
-    "map": {
-        "url": "/images/service-area-map.png",
-        "alt": "Map of Southwest Washington, highlighting Clark, Cowlitz, and Skamania counties."
+  "heading": "Our Coverage Area",
+  "tagline": "Proudly serving Clark County since 1979",
+  "tiers": [
+    {
+      "level": "primary",
+      "label": "Clark County",
+      "description": "Our home base and primary service area",
+      "counties": [
+        {
+          "name": "Clark County",
+          "state": "WA",
+          "sameAs": "https://en.wikipedia.org/wiki/Clark_County,_Washington",
+          "cities": [
+            {"name": "Battle Ground", "type": "city", "isHeadquarters": true},
+            {"name": "Vancouver", "type": "city"},
+            {"name": "Camas", "type": "city"},
+            {"name": "Washougal", "type": "city"},
+            {"name": "Ridgefield", "type": "city"},
+            {"name": "La Center", "type": "city"},
+            {"name": "Yacolt", "type": "city"},
+            {"name": "Brush Prairie", "type": "unincorporated"},
+            {"name": "Hockinson", "type": "unincorporated"},
+            {"name": "Hazel Dell", "type": "unincorporated"},
+            {"name": "Orchards", "type": "unincorporated"},
+            {"name": "Salmon Creek", "type": "unincorporated"},
+            {"name": "Five Corners", "type": "unincorporated"},
+            {"name": "Felida", "type": "unincorporated"},
+            {"name": "Minnehaha", "type": "unincorporated"},
+            {"name": "Mill Plain", "type": "unincorporated"},
+            {"name": "Meadow Glade", "type": "unincorporated"},
+            {"name": "Amboy", "type": "unincorporated"}
+          ]
+        }
+      ]
     },
-    "cities": [
-        "Vancouver",
-        "Woodland",
-        "Camas",
-        "Longview"
-    ]
+    {
+      "level": "secondary",
+      "label": "Also Serving",
+      "description": "Bordering counties we regularly serve",
+      "counties": [
+        {
+          "name": "Cowlitz County",
+          "state": "WA",
+          "sameAs": "https://en.wikipedia.org/wiki/Cowlitz_County,_Washington",
+          "cities": [
+            {"name": "Longview", "type": "city"},
+            {"name": "Kelso", "type": "city"},
+            {"name": "Woodland", "type": "city"},
+            {"name": "Kalama", "type": "city"},
+            {"name": "Castle Rock", "type": "city"}
+          ]
+        },
+        {
+          "name": "Skamania County",
+          "state": "WA",
+          "sameAs": "https://en.wikipedia.org/wiki/Skamania_County,_Washington",
+          "cities": [
+            {"name": "Stevenson", "type": "city"},
+            {"name": "North Bonneville", "type": "city"},
+            {"name": "Carson", "type": "unincorporated"}
+          ]
+        }
+      ]
+    },
+    {
+      "level": "statewide",
+      "label": "Licensed Statewide",
+      "description": "Licensed to serve all of Washington State"
+    }
+  ],
+  "outOfAreaCTA": "Not in our primary area? Call us - we may still be able to help!",
+  "map": {
+    "url": "/images/service-area-map.png",
+    "alt": "Service area map showing Clark County highlighted in red, with Cowlitz and Skamania counties in lighter red, within Washington state"
+  }
 }
