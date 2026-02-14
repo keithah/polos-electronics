@@ -58,6 +58,61 @@ jobs:
             echo "No existing platforms metadata - will use empty object"
           fi
 
+      - name: Validate API credentials and IDs
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+          YELP_API_KEY: ${{ secrets.YELP_API_KEY }}
+          YELP_BUSINESS_ID: ${{ secrets.YELP_BUSINESS_ID }}
+        run: |
+          issues=0
+
+          if [ -z "$GOOGLE_API_KEY" ] || [ -z "$GOOGLE_PLACE_ID" ]; then
+            echo "::error::Google credentials missing (GOOGLE_API_KEY or GOOGLE_PLACE_ID)."
+            issues=$((issues + 1))
+          else
+            G_BODY="/tmp/google-validate.json"
+            G_HTTP=$(curl -sS -o "$G_BODY" -w "%{http_code}" \
+              "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name&key=${GOOGLE_API_KEY}")
+            G_STATUS=$(jq -r '.status // "UNKNOWN"' "$G_BODY")
+            G_ERROR=$(jq -r '.error_message // empty' "$G_BODY")
+
+            if [ "$G_HTTP" != "200" ] || [ "$G_STATUS" = "REQUEST_DENIED" ] || [ "$G_STATUS" = "INVALID_REQUEST" ] || [ "$G_STATUS" = "OVER_DAILY_LIMIT" ] || [ "$G_STATUS" = "OVER_QUERY_LIMIT" ]; then
+              echo "::error::Google validation failed (http=${G_HTTP}, status=${G_STATUS}) ${G_ERROR}"
+              issues=$((issues + 1))
+            else
+              echo "Google validation ok (status=${G_STATUS})."
+            fi
+          fi
+
+          BIZ_ID="${YELP_BUSINESS_ID:-polos-electronics-battle-ground}"
+          if [ -z "$YELP_API_KEY" ]; then
+            echo "::warning::YELP_API_KEY missing. Yelp API fetch will be skipped."
+          else
+            Y_BODY="/tmp/yelp-validate.json"
+            Y_HTTP=$(curl -sS -o "$Y_BODY" -w "%{http_code}" \
+              "https://api.yelp.com/v3/businesses/${BIZ_ID}" \
+              -H "Authorization: Bearer ${YELP_API_KEY}")
+
+            if [ "$Y_HTTP" = "401" ] || [ "$Y_HTTP" = "403" ]; then
+              echo "::error::Yelp validation failed (http=${Y_HTTP}) invalid or unauthorized YELP_API_KEY."
+              issues=$((issues + 1))
+            elif [ "$Y_HTTP" = "404" ]; then
+              echo "::error::Yelp validation failed (http=404) invalid YELP_BUSINESS_ID: ${BIZ_ID}."
+              issues=$((issues + 1))
+            elif [ "$Y_HTTP" != "200" ]; then
+              echo "::error::Yelp validation failed (http=${Y_HTTP}) unexpected upstream response."
+              issues=$((issues + 1))
+            else
+              echo "Yelp validation ok (business=${BIZ_ID})."
+            fi
+          fi
+
+          if [ "$issues" -gt 0 ]; then
+            echo "API validation failed with ${issues} issue(s)."
+            exit 1
+          fi
+
       - name: Fetch Google Reviews
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
