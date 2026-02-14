@@ -263,19 +263,53 @@
                     <div class="reviews-container">
                         <div class="reviews-grid">
                             {{ range .Site.Data.reviews.reviews }}
-                                {{ if eq (int .rating) 5 }}
-                                <div class="review-card">
+                                {{ $review := . }}
+                                {{ if or (ge (int (.rating | default 0)) 4) (eq .platform "nextdoor") }}
+                                <div class="review-card" data-platform="{{ .platform }}">
                                     <div class="review-header">
-                                        {{ if .profile_photo }}
-                                        <img src="{{ .profile_photo }}" alt="{{ .author }}" class="review-avatar">
+                                        {{ if .profilePhoto }}
+                                        <img src="{{ .profilePhoto }}"
+                                             alt="{{ .author }}"
+                                             class="review-avatar"
+                                             onerror="this.src='/images/default-avatar.svg'; this.onerror=null;">
+                                        {{ else }}
+                                        <div class="review-avatar review-avatar-placeholder">
+                                            {{ substr .author 0 1 }}
+                                        </div>
                                         {{ end }}
                                         <div class="review-meta">
                                             <p class="review-author">{{ .author }}</p>
-                                            <p class="review-time">{{ .time }}</p>
+                                            <p class="review-time">{{ .relativeTime | default .date }}</p>
                                         </div>
+                                        {{ with index $.Site.Data.reviews.platforms $review.platform }}
+                                        <a href="{{ .profileUrl }}" target="_blank" rel="noopener"
+                                           class="platform-badge-link" title="View on {{ $review.platform | title }}">
+                                            <img src="/images/platforms/{{ $review.platform }}-logo.svg"
+                                                 alt="{{ $review.platform | title }}"
+                                                 class="platform-badge">
+                                        </a>
+                                        {{ end }}
                                     </div>
-                                    <div class="review-stars">★★★★★</div>
-                                    <p class="review-text">"{{ .text }}"</p>
+
+                                    {{ if eq .platform "nextdoor" }}
+                                    <div class="review-recommended">Recommended</div>
+                                    {{ else if .rating }}
+                                    <div class="review-stars">
+                                        {{ $rating := int .rating }}
+                                        {{ range seq $rating }}★{{ end }}{{ range seq (sub 5 $rating) }}☆{{ end }}
+                                    </div>
+                                    {{ end }}
+
+                                    <div class="review-text-container">
+                                        <p class="review-text">"{{ .text }}"</p>
+                                    </div>
+
+                                    {{ with index $.Site.Data.reviews.platforms $review.platform }}
+                                    <a href="{{ .profileUrl }}" target="_blank" rel="noopener"
+                                       class="review-source-link">
+                                        View on {{ .businessName | default ($review.platform | title) }}
+                                    </a>
+                                    {{ end }}
                                 </div>
                                 {{ end }}
                             {{ end }}
@@ -289,12 +323,14 @@
                 {{ end }}
 
                 <div class="reviews-cta">
-                    <p class="reviews-cta-text">See our reviews on:</p>
+                    <p class="reviews-cta-text">Leave us a review:</p>
                     <div class="review-platforms">
-                        <a href="https://share.google/D3mexUt7VZzi7gvWZ" target="_blank" rel="noopener" class="btn btn-primary">Google »</a>
-                        <a href="https://www.yelp.com/biz/polos-electronics-battle-ground" target="_blank" rel="noopener" class="btn btn-primary">Yelp »</a>
-                        <a href="https://nextdoor.com/page/polos-electronics-battle-ground-wa" target="_blank" rel="noopener" class="btn btn-primary">Nextdoor »</a>
-                        <a href="https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html" target="_blank" rel="noopener" class="btn btn-primary">HomeAdvisor »</a>
+                        {{ range $platform, $data := .Site.Data.reviews.platforms }}
+                        <a href="{{ $data.profileUrl }}" target="_blank" rel="noopener"
+                           class="btn btn-primary review-platform-btn" data-platform="{{ $platform }}">
+                            {{ $platform | title }} »
+                        </a>
+                        {{ end }}
                     </div>
                 </div>
             </div>
