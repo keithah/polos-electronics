@@ -98,14 +98,18 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 **Depends on**: Phase 7
 **Requirements**: SEO-01, SEO-02, SEO-03, SEO-04, SEO-05, SEO-06, SEO-07
 **Success Criteria** (what must be TRUE):
-  1. Google search results show star ratings via AggregateRating schema
-  2. Individual reviews are marked up with Review schema for potential rich snippets
-  3. Service area coverage uses GeoCircle/GeoShape schema for local SEO
+  1. AggregateRating schema is present (semantic value - note: Google does not display stars for self-hosted LocalBusiness reviews)
+  2. Individual reviews are marked up with Review schema for semantic understanding
+  3. Service area coverage uses GeoCircle schema for local SEO
   4. Social share image is a designed branded image (not just logo)
   5. Sitemap.xml exists and is properly configured
-  6. Images are optimized for page speed (WebP, lazy loading, proper sizing)
+  6. Images are optimized for page speed (lazy loading, proper sizing)
   7. FAQ answers include internal links to relevant sections
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 08-01-PLAN.md — Schema enhancement (AggregateRating, Review, GeoCircle)
+- [ ] 08-02-PLAN.md — Social image, sitemap config, FAQ internal links
+- [ ] 08-03-PLAN.md — Image lazy loading optimization
 
 ## Progress
 
@@ -121,4 +125,4 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7 > 8
 | 5. Validation & CI Gates | v1.1 | 0/TBD | Not started | - |
 | 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
-| 8. SEO Enhancement | v1.3 | 0/TBD | Not started | - |
+| 8. SEO Enhancement | v1.3 | 0/3 | Not started | - |
