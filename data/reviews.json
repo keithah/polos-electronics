@@ -209,5 +209,7 @@
       "profileUrl": "https://nextdoor.com/pages/polos-electronics-battle-ground-wa"
     }
   },
+  "staleAfterDays": 45,
+  "freshnessLabel": "Updated",
   "lastUpdated": "2026-02-14T20:00:00Z"
 }
