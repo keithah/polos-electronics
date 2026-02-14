@@ -83,6 +83,9 @@
   "fallbackCallCta": "Questions about coverage? Call us and we will confirm your location.",
   "fallbackContactCta": "Prefer writing first? Send us your city and project details through the contact form.",
   "map": {
+    "embedUrl": "https://www.google.com/maps/d/embed?mid=1-ZXA51a-q4MZBShWlEtQTAZfu2EsLz8&noprof=1",
+    "previewUrl": "/images/service-area-preview.jpg",
+    "openUrl": "https://www.google.com/maps/place/Polos+Electronics/@45.7906,-122.5344,17z",
     "url": "/images/service-area-map.svg",
     "fallbackUrl": "/images/service-area-map.png",
     "alt": "Washington state service map with major city markers and Battle Ground highlighted",

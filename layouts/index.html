@@ -260,12 +260,44 @@
 
                     {{ $map := $sa.map | default dict }}
                     {{ $mapAlt := $map.alt | default "Service area map for Clark, Cowlitz, and Skamania counties" }}
+                    {{ $mapEmbedUrl := $map.embedUrl | default "" }}
+                    {{ $mapOpenUrl := $map.openUrl | default "" }}
+                    {{ $mapPreviewUrl := $map.previewUrl | default "" }}
                     {{ $mapPrimaryUrl := $map.url | default "" }}
                     {{ $mapFallbackUrl := $map.fallbackUrl | default "" }}
                     {{ $fallbackContext := $map.fallbackContext | default $sa.tagline }}
                     {{ $fallbackCallCta := $sa.fallbackCallCta | default "Questions about coverage? Call us and we will confirm your location." }}
                     {{ $fallbackContactCta := $sa.fallbackContactCta | default "Prefer writing first? Send us your city and project details through the contact form." }}
                     <div class="service-area-map">
+                        {{ if $mapEmbedUrl }}
+                        <!-- Wrapper holds both stacked; preview fades out when iframe loads -->
+                        <div class="service-area-map-wrapper">
+                            <!-- Interactive map embed (loads in background) -->
+                            <div class="service-area-map-embed-container">
+                                <iframe
+                                    src="{{ $mapEmbedUrl }}"
+                                    class="service-area-map-embed"
+                                    title="{{ $mapAlt }}"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            {{ if $mapPreviewUrl }}
+                            <!-- Preview image shown instantly, fades when iframe ready -->
+                            <div class="service-area-map-preview">
+                                <img
+                                    src="{{ $mapPreviewUrl | relURL }}"
+                                    alt="{{ $mapAlt }}"
+                                    class="service-area-map-preview-image">
+                            </div>
+                            {{ end }}
+                        </div>
+                        {{ if $mapOpenUrl }}
+                        <a href="{{ $mapOpenUrl }}" target="_blank" rel="noopener" class="service-area-map-link">
+                            Open in Google Maps →
+                        </a>
+                        {{ end }}
+                        {{ else }}
+                        <!-- Static map only (when no embed configured) -->
                         <img
                             src="{{ $mapPrimaryUrl | relURL }}"
                             alt="{{ $mapAlt }}"
@@ -281,6 +313,7 @@
                             <p class="service-area-map-fallback-note">{{ $fallbackCallCta }}</p>
                             <p class="service-area-map-fallback-note">{{ $fallbackContactCta }}</p>
                         </div>
+                        {{ end }}
                     </div>
                 </div>
             </div>
@@ -324,7 +357,6 @@
                                         {{ end }}
                                         <div class="review-meta">
                                             <p class="review-author">{{ .author }}</p>
-                                            <p class="review-time">{{ .relativeTime | default .date }}</p>
                                         </div>
                                         {{ with index $.Site.Data.reviews.platforms $review.platform }}
                                         <a href="{{ .profileUrl }}" target="_blank" rel="noopener"
@@ -361,7 +393,7 @@
                                     {{ with index $.Site.Data.reviews.platforms $review.platform }}
                                     <a href="{{ .profileUrl }}" target="_blank" rel="noopener"
                                        class="review-source-link">
-                                        View on {{ .businessName | default ($review.platform | title) }}
+                                        View on {{ $review.platform | title }}
                                     </a>
                                     {{ else }}
                                     {{ with $review.profileUrl }}
@@ -604,6 +636,15 @@
         const reviewsCarousel = document.querySelector('.reviews-carousel');
         if (reviewsCarousel) {
             const grid = reviewsCarousel.querySelector('.reviews-grid');
+
+            // Shuffle review cards on each page load (Fisher-Yates)
+            const cardsToShuffle = Array.from(grid.children);
+            for (let i = cardsToShuffle.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cardsToShuffle[i], cardsToShuffle[j]] = [cardsToShuffle[j], cardsToShuffle[i]];
+            }
+            cardsToShuffle.forEach(card => grid.appendChild(card));
+
             const cards = Array.from(grid.children);
             const prevBtn = reviewsCarousel.querySelector('.prev');
             const nextBtn = reviewsCarousel.querySelector('.next');
@@ -698,6 +739,15 @@
                 }
             });
         });
+
+        // Map embed: fade out preview when iframe loads
+        const mapPreview = document.querySelector('.service-area-map-preview');
+        const mapEmbed = document.querySelector('.service-area-map-embed');
+        if (mapPreview && mapEmbed) {
+            mapEmbed.addEventListener('load', function() {
+                mapPreview.classList.add('is-loaded');
+            });
+        }
     </script>
 </body>
 </html>

@@ -1,115 +1,212 @@
 {
   "reviews": [
     {
-      "id": "google-20251218",
+      "id": "google-robert-molidor",
       "platform": "google",
-      "author": "J. M.",
+      "author": "Robert Molidor",
       "rating": 5,
-      "text": "Andy diagnosed a panel issue quickly, explained the repair in plain language, and had everything working the same day. Professional from start to finish.",
-      "date": "2025-12-18",
-      "relativeTime": "2025-12-18",
-      "profilePhoto": null
+      "text": "I had a couple guys from Polos do an Ethernet retrofit on my home. Not only were they friendly and relatable, they got the job done in two hours and the total came out under the quote. The quality of work was great and aligned with the ask."
     },
     {
-      "id": "yelp-20251109",
+      "id": "yelp-don-b",
       "platform": "yelp",
-      "author": "Carla P.",
+      "author": "Don B.",
       "rating": 5,
-      "text": "We called for troubleshooting after repeated breaker trips. Polos Electronics showed up on time, fixed the underlying wiring issue, and the pricing was fair.",
-      "date": "2025-11-09",
-      "relativeTime": "2025-11-09",
-      "profilePhoto": null
+      "text": "Andy and his team rocked the problem from start to finish. Assessing the problem, surveying the terrain and challenges, and mapping out a solution that was least intrusive and caused the least amount of destruction along the way. The crew was quick and clean, explained everything they did, and it was all golden. These guys are clutch for low-voltage wiring needs."
     },
     {
-      "id": "nextdoor-20220611-a",
-      "platform": "nextdoor",
-      "author": "A. N.",
-      "rating": null,
-      "text": "We have used Polos Electronics, a local company, for 25 years. We are very happy with them.",
-      "date": "2022-06-11",
-      "relativeTime": "2022-06-11",
-      "profilePhoto": null
+      "id": "ha-melissa-s",
+      "platform": "homeadvisor",
+      "author": "Melissa S.",
+      "rating": 5,
+      "text": "Worked quickly and efficiently. They crammed as much work as they possibly could into an hour to keep my cost low. I will definitely use their services again and recommend them to my friends."
     },
     {
-      "id": "nextdoor-20220509-a",
-      "platform": "nextdoor",
-      "author": "A. T.",
-      "rating": null,
-      "text": "I would recommend Cat 6a over regular Cat 6 to future-proof. Polos Electronics in Battle Ground installed Ethernet in our existing home and did a great job.",
-      "date": "2022-05-09",
-      "relativeTime": "2022-05-09",
-      "profilePhoto": null
+      "id": "google-jerry-danna",
+      "platform": "google",
+      "author": "Jerry Danna",
+      "rating": 5,
+      "text": "Great company to do business with. My Bose system was not working. I gave up on trying to get it fixed. I contacted Polos and was ready to buy a whole new sound system amplifier and sound bar. Polos arrived and spent more time than I would have expected troubleshooting, and got it working again."
     },
     {
-      "id": "nextdoor-20201128-m",
-      "platform": "nextdoor",
-      "author": "M. B.",
-      "rating": null,
-      "text": "Polos Electronics at 360-687-3543. We have used them for 19 years. Andy Polos.",
-      "date": "2020-11-28",
-      "relativeTime": "2020-11-28",
-      "profilePhoto": null
+      "id": "yelp-christopher-d",
+      "platform": "yelp",
+      "author": "Christopher D.",
+      "rating": 5,
+      "text": "Great family/local business. Appreciate the communication, fair pricing, and Andy's recommendations about home security options and home theater stuff."
     },
     {
-      "id": "nextdoor-verified-neighbors",
-      "platform": "nextdoor",
-      "author": "Verified Neighbors",
-      "rating": null,
-      "text": "Polos Electronics in Battle Ground is highly recommended for home audio/video, smart TV setup, networking, and clean installation work.",
-      "date": "2026-02-14",
-      "relativeTime": "2026-02-14",
-      "profilePhoto": null
+      "id": "ha-kevin-b",
+      "platform": "homeadvisor",
+      "author": "Kevin B.",
+      "rating": 5,
+      "text": "It was quick, easy and looks great. They do great work, friendly and knows what they are doing."
+    },
+    {
+      "id": "google-michael-scheetz",
+      "platform": "google",
+      "author": "Michael Scheetz",
+      "rating": 5,
+      "text": "Fast service, incredibly friendly and accommodating. They came out and did a fast inspection/estimate, even suggesting a few things for all the low voltage wiring I was having them do, that I hadn't thought of. When they came to do the job, everything went smoothly."
+    },
+    {
+      "id": "yelp-r-c",
+      "platform": "yelp",
+      "author": "R C.",
+      "rating": 5,
+      "text": "Called Polos to fix our entertainment system (both the movie room audio and the in ceiling audio throughout the house and outdoor space) because we couldn't get it to work right. They were able to set up the appropriate equipment, tap into the existing wiring and get everything working great. Super knowledgeable and helpful, we couldn't be happier with the service and the reasonable prices."
+    },
+    {
+      "id": "ha-hayden-h",
+      "platform": "homeadvisor",
+      "author": "Hayden H.",
+      "rating": 5,
+      "text": "Promptly called and set up an appointment. Provided service at appt. time. Checked everything. Satisfied with work even though they needed to return for one little thing. Return a couple of hours later, seemed to know what the problem was, fixed the problem and were out of here in approx. 5 minutes. I would certainly use their service again."
+    },
+    {
+      "id": "google-eric-e",
+      "platform": "google",
+      "author": "Eric E.",
+      "rating": 5,
+      "text": "Nothing but the best! Polos did a great job on my home theater system. Couldn't ask for anything more. The price was right and the system looks and sounds amazing! They moved the speakers around to the correct places in my room and also cleaned up all the wiring."
+    },
+    {
+      "id": "yelp-brian-p",
+      "platform": "yelp",
+      "author": "Brian P.",
+      "rating": 5,
+      "text": "This company is top-notch, and I highly recommend Polos Electronics for any project they can handle. Every interaction with their staff has been professional and pleasant, they showed up early for the installation, they did excellent work with great follow-up, and prices are very reasonable."
+    },
+    {
+      "id": "ha-rick-g",
+      "platform": "homeadvisor",
+      "author": "Rick G.",
+      "rating": 5,
+      "text": "Impressive knowledge and very friendly service. Quality company."
+    },
+    {
+      "id": "google-karly-bordak",
+      "platform": "google",
+      "author": "Karly Bordak",
+      "rating": 5,
+      "text": "Great company! Would recommend them over and over. Professional, detailed, friendly, and great audio system installed!"
+    },
+    {
+      "id": "yelp-catherine-c",
+      "platform": "yelp",
+      "author": "Catherine C.",
+      "rating": 5,
+      "text": "We joined the 21st century when Polos Electronics installed cable and CAT6e internet connections throughout our 1970 house. Andy and Brad arrived punctually on the agreed day, were very professional and did an excellent installation job. The job exceeded our expectations. We would highly recommend them."
+    },
+    {
+      "id": "ha-marcia-p",
+      "platform": "homeadvisor",
+      "author": "Marcia P.",
+      "rating": 4.5,
+      "text": "They worked with us to do the job correctly, BUT at the least cost. YES, would hire again if we need their services."
+    },
+    {
+      "id": "google-delores-santiago",
+      "platform": "google",
+      "author": "Delores Santiago",
+      "rating": 5,
+      "text": "Always professional and quick with responses to questions. Wonderful work."
+    },
+    {
+      "id": "yelp-haris-h",
+      "platform": "yelp",
+      "author": "Haris H.",
+      "rating": 5,
+      "text": "We had Polos Electronics come out to do all the electronics for our new home and we couldn't be happier. They put in our speaker system throughout the entire home, set up TVs, wireless stations and an alarm system. They were on time, efficient, priced right and professional."
+    },
+    {
+      "id": "ha-christy-e",
+      "platform": "homeadvisor",
+      "author": "Christy E.",
+      "rating": 5,
+      "text": "Took less than an hour to get all components DVD, sound and TV connected to universal remote."
+    },
+    {
+      "id": "google-jeannie-aldridge",
+      "platform": "google",
+      "author": "Jeannie Aldridge",
+      "rating": 5,
+      "text": "This company was wonderful to work with. Very grateful we found them."
+    },
+    {
+      "id": "ha-paul-r",
+      "platform": "homeadvisor",
+      "author": "Paul R.",
+      "rating": 5,
+      "text": "Professional job well done. They know what they are doing!!!"
+    },
+    {
+      "id": "google-jimmy-lin",
+      "platform": "google",
+      "author": "Jimmy Lin",
+      "rating": 5,
+      "text": "The guys came out to my house on an emergency call, with great attitude and professionalism. I had a list of things of differing priorities to be taken care of and stressed to them that it was not necessary to get everything done today; all my items were completed by the end of the day."
+    },
+    {
+      "id": "ha-holly-d",
+      "platform": "homeadvisor",
+      "author": "Holly D.",
+      "rating": 5,
+      "text": "He was fast and friendly!"
+    },
+    {
+      "id": "ha-geri-r",
+      "platform": "homeadvisor",
+      "author": "Geri R.",
+      "rating": 5,
+      "text": "Did what I needed and was very happy."
     }
   ],
   "fallbackReviews": [
     {
+      "id": "fallback-google-robert",
       "platform": "google",
-      "author": "J. M.",
+      "author": "Robert Molidor",
       "rating": 5,
-      "text": "Andy diagnosed a panel issue quickly, explained the repair in plain language, and had everything working the same day. Professional from start to finish.",
-      "date": "2025-12-18",
-      "profileUrl": "https://share.google/D3mexUt7VZzi7gvWZ"
+      "text": "I had a couple guys from Polos do an Ethernet retrofit on my home. Not only were they friendly and relatable, they got the job done in two hours and the total came out under the quote. The quality of work was great."
     },
     {
+      "id": "fallback-yelp-christopher",
       "platform": "yelp",
-      "author": "Carla P.",
+      "author": "Christopher D.",
       "rating": 5,
-      "text": "We called for troubleshooting after repeated breaker trips. Polos Electronics showed up on time, fixed the underlying wiring issue, and the pricing was fair.",
-      "date": "2025-11-09",
-      "profileUrl": "https://www.yelp.com/biz/polos-electronics-battle-ground"
+      "text": "Great family/local business. Appreciate the communication, fair pricing, and Andy's recommendations about home security options and home theater stuff."
     },
     {
-      "platform": "nextdoor",
-      "author": "Neighbor in Battle Ground",
-      "rating": null,
-      "text": "Recommended. Great communication, tidy work area, and clear updates throughout the job. We would call Polos Electronics again for future electrical work.",
-      "date": "2025-10-22",
-      "profileUrl": "https://nextdoor.com/page/polos-electronics-battle-ground-wa"
+      "id": "fallback-ha-melissa",
+      "platform": "homeadvisor",
+      "author": "Melissa S.",
+      "rating": 5,
+      "text": "Worked quickly and efficiently. They crammed as much work as they possibly could into an hour to keep my cost low."
     }
   ],
-  "staleAfterDays": 45,
-  "freshnessLabel": "Updated",
   "platforms": {
     "google": {
       "businessName": "Polos Electronics",
-      "profileUrl": "https://share.google/D3mexUt7VZzi7gvWZ",
-      "overallRating": null,
-      "totalReviews": null
+      "profileUrl": "https://www.google.com/maps/place/Polos+Electronics/@45.7906,-122.5344,17z",
+      "overallRating": 4.9,
+      "totalReviews": 14
     },
     "yelp": {
       "businessName": "Polos Electronics",
       "profileUrl": "https://www.yelp.com/biz/polos-electronics-battle-ground",
-      "overallRating": null,
-      "totalReviews": null
+      "overallRating": 5.0,
+      "totalReviews": 8
     },
     "homeadvisor": {
       "businessName": "Polos Electronics Inc.",
-      "profileUrl": "https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html"
+      "profileUrl": "https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html",
+      "overallRating": 4.95,
+      "totalReviews": 11
     },
     "nextdoor": {
       "businessName": "Polos Electronics",
-      "profileUrl": "https://nextdoor.com/page/polos-electronics-battle-ground-wa"
+      "profileUrl": "https://nextdoor.com/pages/polos-electronics-battle-ground-wa"
     }
-  },
-  "lastUpdated": "2026-02-14T18:57:10Z"
+  }
 }

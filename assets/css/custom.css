@@ -1168,6 +1168,69 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+/* Interactive map container - holds both preview and embed stacked */
+.service-area-map-wrapper {
+  position: relative;
+  height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Interactive map embed with header cropped */
+.service-area-map-embed-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.service-area-map-embed {
+  width: 100%;
+  height: 460px;
+  border: none;
+  margin-top: -56px;
+}
+
+/* Preview image (shown while iframe loads) */
+.service-area-map-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.service-area-map-preview.is-loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.service-area-map-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-area-map-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: #fe3a46;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.service-area-map-link:hover {
+  color: #d32f3a;
+  text-decoration: underline;
+}
+
 .service-area-map-fallback {
   background: #ffffff;
   border: 1px solid #e6e6e6;
@@ -1386,6 +1449,19 @@ body {
 
   .service-area-map {
     order: -1; /* Puts the map above the text on smaller screens */
+  }
+
+  .service-area-map-wrapper {
+    height: 350px;
+  }
+
+  .service-area-map-embed {
+    height: 410px;
+  }
+
+  .service-area-map-link {
+    display: block;
+    text-align: center;
   }
 
   .city-list {
