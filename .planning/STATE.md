@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-15)
 
 ## Current Position
 
-Phase: 10 - WebP Image Conversion
+Phase: 11 - CSS/JS Optimization
 Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-02-15 — Completed 10-01-PLAN.md
+Last activity: 2026-02-15 — Completed 11-01-PLAN.md
 
-Progress: [███████░░░] 67% (v1.4 Phase 10 complete)
+Progress: [██████████] 100% (v1.4 Phase 11 complete)
 
 ## v1.4 Phase Overview
 
@@ -22,14 +22,14 @@ Progress: [███████░░░] 67% (v1.4 Phase 10 complete)
 |-------|------|--------------|--------|
 | 9 | Crawling & Quick Wins | CRAWL-01, CRAWL-02, IMG-02, IMG-03, CLS-01, CLS-02 | Complete |
 | 10 | WebP Image Conversion | IMG-01 | Complete |
-| 11 | CSS/JS Optimization | PERF-01, PERF-02, PERF-03 | Pending |
+| 11 | CSS/JS Optimization | PERF-01, PERF-02, PERF-03 | Complete |
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 19
-- Average duration: 2.8 min
-- Total execution time: 53 min
+- Total plans completed: 20
+- Average duration: 2.9 min
+- Total execution time: 57 min
 
 **By Phase:**
 
@@ -45,6 +45,7 @@ Progress: [███████░░░] 67% (v1.4 Phase 10 complete)
 | 08-seo-enhancement | 3 | 8 min | 2.7 min |
 | 09-crawling-quick-wins | 1 | 3 min | 3.0 min |
 | 10-webp-image-conversion | 1 | 7 min | 7.0 min |
+| 11-css-js-optimization | 1 | 4 min | 4.0 min |
 
 ## Accumulated Context
 
@@ -60,6 +61,8 @@ Recent decisions affecting current work:
 - IMG-02 and CLS-01 are the same requirement (both address image dimensions)
 - Use intrinsic file dimensions (not display dimensions) for width/height attributes
 - enableRobotsTXT config required for Hugo to process robots.txt template
+- Critical CSS ~5KB (well under 10KB target) for minimal inline footprint
+- Deferred CSS uses SHA256 fingerprint for long cache with instant invalidation
 
 ### Pending Todos
 
@@ -72,7 +75,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-15T19:53:31Z
-Stopped at: Completed 10-01-PLAN.md
+Last session: 2026-02-15T20:54:51Z
+Stopped at: Completed 11-01-PLAN.md
 Resume file: None
-Next action: Plan and execute Phase 11 (CSS/JS Optimization)
+Next action: v1.4 Milestone complete - ready for PageSpeed testing and deployment
