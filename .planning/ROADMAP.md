@@ -103,7 +103,9 @@ Plans:
   1. Users still see credible review content from last-known-good data when ingestion fails
   2. Operators can trigger a documented manual recovery run that restores review/map reliability without code changes
   3. CI runs provide review/map health diagnostics that make reliability incidents faster to identify and resolve
-**Plans**: TBD (1-2 plans expected)
+**Plans**: 1 plan
+Plans:
+- [ ] 06-01-PLAN.md — Create OPERATIONS.md recovery runbook
 
 ### Phase 7: Interactive Service Map
 **Goal**: Users can explore coverage context via an embedded interactive map while the Service Area section remains reliable through a static fallback
@@ -147,6 +149,6 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 4.1 > 5 > 6 > 7 > 8
 | 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete (regressed) | 2026-02-14 |
 | 4.1. Restore Rendering Reliability | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
 | 5. Validation & CI Gates | v1.1 | 2/2 | ✓ Complete | 2026-02-14 |
-| 6. Operations & Recovery | v1.1 | 0/TBD | Not started | - |
+| 6. Operations & Recovery | v1.1 | 0/1 | Planned | - |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
