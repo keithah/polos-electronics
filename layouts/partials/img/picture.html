@@ -1,0 +1,43 @@
+{{- $srcRaw := .src | default "" -}}
+{{- if not $srcRaw -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $src := strings.TrimPrefix "/" $srcRaw -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $width := .width -}}
+{{- $height := .height -}}
+{{- $loading := .loading | default "" -}}
+{{- $fetchpriority := .fetchpriority | default "" -}}
+{{- $publishOnly := .publish_only | default false -}}
+
+{{- $img := resources.Get $src -}}
+{{- if not $img -}}
+  {{- errorf "img/picture.html: missing asset resource %q" $src -}}
+{{- end -}}
+
+{{- $webp := $img.Process "webp q70" -}}
+
+{{- $ext := path.Ext $src -}}
+{{- $base := strings.TrimSuffix $ext $src -}}
+{{- $webpTarget := printf "%s.webp" $base -}}
+
+{{- $fallbackOut := resources.Copy $src $img -}}
+{{- $webpOut := resources.Copy $webpTarget $webp -}}
+
+{{- if $publishOnly -}}
+  {{- return -}}
+{{- end -}}
+
+<picture>
+  <source srcset="{{ $webpOut.RelPermalink }}" type="image/webp">
+  <img
+    src="{{ $fallbackOut.RelPermalink }}"
+    alt="{{ $alt }}"
+    {{- with $class }} class="{{ . }}"{{- end }}
+    {{- with $width }} width="{{ . }}"{{- end }}
+    {{- with $height }} height="{{ . }}"{{- end }}
+    {{- with $loading }} loading="{{ . }}"{{- end }}
+    {{- with $fetchpriority }} fetchpriority="{{ . }}"{{- end }}>
+</picture>

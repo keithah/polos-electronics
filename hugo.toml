@@ -24,3 +24,8 @@ enableRobotsTXT = true
   changefreq = "monthly"
   priority = 0.5
   filename = "sitemap.xml"
+
+[minify]
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepQuotes = true

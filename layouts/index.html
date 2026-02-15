@@ -92,7 +92,13 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
+                    {{ partial "img/picture.html" (dict
+                        "src" "images/logo.png"
+                        "alt" "Polos Electronics Logo"
+                        "class" "logo"
+                        "width" 1500
+                        "height" 439
+                    ) }}
                 </div>
                 <button class="nav-toggle" aria-label="Toggle navigation menu">
                     <span class="hamburger"></span>
@@ -128,7 +134,13 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="{{ "images/hero-image.jpg" | relURL }}" alt="Electrical work and installation" width="1500" height="1000" fetchpriority="high">
+                    {{ partial "img/picture.html" (dict
+                        "src" "images/hero-image.jpg"
+                        "alt" "Electrical work and installation"
+                        "width" 1500
+                        "height" 1000
+                        "fetchpriority" "high"
+                    ) }}
                 </div>
             </div>
         </section>
@@ -142,10 +154,13 @@
                     <!-- Andy Polos -->
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="{{ "images/andy-polos.jpg" | relURL }}"
-                                 alt="Andy Polos"
-                                 loading="lazy"
-                                 width="960" height="958">
+                            {{ partial "img/picture.html" (dict
+                                "src" "images/andy-polos.jpg"
+                                "alt" "Andy Polos"
+                                "loading" "lazy"
+                                "width" 960
+                                "height" 958
+                            ) }}
                         </div>
                         <h3 class="member-name">Andy Polos</h3>
                         <div class="member-decorative">~~~</div>
@@ -155,10 +170,13 @@
                     <!-- Derick Steele -->
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="{{ "images/derick-steele.jpg" | relURL }}"
-                                 alt="Derick Steele"
-                                 loading="lazy"
-                                 width="907" height="680">
+                            {{ partial "img/picture.html" (dict
+                                "src" "images/derick-steele.jpg"
+                                "alt" "Derick Steele"
+                                "loading" "lazy"
+                                "width" 907
+                                "height" 680
+                            ) }}
                         </div>
                         <h3 class="member-name">Derick Steele</h3>
                         <div class="member-decorative">~~~</div>
@@ -168,10 +186,13 @@
                     <!-- John Polos -->
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="{{ "images/john-polos.jpg" | relURL }}"
-                                 alt="John Polos"
-                                 loading="lazy"
-                                 width="500" height="500">
+                            {{ partial "img/picture.html" (dict
+                                "src" "images/john-polos.jpg"
+                                "alt" "John Polos"
+                                "loading" "lazy"
+                                "width" 500
+                                "height" 500
+                            ) }}
                         </div>
                         <h3 class="member-name">John Polos</h3>
                         <div class="member-decorative">~~~</div>
@@ -225,10 +246,13 @@
 
                     <div class="services-sidebar">
                         <div class="services-image">
-                            <img src="{{ "images/services-image.jpg" | relURL }}"
-                                 alt="Electrical work and installation"
-                                 loading="lazy"
-                                 width="600" height="900">
+                            {{ partial "img/picture.html" (dict
+                                "src" "images/services-image.jpg"
+                                "alt" "Electrical work and installation"
+                                "loading" "lazy"
+                                "width" 600
+                                "height" 900
+                            ) }}
                         </div>
                         <div class="since-badge">
                             <div class="since-text">Since</div>
@@ -282,6 +306,9 @@
                     {{ $fallbackContext := $map.fallbackContext | default $sa.tagline }}
                     {{ $fallbackCallCta := $sa.fallbackCallCta | default "Questions about coverage? Call us and we will confirm your location." }}
                     {{ $fallbackContactCta := $sa.fallbackContactCta | default "Prefer writing first? Send us your city and project details through the contact form." }}
+
+                    {{/* Ensure the raster fallback map is always published (even with embed enabled) */}}
+                    {{ partial "img/picture.html" (dict "src" $mapFallbackUrl "publish_only" true) }}
                     <div class="service-area-map">
                         {{ if $mapEmbedUrl }}
                         <!-- Wrapper holds both stacked; preview fades out when iframe loads -->
@@ -298,12 +325,14 @@
                             {{ if $mapPreviewUrl }}
                             <!-- Preview image shown instantly, fades when iframe ready -->
                             <div class="service-area-map-preview">
-                                <img
-                                    src="{{ $mapPreviewUrl | relURL }}"
-                                    alt="{{ $mapAlt }}"
-                                    class="service-area-map-preview-image"
-                                    width="762" height="620"
-                                    loading="lazy">
+                                {{ partial "img/picture.html" (dict
+                                    "src" $mapPreviewUrl
+                                    "alt" $mapAlt
+                                    "class" "service-area-map-preview-image"
+                                    "width" 762
+                                    "height" 620
+                                    "loading" "lazy"
+                                ) }}
                             </div>
                             {{ end }}
                         </div>
@@ -487,10 +516,13 @@
                 <h2 class="section-title">Contact Us</h2>
                 <div class="contact-layout">
                     <div class="contact-image">
-                        <img src="{{ "images/contact-image.jpg" | relURL }}"
-                             alt="Andy Polos at work"
-                             loading="lazy"
-                             width="500" height="500">
+                        {{ partial "img/picture.html" (dict
+                            "src" "images/contact-image.jpg"
+                            "alt" "Andy Polos at work"
+                            "loading" "lazy"
+                            "width" 500
+                            "height" 500
+                        ) }}
                     </div>
 
                     <div class="contact-form-container">
@@ -541,10 +573,13 @@
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="{{ "images/logo.png" | relURL }}"
-                     alt="Polos Electronics Logo"
-                     loading="lazy"
-                     width="1500" height="439">
+                {{ partial "img/picture.html" (dict
+                    "src" "images/logo.png"
+                    "alt" "Polos Electronics Logo"
+                    "loading" "lazy"
+                    "width" 1500
+                    "height" 439
+                ) }}
             </div>
             <div class="footer-services">
                 <h4>Commercial & Residential Services</h4>
