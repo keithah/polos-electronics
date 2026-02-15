@@ -10,11 +10,20 @@ Potential customers can quickly verify Polos Electronics' credibility through au
 
 ## Current State
 
-**Shipped:** v1.1 Reliability & Visibility (2026-02-14)
+**Shipped:** v1.3 SEO Enhancement (2026-02-14)
 
-Reviews and service-area credibility signals now reliably render with fallback protection, CI validation gates, and operator recovery documentation.
+All previous milestones complete. Site has schema markup, reviews, service area map, reliability features.
 
-**Next Milestone:** TBD (use `/gsd:new-milestone` to start planning)
+## Current Milestone: v1.4 Performance & SEO Polish
+
+**Goal:** Improve PageSpeed Performance score from 51 to 80+ and fix crawling issues.
+
+**Target features:**
+- Add sitemap reference to robots.txt (Cloudflare manages the rest)
+- Convert images to WebP format with fallback
+- Add explicit image dimensions to fix CLS (0.169 → <0.1)
+- Defer non-critical CSS/JS to reduce render blocking
+- Inline critical CSS for faster FCP/LCP
 
 ## Requirements
 
@@ -53,7 +62,17 @@ Capabilities working in production:
 
 ### Active
 
-No active requirements. Start next milestone with `/gsd:new-milestone`.
+**v1.4 Performance & SEO Polish:**
+- [ ] CRAWL-01: Valid robots.txt with sitemap reference
+- [ ] CRAWL-02: robots.txt references sitemap.xml location
+- [ ] IMG-01: Images served in WebP with fallback
+- [ ] IMG-02: All images have explicit width/height
+- [ ] IMG-03: Hero image has fetchpriority="high"
+- [ ] PERF-01: Non-critical CSS deferred
+- [ ] PERF-02: Unused JavaScript removed/deferred
+- [ ] PERF-03: Critical CSS inlined
+- [ ] CLS-01: Image dimensions prevent layout shift
+- [ ] CLS-02: Map embed has reserved dimensions
 
 ### Out of Scope
 

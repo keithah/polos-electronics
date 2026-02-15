@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-14)
+See: .planning/PROJECT.md (updated 2026-02-15)
 
 **Core value:** Potential customers can quickly verify Polos Electronics' credibility through authentic reviews and understand whether they're in the service area — before picking up the phone.
-**Current focus:** Milestone v1.1 gap closure — Phase 6
+**Current focus:** Milestone v1.4 Performance & SEO Polish
 
 ## Current Position
 
-Phase: 6 of 6 for v1.1 (Operations & Recovery) - COMPLETE
-Plan: 1/1 plans complete
-Status: v1.1 MILESTONE COMPLETE
-Last activity: 2026-02-15 — Completed 06-01-PLAN.md
+Phase: Not started (defining roadmap)
+Plan: —
+Status: Creating roadmap
+Last activity: 2026-02-15 — Milestone v1.4 started
 
-Progress: [██████████] 100% (v1.1 complete)
+Progress: [░░░░░░░░░░] 0% (v1.4 starting)
 
 ## Performance Metrics
 
@@ -36,10 +36,6 @@ Progress: [██████████] 100% (v1.1 complete)
 | 06-operations-recovery | 1 | 1 min | 1.0 min |
 | 08-seo-enhancement | 3 | 8 min | 2.7 min |
 
-**Recent Trend:**
-- Last 5 plans: 04.1-01 (3 min), 05-01 (1 min), 05-02 (2 min), 06-01 (1 min)
-- Trend: Fast execution on documentation/validation work
-
 ## Accumulated Context
 
 ### Decisions
@@ -47,14 +43,10 @@ Progress: [██████████] 100% (v1.1 complete)
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- v1.1 starts at Phase 4 to preserve continuous numbering after shipped phases 1-3
-- Phase boundaries for v1.1 are requirement-driven: rendering reliability, validation gates, then operations/recovery
-- Every v1.1 requirement (REND-*, VALD-*, OPER-*) is mapped exactly once in ROADMAP and traceability
-- Used existing hero-image.jpg (1500x1000) for social sharing instead of creating new og-share.jpg
-- Hero image kept eager (no lazy loading) for good LCP score
-- 45-day stale threshold for review freshness indicator
-- Conditional fallback logic: use fallbackReviews ONLY when live reviews array is empty
-- Disabled taxonomy/term kinds in hugo.toml to eliminate warnings for single-page site
+- robots.txt is Cloudflare-managed; we'll add sitemap directive only
+- WebP conversion requires moving images from static/ to assets/
+- Hero image needs fetchpriority="high" for LCP optimization
+- Keep OG/Twitter images as JPG for social crawler compatibility
 
 ### Pending Todos
 
@@ -62,11 +54,12 @@ None.
 
 ### Blockers/Concerns
 
-None.
+- Cloudflare manages robots.txt with Content-Signal directive (non-standard but intentional)
+- GitHub Pages controls cache headers (limited customization)
 
 ## Session Continuity
 
 Last session: 2026-02-15
-Stopped at: Completed 06-01-PLAN.md - v1.1 MILESTONE COMPLETE
+Stopped at: Creating v1.4 roadmap
 Resume file: None
-Next action: v1.1 complete - next milestone planning
+Next action: Spawn roadmapper to create phases
