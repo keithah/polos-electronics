@@ -8,12 +8,15 @@ const fs = require('fs');
 const path = require('path');
 
 const SVG_PATH = path.join(__dirname, '../static/images/service-area-map.svg');
-const PNG_PATH = path.join(__dirname, '../static/images/service-area-map.png');
+const PNG_PATH = path.join(__dirname, '../assets/images/service-area-map.png');
 const WIDTH = 800;
 
 (async () => {
   // Read SVG content
   const svgContent = fs.readFileSync(SVG_PATH, 'utf8');
+
+  // Ensure output directory exists
+  fs.mkdirSync(path.dirname(PNG_PATH), { recursive: true });
 
   // Create HTML wrapper
   const html = `

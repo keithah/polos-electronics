@@ -70,8 +70,14 @@ jobs:
         run: |
           test -f static/images/service-area-map.svg || \
             { echo "ERROR: Missing service-area-map.svg"; exit 1; }
-          test -f static/images/service-area-map.png || \
-            { echo "ERROR: Missing service-area-map.png (fallback)"; exit 1; }
+          test -f assets/images/service-area-map.png || \
+            { echo "ERROR: Missing assets/images/service-area-map.png (fallback)"; exit 1; }
+
+          # Optional-but-recommended: fail fast if primary raster assets go missing
+          test -f assets/images/hero-image.jpg || \
+            { echo "ERROR: Missing assets/images/hero-image.jpg"; exit 1; }
+          test -f assets/images/logo.png || \
+            { echo "ERROR: Missing assets/images/logo.png"; exit 1; }
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
