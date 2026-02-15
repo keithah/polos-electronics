@@ -68,64 +68,11 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 
 **Milestone Goal:** Improve PageSpeed Performance score from 51 to 80+ and fix SEO crawling issues.
 
-### Phase 9: Crawling & Quick Wins
-**Goal**: Search engines can crawl efficiently while images load faster with proper prioritization
-**Dependencies**: None
-**Requirements**: CRAWL-01, CRAWL-02, IMG-02, IMG-03, CLS-01, CLS-02
-**Plans**: 1 plan
+- [x] **Phase 9: Crawling & Quick Wins** — robots.txt template + image dimensions + hero fetchpriority
+- [x] **Phase 10: WebP Image Conversion** — WebP images with fallbacks via Hugo Pipes
+- [x] **Phase 11: CSS/JS Optimization** — Critical CSS inlined, deferred CSS async-loaded
 
-Plans:
-- [x] 09-01-PLAN.md — robots.txt template + image dimensions + hero fetchpriority
-
-**Success Criteria:**
-1. robots.txt validates without errors and includes sitemap.xml reference
-2. All images have explicit width and height attributes in HTML
-3. Hero image loads with high priority (visible in network waterfall before other images)
-4. Map embed container reserves space before iframe loads (no layout shift)
-
-**Notes:**
-- IMG-02 and CLS-01 are the same requirement (image dimensions prevent CLS)
-- robots.txt uses Hugo template; only add sitemap directive (Cloudflare manages rest)
-- CLS-02 already satisfied (map container has fixed 400px/350px height)
-
----
-
-### Phase 10: WebP Image Conversion
-**Goal**: Images load faster with modern WebP format while maintaining compatibility with older browsers
-**Dependencies**: Phase 9 (image dimensions must be in place first)
-**Requirements**: IMG-01
-
-**Plans**: 1 plan
-
-Plans:
-- [x] 10-01-PLAN.md — Move raster images into assets/, generate WebP + fallbacks, and wire HTML/CSS
-
-**Success Criteria:**
-1. All site images served as WebP to browsers that support it
-2. JPG/PNG fallback works in Safari 13 and older browsers
-3. Hugo Pipes processes images from assets/ directory (not static/)
-4. Build generates both WebP and original formats
-
-**Notes:**
-- Requires moving images from static/ to assets/ for Hugo Pipes
-- Keep OG/Twitter images as JPG for social crawler compatibility
-
----
-
-### Phase 11: CSS/JS Optimization
-**Goal**: Page renders quickly by loading only critical styles immediately and deferring the rest
-**Dependencies**: Phase 9 (layout must be stable before CSS changes)
-**Requirements**: PERF-01, PERF-02, PERF-03
-**Plans**: 1 plan
-
-Plans:
-- [x] 11-01-PLAN.md — Split CSS into critical/deferred, inline critical, async-load fonts
-
-**Success Criteria:**
-1. Above-fold content styles are inlined in HTML head (no external CSS blocks initial render)
-2. Non-critical CSS loads after initial paint (deferred via media or rel="preload")
-3. No render-blocking JavaScript in document head
-4. PageSpeed Performance score reaches 80+
+**Archive:** See `.planning/milestones/v1.4-ROADMAP.md` for full details.
 
 </details>
 
@@ -146,4 +93,4 @@ Plans:
 | 10. WebP Image Conversion | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
 | 11. CSS/JS Optimization | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
 
-**All phases complete.** Run `/gsd:audit-milestone` to verify milestone completion.
+**All phases complete.** Run `/gsd:new-milestone` to define next milestone.

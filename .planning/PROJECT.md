@@ -10,20 +10,13 @@ Potential customers can quickly verify Polos Electronics' credibility through au
 
 ## Current State
 
-**Shipped:** v1.3 SEO Enhancement (2026-02-14)
+**Shipped:** v1.4 Performance & SEO Polish (2026-02-15)
 
-All previous milestones complete. Site has schema markup, reviews, service area map, reliability features.
+All milestones complete through v1.4. Site has schema markup, reviews, service area map, reliability features, and optimized performance (critical CSS, WebP images, async fonts).
 
-## Current Milestone: v1.4 Performance & SEO Polish
+## Next Milestone: TBD
 
-**Goal:** Improve PageSpeed Performance score from 51 to 80+ and fix crawling issues.
-
-**Target features:**
-- Add sitemap reference to robots.txt (Cloudflare manages the rest)
-- Convert images to WebP format with fallback
-- Add explicit image dimensions to fix CLS (0.169 → <0.1)
-- Defer non-critical CSS/JS to reduce render blocking
-- Inline critical CSS for faster FCP/LCP
+Run `/gsd:new-milestone` to define the next milestone.
 
 ## Requirements
 
@@ -60,19 +53,21 @@ Capabilities working in production:
 - ✓ OPER-02: CI diagnostics for review/map health
 - ✓ OPER-03: Last-known-good fallback data when ingestion fails
 
+**v1.4 Performance & SEO Polish:**
+- ✓ CRAWL-01: Valid robots.txt with sitemap reference — v1.4
+- ✓ CRAWL-02: robots.txt references sitemap.xml location — v1.4
+- ✓ IMG-01: Images served in WebP with fallback — v1.4
+- ✓ IMG-02: All images have explicit width/height — v1.4
+- ✓ IMG-03: Hero image has fetchpriority="high" — v1.4
+- ✓ PERF-01: Non-critical CSS deferred — v1.4
+- ✓ PERF-02: Unused JavaScript removed/deferred — v1.4
+- ✓ PERF-03: Critical CSS inlined — v1.4
+- ✓ CLS-01: Image dimensions prevent layout shift — v1.4
+- ✓ CLS-02: Map embed has reserved dimensions — v1.4
+
 ### Active
 
-**v1.4 Performance & SEO Polish:**
-- [ ] CRAWL-01: Valid robots.txt with sitemap reference
-- [ ] CRAWL-02: robots.txt references sitemap.xml location
-- [ ] IMG-01: Images served in WebP with fallback
-- [ ] IMG-02: All images have explicit width/height
-- [ ] IMG-03: Hero image has fetchpriority="high"
-- [ ] PERF-01: Non-critical CSS deferred
-- [ ] PERF-02: Unused JavaScript removed/deferred
-- [ ] PERF-03: Critical CSS inlined
-- [ ] CLS-01: Image dimensions prevent layout shift
-- [ ] CLS-02: Map embed has reserved dimensions
+None — define next milestone with `/gsd:new-milestone`
 
 ### Out of Scope
 
@@ -87,12 +82,15 @@ Capabilities working in production:
 
 **Current Codebase:**
 - Hugo 0.135.0 static site generator
-- ~6,000 lines (HTML, CSS, JSON, YAML)
+- ~5,100 lines (HTML, CSS, JSON, YAML)
 - Deployed to GitHub Pages via GitHub Actions
 - CI pipeline with data validation, strict build, smoke checks
 
 **Technical Stack:**
 - Hugo templates with conditional fallback rendering
+- Hugo Pipes for CSS processing and image optimization
+- WebP image generation with `<picture>` fallbacks
+- Critical/deferred CSS split with preload/swap pattern
 - reviews.json with live reviews + fallbackReviews arrays
 - service_area.json with tiered coverage + map fallback config
 - OPERATIONS.md runbook for incident recovery
@@ -121,6 +119,9 @@ Capabilities working in production:
 | 45-day stale threshold for freshness indicator | Balance between alert fatigue and data freshness | — Pending |
 | --panicOnWarning for strict Hugo builds | Catch regressions early in CI | ✓ Good (v1.1) |
 | Documentation-only operations (OPERATIONS.md) | Simple, no automation needed for rare incidents | ✓ Good (v1.1) |
+| Critical CSS ~5KB (under 10KB target) | Minimal inline footprint, fastest first paint | ✓ Good (v1.4) |
+| Deferred CSS with SHA256 fingerprint | Long cache with instant invalidation | ✓ Good (v1.4) |
+| WebP with JPG/PNG fallbacks | Modern format with legacy support | ✓ Good (v1.4) |
 
 ---
-*Last updated: 2026-02-14 after shipping v1.1 milestone*
+*Last updated: 2026-02-15 after shipping v1.4 milestone*
