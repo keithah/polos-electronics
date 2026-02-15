@@ -5,6 +5,9 @@ title = 'Polos Electronics'
 # Disable default taxonomies (not needed for single-page site)
 disableKinds = ["taxonomy", "term"]
 
+# Enable robots.txt generation from template
+enableRobotsTXT = true
+
 [params]
   description = "Locally owned and operated Low Voltage Electrical Contractor since 1979"
   phone = "(360) 687-3543"
