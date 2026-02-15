@@ -14,7 +14,7 @@ Requirements to improve PageSpeed Performance score from 51 to 80+ and fix SEO c
 
 ### Image Optimization
 
-- [ ] **IMG-01**: Images are served in WebP format with JPG/PNG fallback for older browsers
+- [x] **IMG-01**: Images are served in WebP format with JPG/PNG fallback for older browsers
 - [ ] **IMG-02**: All image elements have explicit width and height attributes
 - [ ] **IMG-03**: Hero image has fetchpriority="high" for faster LCP
 
@@ -45,7 +45,7 @@ Requirements to improve PageSpeed Performance score from 51 to 80+ and fix SEO c
 |-------------|-------|--------|
 | CRAWL-01 | Phase 9 | Pending |
 | CRAWL-02 | Phase 9 | Pending |
-| IMG-01 | Phase 10 | Pending |
+| IMG-01 | Phase 10 | Complete |
 | IMG-02 | Phase 9 | Pending |
 | IMG-03 | Phase 9 | Pending |
 | PERF-01 | Phase 11 | Pending |
