@@ -145,8 +145,7 @@
                             <img src="{{ "images/andy-polos.jpg" | relURL }}"
                                  alt="Andy Polos"
                                  loading="lazy"
-                                 width="960"
-                                 height="958">
+                                 width="960" height="958">
                         </div>
                         <h3 class="member-name">Andy Polos</h3>
                         <div class="member-decorative">~~~</div>
@@ -159,8 +158,7 @@
                             <img src="{{ "images/derick-steele.jpg" | relURL }}"
                                  alt="Derick Steele"
                                  loading="lazy"
-                                 width="907"
-                                 height="680">
+                                 width="907" height="680">
                         </div>
                         <h3 class="member-name">Derick Steele</h3>
                         <div class="member-decorative">~~~</div>
@@ -173,8 +171,7 @@
                             <img src="{{ "images/john-polos.jpg" | relURL }}"
                                  alt="John Polos"
                                  loading="lazy"
-                                 width="500"
-                                 height="500">
+                                 width="500" height="500">
                         </div>
                         <h3 class="member-name">John Polos</h3>
                         <div class="member-decorative">~~~</div>
@@ -231,8 +228,7 @@
                             <img src="{{ "images/services-image.jpg" | relURL }}"
                                  alt="Electrical work and installation"
                                  loading="lazy"
-                                 width="600"
-                                 height="900">
+                                 width="600" height="900">
                         </div>
                         <div class="since-badge">
                             <div class="since-text">Since</div>
@@ -306,8 +302,7 @@
                                     src="{{ $mapPreviewUrl | relURL }}"
                                     alt="{{ $mapAlt }}"
                                     class="service-area-map-preview-image"
-                                    width="762"
-                                    height="620"
+                                    width="762" height="620"
                                     loading="lazy">
                             </div>
                             {{ end }}
@@ -323,8 +318,7 @@
                             src="{{ $mapPrimaryUrl | relURL }}"
                             alt="{{ $mapAlt }}"
                             class="service-area-map-image"
-                            width="762"
-                            height="620"
+                            width="762" height="620"
                             loading="lazy"
                             data-fallback-src="{{ if $mapFallbackUrl }}{{ $mapFallbackUrl | relURL }}{{ end }}"
                             onerror="if (!this.dataset.fallbackTried && this.dataset.fallbackSrc) { this.dataset.fallbackTried = 'true'; this.src = this.dataset.fallbackSrc; return; } this.style.display = 'none'; this.classList.add('is-failed'); var fallback = this.parentElement.querySelector('.service-area-map-fallback'); if (fallback) { fallback.hidden = false; } this.onerror = null;">
@@ -376,6 +370,7 @@
                                         <img src="{{ .profilePhoto }}"
                                              alt="{{ .author }}"
                                              class="review-avatar"
+                                             width="48" height="48"
                                              onerror="this.src='/images/default-avatar.svg'; this.onerror=null;">
                                         {{ else }}
                                         <div class="review-avatar review-avatar-placeholder">
@@ -390,7 +385,8 @@
                                            class="platform-badge-link" title="View on {{ $review.platform | title }}">
                                             <img src="/images/platforms/{{ $review.platform }}-logo.svg"
                                                  alt="{{ $review.platform | title }}"
-                                                 class="platform-badge">
+                                                 class="platform-badge"
+                                                 width="24" height="24">
                                         </a>
                                         {{ else }}
                                         {{ with $review.profileUrl }}
@@ -398,7 +394,8 @@
                                            class="platform-badge-link" title="View on {{ $review.platform | title }}">
                                             <img src="/images/platforms/{{ $review.platform }}-logo.svg"
                                                  alt="{{ $review.platform | title }}"
-                                                 class="platform-badge">
+                                                 class="platform-badge"
+                                                 width="24" height="24">
                                         </a>
                                         {{ end }}
                                         {{ end }}
@@ -493,8 +490,7 @@
                         <img src="{{ "images/contact-image.jpg" | relURL }}"
                              alt="Andy Polos at work"
                              loading="lazy"
-                             width="500"
-                             height="500">
+                             width="500" height="500">
                     </div>
 
                     <div class="contact-form-container">
@@ -548,8 +544,7 @@
                 <img src="{{ "images/logo.png" | relURL }}"
                      alt="Polos Electronics Logo"
                      loading="lazy"
-                     width="1500"
-                     height="439">
+                     width="1500" height="439">
             </div>
             <div class="footer-services">
                 <h4>Commercial & Residential Services</h4>
