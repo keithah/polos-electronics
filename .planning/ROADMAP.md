@@ -72,6 +72,10 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 **Goal**: Search engines can crawl efficiently while images load faster with proper prioritization
 **Dependencies**: None
 **Requirements**: CRAWL-01, CRAWL-02, IMG-02, IMG-03, CLS-01, CLS-02
+**Plans**: 1 plan
+
+Plans:
+- [ ] 09-01-PLAN.md — robots.txt template + image dimensions + hero fetchpriority
 
 **Success Criteria:**
 1. robots.txt validates without errors and includes sitemap.xml reference
@@ -82,6 +86,7 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 **Notes:**
 - IMG-02 and CLS-01 are the same requirement (image dimensions prevent CLS)
 - robots.txt uses Hugo template; only add sitemap directive (Cloudflare manages rest)
+- CLS-02 already satisfied (map container has fixed 400px/350px height)
 
 ---
 
@@ -128,8 +133,8 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 | 6. Operations & Recovery | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
-| 9. Crawling & Quick Wins | v1.4 | 0/? | Pending | — |
+| 9. Crawling & Quick Wins | v1.4 | 0/1 | Planned | — |
 | 10. WebP Image Conversion | v1.4 | 0/? | Pending | — |
 | 11. CSS/JS Optimization | v1.4 | 0/? | Pending | — |
 
-**Next Phase:** 9 (start with `/gsd:plan-phase 9`)
+**Next Phase:** 9 (execute with `/gsd:execute-phase 9`)
