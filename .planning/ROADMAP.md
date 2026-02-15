@@ -95,6 +95,11 @@ Plans:
 **Dependencies**: Phase 9 (image dimensions must be in place first)
 **Requirements**: IMG-01
 
+**Plans**: 1 plan
+
+Plans:
+- [ ] 10-01-PLAN.md — Move raster images into assets/, generate WebP + fallbacks, and wire HTML/CSS
+
 **Success Criteria:**
 1. All site images served as WebP to browsers that support it
 2. JPG/PNG fallback works in Safari 13 and older browsers
@@ -134,7 +139,7 @@ Plans:
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
 | 9. Crawling & Quick Wins | v1.4 | 0/1 | Planned | — |
-| 10. WebP Image Conversion | v1.4 | 0/? | Pending | — |
+| 10. WebP Image Conversion | v1.4 | 0/1 | Pending | — |
 | 11. CSS/JS Optimization | v1.4 | 0/? | Pending | — |
 
-**Next Phase:** 9 (execute with `/gsd:execute-phase 9`)
+**Next Phase:** 10 (execute with `/gsd:execute-phase 10`)
