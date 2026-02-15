@@ -10,7 +10,7 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 - ✅ **v1.1 Reliability & Visibility** - Phases 4-6 (shipped 2026-02-14)
 - ✅ **v1.2 Interactive Coverage Map** - Phase 7 (shipped 2026-02-14)
 - ✅ **v1.3 SEO Enhancement** - Phase 8 (shipped 2026-02-14)
-- **v1.4 Performance & SEO Polish** - Phases 9-11 (in progress)
+- ✅ **v1.4 Performance & SEO Polish** - Phases 9-11 (shipped 2026-02-15)
 
 ## Phases
 
@@ -63,8 +63,8 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 
 </details>
 
-<details open>
-<summary>v1.4 Performance & SEO Polish (Phases 9-11) - IN PROGRESS</summary>
+<details>
+<summary>✅ v1.4 Performance & SEO Polish (Phases 9-11) - SHIPPED 2026-02-15</summary>
 
 **Milestone Goal:** Improve PageSpeed Performance score from 51 to 80+ and fix SEO crawling issues.
 
@@ -119,7 +119,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 11-01-PLAN.md — Split CSS into critical/deferred, inline critical, async-load fonts
+- [x] 11-01-PLAN.md — Split CSS into critical/deferred, inline critical, async-load fonts
 
 **Success Criteria:**
 1. Above-fold content styles are inlined in HTML head (no external CSS blocks initial render)
@@ -144,6 +144,6 @@ Plans:
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
 | 9. Crawling & Quick Wins | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
 | 10. WebP Image Conversion | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
-| 11. CSS/JS Optimization | v1.4 | 0/1 | Pending | — |
+| 11. CSS/JS Optimization | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
 
-**Next Phase:** 11 (execute with `/gsd:execute-phase 11`)
+**All phases complete.** Run `/gsd:audit-milestone` to verify milestone completion.
