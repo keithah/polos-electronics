@@ -92,7 +92,7 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo">
+                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
                 </div>
                 <button class="nav-toggle" aria-label="Toggle navigation menu">
                     <span class="hamburger"></span>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="{{ "images/hero-image.jpg" | relURL }}" alt="Electrical work and installation">
+                    <img src="{{ "images/hero-image.jpg" | relURL }}" alt="Electrical work and installation" width="1500" height="1000" fetchpriority="high">
                 </div>
             </div>
         </section>
@@ -145,8 +145,8 @@
                             <img src="{{ "images/andy-polos.jpg" | relURL }}"
                                  alt="Andy Polos"
                                  loading="lazy"
-                                 width="300"
-                                 height="300">
+                                 width="960"
+                                 height="958">
                         </div>
                         <h3 class="member-name">Andy Polos</h3>
                         <div class="member-decorative">~~~</div>
@@ -159,8 +159,8 @@
                             <img src="{{ "images/derick-steele.jpg" | relURL }}"
                                  alt="Derick Steele"
                                  loading="lazy"
-                                 width="300"
-                                 height="300">
+                                 width="907"
+                                 height="680">
                         </div>
                         <h3 class="member-name">Derick Steele</h3>
                         <div class="member-decorative">~~~</div>
@@ -173,8 +173,8 @@
                             <img src="{{ "images/john-polos.jpg" | relURL }}"
                                  alt="John Polos"
                                  loading="lazy"
-                                 width="300"
-                                 height="300">
+                                 width="500"
+                                 height="500">
                         </div>
                         <h3 class="member-name">John Polos</h3>
                         <div class="member-decorative">~~~</div>
@@ -231,8 +231,8 @@
                             <img src="{{ "images/services-image.jpg" | relURL }}"
                                  alt="Electrical work and installation"
                                  loading="lazy"
-                                 width="500"
-                                 height="400">
+                                 width="600"
+                                 height="900">
                         </div>
                         <div class="since-badge">
                             <div class="since-text">Since</div>
@@ -305,7 +305,10 @@
                                 <img
                                     src="{{ $mapPreviewUrl | relURL }}"
                                     alt="{{ $mapAlt }}"
-                                    class="service-area-map-preview-image">
+                                    class="service-area-map-preview-image"
+                                    width="762"
+                                    height="620"
+                                    loading="lazy">
                             </div>
                             {{ end }}
                         </div>
@@ -320,6 +323,9 @@
                             src="{{ $mapPrimaryUrl | relURL }}"
                             alt="{{ $mapAlt }}"
                             class="service-area-map-image"
+                            width="762"
+                            height="620"
+                            loading="lazy"
                             data-fallback-src="{{ if $mapFallbackUrl }}{{ $mapFallbackUrl | relURL }}{{ end }}"
                             onerror="if (!this.dataset.fallbackTried && this.dataset.fallbackSrc) { this.dataset.fallbackTried = 'true'; this.src = this.dataset.fallbackSrc; return; } this.style.display = 'none'; this.classList.add('is-failed'); var fallback = this.parentElement.querySelector('.service-area-map-fallback'); if (fallback) { fallback.hidden = false; } this.onerror = null;">
                         <div class="service-area-map-fallback" hidden>
@@ -488,7 +494,7 @@
                              alt="Andy Polos at work"
                              loading="lazy"
                              width="500"
-                             height="400">
+                             height="500">
                     </div>
 
                     <div class="contact-form-container">
@@ -542,8 +548,8 @@
                 <img src="{{ "images/logo.png" | relURL }}"
                      alt="Polos Electronics Logo"
                      loading="lazy"
-                     width="150"
-                     height="auto">
+                     width="1500"
+                     height="439">
             </div>
             <div class="footer-services">
                 <h4>Commercial & Residential Services</h4>
