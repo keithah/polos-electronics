@@ -116,6 +116,10 @@ Plans:
 **Goal**: Page renders quickly by loading only critical styles immediately and deferring the rest
 **Dependencies**: Phase 9 (layout must be stable before CSS changes)
 **Requirements**: PERF-01, PERF-02, PERF-03
+**Plans**: 1 plan
+
+Plans:
+- [ ] 11-01-PLAN.md — Split CSS into critical/deferred, inline critical, async-load fonts
 
 **Success Criteria:**
 1. Above-fold content styles are inlined in HTML head (no external CSS blocks initial render)
@@ -140,6 +144,6 @@ Plans:
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
 | 9. Crawling & Quick Wins | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
 | 10. WebP Image Conversion | v1.4 | 1/1 | ✓ Complete | 2026-02-15 |
-| 11. CSS/JS Optimization | v1.4 | 0/? | Pending | — |
+| 11. CSS/JS Optimization | v1.4 | 0/1 | Pending | — |
 
 **Next Phase:** 11 (execute with `/gsd:execute-phase 11`)
