@@ -508,7 +508,16 @@ body {
 
 /* Call to Action Section */
 .cta-section {
-  background: url('/images/hero-image.jpg') center center;
+  background-image: url('/images/hero-image.jpg');
+  background-image: -webkit-image-set(
+    url('/images/hero-image.webp') type('image/webp'),
+    url('/images/hero-image.jpg') type('image/jpeg')
+  );
+  background-image: image-set(
+    url('/images/hero-image.webp') type('image/webp'),
+    url('/images/hero-image.jpg') type('image/jpeg')
+  );
+  background-position: center center;
   background-size: cover;
   position: relative;
   padding: 100px 0;
