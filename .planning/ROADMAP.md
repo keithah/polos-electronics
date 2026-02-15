@@ -7,7 +7,7 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 ## Milestones
 
 - ✅ **v1.0 Foundation** - Phases 1-3 (shipped 2026-02-14)
-- 🚧 **v1.1 Reliability & Visibility** - Phases 4-6 (in progress)
+- ✅ **v1.1 Reliability & Visibility** - Phases 4-6 (shipped 2026-02-14)
 - ✅ **v1.2 Interactive Coverage Map** - Phase 7 (shipped 2026-02-14)
 - ✅ **v1.3 SEO Enhancement** - Phase 8 (shipped 2026-02-14)
 
@@ -30,14 +30,14 @@ This roadmap now tracks milestone-based delivery for the Hugo site. v1.0 foundat
 
 </details>
 
-### 🚧 v1.1 Reliability & Visibility (In Progress)
+### ✅ v1.1 Reliability & Visibility (Shipped 2026-02-14)
 
 **Milestone Goal:** Reviews and service-area credibility signals reliably render and remain visible across ingestion failures, build regressions, and deploy drift.
 
 - [x] **Phase 4: Rendering Reliability** - Make reviews and service-area sections deterministic and always visible
 - [x] **Phase 4.1: Restore Rendering Reliability** - Fix Phase 4 regressions (fallback logic, freshness metadata)
 - [x] **Phase 5: Validation & CI Gates** - Block broken data/assets/build output before deploy
-- [ ] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
+- [x] **Phase 6: Operations & Recovery** - Reduce outage duration with fallback data and operator recovery paths
 
 ### ✅ v1.2 Interactive Coverage Map (Shipped 2026-02-14)
 
@@ -105,7 +105,8 @@ Plans:
   3. CI runs provide review/map health diagnostics that make reliability incidents faster to identify and resolve
 **Plans**: 1 plan
 Plans:
-- [ ] 06-01-PLAN.md — Create OPERATIONS.md recovery runbook
+- [x] 06-01-PLAN.md — Create OPERATIONS.md recovery runbook
+**Status**: ✓ Complete (2026-02-14)
 
 ### Phase 7: Interactive Service Map
 **Goal**: Users can explore coverage context via an embedded interactive map while the Service Area section remains reliable through a static fallback
@@ -149,6 +150,6 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 4.1 > 5 > 6 > 7 > 8
 | 4. Rendering Reliability | v1.1 | 3/3 | ✓ Complete (regressed) | 2026-02-14 |
 | 4.1. Restore Rendering Reliability | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
 | 5. Validation & CI Gates | v1.1 | 2/2 | ✓ Complete | 2026-02-14 |
-| 6. Operations & Recovery | v1.1 | 0/1 | Planned | - |
+| 6. Operations & Recovery | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |

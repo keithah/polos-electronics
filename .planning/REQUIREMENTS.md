@@ -22,9 +22,9 @@ Requirements for reliability and visibility. Each maps to roadmap phases 4-6.
 
 ### Operations & Recovery
 
-- [ ] **OPER-01**: User is protected from prolonged outages because operators can trigger a documented manual recovery run
-- [ ] **OPER-02**: User benefits from faster incident resolution through CI diagnostics for review/map health
-- [ ] **OPER-03**: User still sees credible review content when ingestion fails by using last-known-good fallback data
+- [x] **OPER-01**: User is protected from prolonged outages because operators can trigger a documented manual recovery run
+- [x] **OPER-02**: User benefits from faster incident resolution through CI diagnostics for review/map health
+- [x] **OPER-03**: User still sees credible review content when ingestion fails by using last-known-good fallback data
 
 ## v1.2 Requirements (Interactive Map)
 
@@ -86,9 +86,9 @@ Which phases cover which requirements.
 | VALD-02 | Phase 5 | ✓ Complete |
 | VALD-03 | Phase 5 | ✓ Complete |
 | VALD-04 | Phase 5 | ✓ Complete |
-| OPER-01 | Phase 6 | Pending |
-| OPER-02 | Phase 6 | Pending |
-| OPER-03 | Phase 6 | Pending |
+| OPER-01 | Phase 6 | ✓ Complete |
+| OPER-02 | Phase 6 | ✓ Complete |
+| OPER-03 | Phase 6 | ✓ Complete |
 | IMAP-01 | Phase 7 | ✓ Complete |
 | IMAP-02 | Phase 7 | ✓ Complete |
 | SEO-01 | Phase 8 | ✓ Complete |
@@ -100,10 +100,10 @@ Which phases cover which requirements.
 | SEO-07 | Phase 8 | ✓ Complete |
 
 **Coverage:**
-- v1.1 requirements: 10 total (7 complete, 3 pending)
+- v1.1 requirements: 10 total (10 complete)
 - v1.2 requirements: 2 total (2 complete)
 - v1.3 requirements: 7 total (7 complete)
 
 ---
 *Requirements defined: 2026-02-14*
-*Last updated: 2026-02-14 after completing Phase 5 (VALD-01 through VALD-04)*
+*Last updated: 2026-02-14 after completing Phase 6 (OPER-01 through OPER-03)*
