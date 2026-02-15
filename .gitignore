@@ -22,6 +22,7 @@ Thumbs.db
 
 # Temporary files
 *.tmp
+.tmp-fetch-log*.txt
 
 # Node.js (dev tools only)
 node_modules/
