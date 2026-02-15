@@ -1,0 +1,9 @@
+{{/* Defer non-critical CSS using preload/swap pattern */}}
+{{ $deferred := resources.Get "css/deferred.css" | resources.Minify | resources.Fingerprint "sha256" }}
+<link rel="preload"
+      href="{{ $deferred.RelPermalink }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="{{ $deferred.RelPermalink }}">
+</noscript>

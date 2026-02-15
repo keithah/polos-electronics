@@ -1,0 +1,6 @@
+{{/* Inline critical CSS for above-fold content */}}
+{{ $critical := resources.Get "css/critical.css" }}
+{{ if hugo.IsProduction }}
+  {{ $critical = $critical | resources.Minify }}
+{{ end }}
+<style>{{ $critical.Content | safeCSS }}</style>

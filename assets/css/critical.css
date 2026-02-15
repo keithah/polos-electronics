@@ -1,0 +1,479 @@
+/* Critical CSS - Above-fold styles (inlined in HTML head) */
+
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto Condensed', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  color: #323232;
+  background: #ffffff;
+  overflow-x: hidden;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* WordPress-style Navigation */
+.site-header {
+  background: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Header Top Section */
+.header-top {
+  background: #f8f8f8;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-info {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.header-address,
+.header-hours {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.header-address .icon,
+.header-hours .icon {
+  color: #5a9fd4;
+}
+
+.header-address a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.header-address a:hover {
+  color: #5a9fd4;
+  text-decoration: underline;
+}
+
+.contact-btn {
+  background: #5a9fd4;
+  color: white;
+  padding: 8px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 3px;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+}
+
+.contact-btn:hover {
+  background: #4a8bc2;
+}
+
+/* Main Navigation */
+.navbar {
+  background: #ffffff;
+  padding: 15px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo .logo {
+  height: 60px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+  margin: 0;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #323232;
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-menu a:hover {
+  color: #5a9fd4;
+}
+
+/* Mobile Menu Toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #323232;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background: #323232;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  bottom: -8px;
+}
+
+.nav-toggle.active .hamburger {
+  background: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.nav-toggle.active .hamburger::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.nav-phone {
+  text-align: right;
+}
+
+.phone-cta .phone-text {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.phone-cta .phone-number {
+  color: #fe3a46;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.phone-cta .phone-number:hover {
+  text-decoration: underline;
+}
+
+/* Main content spacing */
+.site-main {
+  margin-top: 140px;
+}
+
+/* Hero Section - WordPress Style */
+.hero-section {
+  background: #ffffff;
+  padding: 60px 0;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-content {
+  padding-right: 20px;
+}
+
+.hero-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #323232;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.hero-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 35px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.hero-image {
+  display: block;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* WordPress-style Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #5a9fd4;
+  color: white;
+  border-color: #5a9fd4;
+}
+
+.btn-primary:hover {
+  background: #4a8bc2;
+  border-color: #4a8bc2;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #5a9fd4;
+  border-color: #5a9fd4;
+}
+
+.btn-secondary:hover {
+  background: #5a9fd4;
+  color: white;
+}
+
+/* Section container (needed for hero/first sections) */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Mobile Responsive - Above-fold */
+@media (max-width: 1024px) {
+  .header-info {
+    gap: 20px;
+  }
+
+  .header-address,
+  .header-hours {
+    font-size: 13px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-top {
+    display: none;
+  }
+
+  .site-main {
+    margin-top: 70px;
+  }
+
+  .nav-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: block;
+    order: 2;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    max-height: 300px;
+    padding: 20px 0;
+  }
+
+  .nav-menu li {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .nav-menu li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-menu a {
+    font-size: 14px;
+    display: block;
+    padding: 5px 20px;
+  }
+
+  .nav-phone {
+    order: 3;
+    display: none;
+  }
+
+  .phone-cta .phone-text {
+    font-size: 12px;
+  }
+
+  .phone-cta .phone-number {
+    font-size: 18px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  .section-container {
+    padding: 0 15px;
+  }
+
+  .hero-section {
+    padding: 30px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-logo .logo {
+    height: 45px;
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .nav-menu a {
+    font-size: 13px;
+  }
+
+  .phone-cta .phone-number {
+    font-size: 16px;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .hero-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .btn {
+    padding: 11px 18px;
+    font-size: 12px;
+    width: 100%;
+    max-width: 250px;
+  }
+}
