@@ -43,21 +43,28 @@ Requirements to improve PageSpeed Performance score from 51 to 80+ and fix SEO c
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CRAWL-01 | TBD | Pending |
-| CRAWL-02 | TBD | Pending |
-| IMG-01 | TBD | Pending |
-| IMG-02 | TBD | Pending |
-| IMG-03 | TBD | Pending |
-| PERF-01 | TBD | Pending |
-| PERF-02 | TBD | Pending |
-| PERF-03 | TBD | Pending |
-| CLS-01 | TBD | Pending |
-| CLS-02 | TBD | Pending |
+| CRAWL-01 | Phase 9 | Pending |
+| CRAWL-02 | Phase 9 | Pending |
+| IMG-01 | Phase 10 | Pending |
+| IMG-02 | Phase 9 | Pending |
+| IMG-03 | Phase 9 | Pending |
+| PERF-01 | Phase 11 | Pending |
+| PERF-02 | Phase 11 | Pending |
+| PERF-03 | Phase 11 | Pending |
+| CLS-01 | Phase 9 | Pending |
+| CLS-02 | Phase 9 | Pending |
 
 **Coverage:**
 - v1.4 requirements: 10 total
-- Mapped to phases: 0
-- Unmapped: 10 ⚠️
+- Mapped to phases: 10
+- Unmapped: 0
+
+**Phase Distribution:**
+- Phase 9 (Crawling & Quick Wins): 6 requirements
+- Phase 10 (WebP Image Conversion): 1 requirement
+- Phase 11 (CSS/JS Optimization): 3 requirements
+
+**Note:** IMG-02 and CLS-01 are effectively the same requirement (explicit image dimensions prevent layout shift). Both are addressed in Phase 9.
 
 ---
 *Requirements defined: 2026-02-15*

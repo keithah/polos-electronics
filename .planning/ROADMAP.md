@@ -10,6 +10,7 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 - ✅ **v1.1 Reliability & Visibility** - Phases 4-6 (shipped 2026-02-14)
 - ✅ **v1.2 Interactive Coverage Map** - Phase 7 (shipped 2026-02-14)
 - ✅ **v1.3 SEO Enhancement** - Phase 8 (shipped 2026-02-14)
+- **v1.4 Performance & SEO Polish** - Phases 9-11 (in progress)
 
 ## Phases
 
@@ -62,6 +63,58 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 
 </details>
 
+<details open>
+<summary>v1.4 Performance & SEO Polish (Phases 9-11) - IN PROGRESS</summary>
+
+**Milestone Goal:** Improve PageSpeed Performance score from 51 to 80+ and fix SEO crawling issues.
+
+### Phase 9: Crawling & Quick Wins
+**Goal**: Search engines can crawl efficiently while images load faster with proper prioritization
+**Dependencies**: None
+**Requirements**: CRAWL-01, CRAWL-02, IMG-02, IMG-03, CLS-01, CLS-02
+
+**Success Criteria:**
+1. robots.txt validates without errors and includes sitemap.xml reference
+2. All images have explicit width and height attributes in HTML
+3. Hero image loads with high priority (visible in network waterfall before other images)
+4. Map embed container reserves space before iframe loads (no layout shift)
+
+**Notes:**
+- IMG-02 and CLS-01 are the same requirement (image dimensions prevent CLS)
+- robots.txt uses Hugo template; only add sitemap directive (Cloudflare manages rest)
+
+---
+
+### Phase 10: WebP Image Conversion
+**Goal**: Images load faster with modern WebP format while maintaining compatibility with older browsers
+**Dependencies**: Phase 9 (image dimensions must be in place first)
+**Requirements**: IMG-01
+
+**Success Criteria:**
+1. All site images served as WebP to browsers that support it
+2. JPG/PNG fallback works in Safari 13 and older browsers
+3. Hugo Pipes processes images from assets/ directory (not static/)
+4. Build generates both WebP and original formats
+
+**Notes:**
+- Requires moving images from static/ to assets/ for Hugo Pipes
+- Keep OG/Twitter images as JPG for social crawler compatibility
+
+---
+
+### Phase 11: CSS/JS Optimization
+**Goal**: Page renders quickly by loading only critical styles immediately and deferring the rest
+**Dependencies**: Phase 9 (layout must be stable before CSS changes)
+**Requirements**: PERF-01, PERF-02, PERF-03
+
+**Success Criteria:**
+1. Above-fold content styles are inlined in HTML head (no external CSS blocks initial render)
+2. Non-critical CSS loads after initial paint (deferred via media or rel="preload")
+3. No render-blocking JavaScript in document head
+4. PageSpeed Performance score reaches 80+
+
+</details>
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -75,5 +128,8 @@ This roadmap tracks milestone-based delivery for the Hugo site. Phase numbering 
 | 6. Operations & Recovery | v1.1 | 1/1 | ✓ Complete | 2026-02-14 |
 | 7. Interactive Service Map | v1.2 | 1/1 | ✓ Complete | 2026-02-14 |
 | 8. SEO Enhancement | v1.3 | 3/3 | ✓ Complete | 2026-02-14 |
+| 9. Crawling & Quick Wins | v1.4 | 0/? | Pending | — |
+| 10. WebP Image Conversion | v1.4 | 0/? | Pending | — |
+| 11. CSS/JS Optimization | v1.4 | 0/? | Pending | — |
 
-**Next Phase:** 9 (start with `/gsd:new-milestone`)
+**Next Phase:** 9 (start with `/gsd:plan-phase 9`)
