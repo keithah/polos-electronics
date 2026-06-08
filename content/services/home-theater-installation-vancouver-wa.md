@@ -15,7 +15,7 @@ highlights = [
   "TV, receiver, and component connection",
   "Cable concealment and wiring cleanup"
 ]
-cities = ["Vancouver", "Battle Ground", "Camas", "Ridgefield", "Washougal", "Woodland", "Clark County"]
+service_areas = ["Vancouver", "Battle Ground", "Camas", "Ridgefield", "Washougal", "Woodland", "Clark County"]
 
 [[faqs]]
 question = "Can you fix an existing home theater system?"

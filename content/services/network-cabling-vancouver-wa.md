@@ -15,7 +15,7 @@ highlights = [
   "Retrofit wiring for existing homes",
   "Commercial office network cabling"
 ]
-cities = ["Vancouver", "Battle Ground", "Ridgefield", "Camas", "Washougal", "Longview", "Clark County"]
+service_areas = ["Vancouver", "Battle Ground", "Ridgefield", "Camas", "Washougal", "Longview", "Clark County"]
 
 [[faqs]]
 question = "Can you add Ethernet drops to an existing home?"

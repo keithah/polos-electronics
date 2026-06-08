@@ -15,7 +15,7 @@ highlights = [
   "Low voltage cabling and device setup",
   "Integration with security and surveillance needs"
 ]
-cities = ["Battle Ground", "Vancouver", "Camas", "Ridgefield", "Washougal", "Woodland", "Clark County"]
+service_areas = ["Battle Ground", "Vancouver", "Camas", "Ridgefield", "Washougal", "Woodland", "Clark County"]
 
 [[faqs]]
 question = "Do you install commercial door access systems?"

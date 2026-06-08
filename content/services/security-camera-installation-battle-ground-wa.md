@@ -15,7 +15,7 @@ highlights = [
   "Remote viewing configuration",
   "Clean cabling and wiring cleanup"
 ]
-cities = ["Battle Ground", "Vancouver", "Brush Prairie", "Ridgefield", "Camas", "Washougal", "Clark County"]
+service_areas = ["Battle Ground", "Vancouver", "Brush Prairie", "Ridgefield", "Camas", "Washougal", "Clark County"]
 
 [[faqs]]
 question = "Do you install both residential and commercial camera systems?"
@@ -36,4 +36,4 @@ We help with camera placement, cable routes, recorder location, monitor or app a
 
 Our work includes camera cabling, DVR and NVR setup, remote viewing configuration, and wiring cleanup. We focus on practical coverage, clean installation, and systems that make sense for how the property is used.
 
-Polos Electronics has provided low voltage electrical work since 1979. Call for a free estimate if you need a new camera system or want help improving an existing one.
+Polos Electronics has provided low-voltage electrical work since 1979. Call for a free estimate if you need a new camera system or want help improving an existing one.

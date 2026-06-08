@@ -1,6 +1,6 @@
 +++
 title = "Low Voltage Contractor in Vancouver, WA | Polos Electronics"
-description = "Low voltage electrical contractor serving Vancouver, Battle Ground, Clark County, Cowlitz County, Lewis County, Skamania County, and Washington since 1979."
+description = "Low voltage electrical contractor serving Vancouver, Battle Ground, Clark County, Cowlitz County, Lewis County, Skamania County, and throughout Washington since 1979."
 h1 = "Low Voltage Contractor in Vancouver, WA"
 kicker = "Commercial and residential low voltage work"
 lead = "Polos Electronics provides low voltage electrical installation, repair, troubleshooting, and wiring cleanup for homes and businesses across Southwest Washington."
@@ -15,7 +15,7 @@ highlights = [
   "Access control and door systems",
   "Pre-wiring, retrofits, and wiring cleanup"
 ]
-cities = ["Vancouver", "Battle Ground", "Clark County", "Cowlitz County", "Lewis County", "Skamania County", "Washington"]
+service_areas = ["Vancouver", "Battle Ground", "Clark County", "Cowlitz County", "Lewis County", "Skamania County"]
 
 [[faqs]]
 question = "What does a low voltage contractor install?"
