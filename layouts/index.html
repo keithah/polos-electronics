@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
 
-    <title>{{ .Site.Title }}</title>
+    <title>{{ .Site.Params.seo_title | default .Site.Title }}</title>
     <meta name="description" content="{{ .Site.Params.description }}">
     <meta name="keywords" content="electrical contractor, security systems, home theater, surveillance, Battle Ground WA, low voltage, networking, Starlink">
     <meta name="robots" content="index, follow">
@@ -19,7 +19,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ .Site.Title }}">
-    <meta property="og:title" content="{{ .Site.Title }} - Low Voltage Electrical Contractor">
+    <meta property="og:title" content="{{ .Site.Params.seo_title | default (printf "%s - Low Voltage Electrical Contractor" .Site.Title) }}">
     <meta property="og:description" content="{{ .Site.Params.description }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:image" content="{{ "images/hero-image.jpg" | absURL }}">
@@ -36,7 +36,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@poloselectronics">
-    <meta name="twitter:title" content="{{ .Site.Title }} - Low Voltage Electrical Contractor">
+    <meta name="twitter:title" content="{{ .Site.Params.seo_title | default (printf "%s - Low Voltage Electrical Contractor" .Site.Title) }}">
     <meta name="twitter:description" content="{{ .Site.Params.description }}">
     <meta name="twitter:image" content="{{ "images/hero-image.jpg" | absURL }}">
     <meta name="twitter:image:alt" content="{{ .Site.Title }} Logo">
@@ -108,7 +108,7 @@
                 <div class="nav-phone">
                     <div class="phone-cta">
                         <span class="phone-text">call for a free estimate!</span>
-                        <a href="tel:{{ .Site.Params.phone }}" class="phone-number">{{ .Site.Params.phone }}</a>
+                        <a href="tel:{{ .Site.Params.phone_href }}" class="phone-number">{{ .Site.Params.phone }}</a>
                     </div>
                 </div>
             </div>
@@ -193,14 +193,14 @@
                         </div>
 
                         <ul class="services-list">
-                            <li>Starlink Installation</li>
+                            <li><a href="{{ "services/starlink-installation-vancouver-wa/" | relURL }}">Starlink Installation</a></li>
                             <li>Pre-Wiring & Retrofits</li>
-                            <li>Residential & Commercial Security Systems</li>
-                            <li>Surveillance Systems</li>
-                            <li>Door Access Systems</li>
-                            <li>Home Theater Systems</li>
+                            <li><a href="{{ "services/low-voltage-contractor-vancouver-wa/" | relURL }}">Residential & Commercial Security Systems</a></li>
+                            <li><a href="{{ "services/security-camera-installation-battle-ground-wa/" | relURL }}">Surveillance Systems</a></li>
+                            <li><a href="{{ "services/access-control-systems-clark-county-wa/" | relURL }}">Door Access Systems</a></li>
+                            <li><a href="{{ "services/home-theater-installation-vancouver-wa/" | relURL }}">Home Theater Systems</a></li>
                             <li>Whole House Audio/Visual</li>
-                            <li>Full Networking Services</li>
+                            <li><a href="{{ "services/network-cabling-vancouver-wa/" | relURL }}">Full Networking Services</a></li>
                             <li>Cable Management</li>
                             <li>Wiring Cleanup</li>
                             <li>CAT5 & CAT6</li>
@@ -325,7 +325,7 @@
                         <div class="service-area-map-fallback" hidden>
                             <p class="service-area-map-fallback-context">{{ $fallbackContext }}</p>
                             <div class="service-area-map-fallback-ctas">
-                                <a href="tel:{{ .Site.Params.phone }}" class="btn btn-primary">Call {{ .Site.Params.phone }}</a>
+                                <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-primary">Call {{ .Site.Params.phone }}</a>
                                 <a href="#contact" class="btn btn-secondary">Contact Us</a>
                             </div>
                             <p class="service-area-map-fallback-note">{{ $fallbackCallCta }}</p>

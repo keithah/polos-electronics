@@ -9,8 +9,10 @@ disableKinds = ["taxonomy", "term"]
 enableRobotsTXT = true
 
 [params]
-  description = "Locally owned and operated Low Voltage Electrical Contractor since 1979"
+  seo_title = "Polos Electronics | Low Voltage Contractor in Battle Ground, WA"
+  description = "Low voltage electrical contractor serving Battle Ground, Vancouver, Clark County, and Southwest Washington since 1979. Security, surveillance, Starlink, networking, and AV installation."
   phone = "(360) 687-3543"
+  phone_href = "+13606873543"
   email = "service@poloselectronics.com"
   address = "20810 NE 267th St, Battle Ground, WA 98604"
   google_analytics = "G-TT7PTG1YW9"

@@ -69,7 +69,9 @@
   "@type" $b.type
   "@id" (printf "%s#organization" $baseURL)
   "name" $b.name
+  "legalName" $b.legalName
   "description" $b.description
+  "slogan" $b.slogan
   "url" $b.url
   "telephone" $b.telephone
   "email" $b.email
@@ -78,10 +80,13 @@
   "openingHoursSpecification" (slice $hours)
   "priceRange" $b.priceRange
   "foundingDate" $b.foundingDate
+  "founder" (dict "@type" "Person" "name" $b.founder)
   "image" (printf "%simages/logo.png" $baseURL)
   "logo" (printf "%simages/logo.png" $baseURL)
   "areaServed" $areas
   "sameAs" $b.sameAs
+  "hasMap" $b.googleMapsUrl
+  "knowsAbout" $b.knowsAbout
   "aggregateRating" $aggregateRating
 -}}
 

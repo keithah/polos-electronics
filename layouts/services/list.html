@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+    <title>{{ .Title }}</title>
+    <meta name="description" content="{{ .Description }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ $style := resources.Get "css/custom.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    {{ partial "schema/local-business.html" . }}
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a class="nav-logo" href="{{ "/" | relURL }}">
+                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="{{ "/" | relURL }}#home">Home</a></li>
+                    <li><a href="{{ "/" | relURL }}#services">Services</a></li>
+                    <li><a href="{{ "/" | relURL }}#service-area">Service Area</a></li>
+                    <li><a href="{{ "/" | relURL }}#contact">Contact</a></li>
+                </ul>
+                <div class="nav-phone">
+                    <div class="phone-cta">
+                        <span class="phone-text">call for a free estimate!</span>
+                        <a href="tel:{{ .Site.Params.phone_href }}" class="phone-number">{{ .Site.Params.phone }}</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="site-main service-page-main">
+        <section class="service-page-hero">
+            <div class="section-container">
+                <p class="service-page-kicker">Polos Electronics</p>
+                <h1>{{ .Title }}</h1>
+                <p class="service-page-lead">{{ .Description }}</p>
+            </div>
+        </section>
+        <section class="service-page-content-section">
+            <div class="section-container service-index-grid">
+                {{ range .Pages.ByTitle }}
+                <article class="service-index-card">
+                    <h2><a href="{{ .RelPermalink }}">{{ .Params.h1 | default .Title }}</a></h2>
+                    <p>{{ .Description }}</p>
+                    <a href="{{ .RelPermalink }}" class="service-area-map-link">Learn more →</a>
+                </article>
+                {{ end }}
+            </div>
+        </section>
+    </main>
+    <script>
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+          navToggle.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        });
+      }
+    </script>
+</body>
+</html>
