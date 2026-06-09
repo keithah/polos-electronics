@@ -3,7 +3,16 @@
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" loading="lazy" width="1500" height="439">
+                {{ partial "site/picture.html" (dict
+                    "src" "/images/responsive/logo-205.png"
+                    "srcset" "/images/responsive/logo-205.png 205w, /images/responsive/logo-410.png 410w"
+                    "webpSrcset" "/images/responsive/logo-205.webp 205w, /images/responsive/logo-410.webp 410w"
+                    "sizes" "205px"
+                    "alt" "Polos Electronics Logo"
+                    "width" "205"
+                    "height" "60"
+                    "loading" "lazy"
+                ) }}
             </div>
             <div class="footer-services">
                 <h4>Commercial & Residential Services</h4>

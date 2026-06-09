@@ -1,0 +1,18 @@
+{{- $class := .class | default "" -}}
+{{- $loading := .loading | default "" -}}
+{{- $decoding := .decoding | default "async" -}}
+{{- $fetchpriority := .fetchpriority | default "" -}}
+<picture>
+  {{- with .webpSrcset }}
+  <source type="image/webp" srcset="{{ . }}" sizes="{{ $.sizes }}">
+  {{- end }}
+  <img src="{{ .src }}"
+       {{- with .srcset }} srcset="{{ . }}"{{ end }}
+       {{- with .sizes }} sizes="{{ . }}"{{ end }}
+       alt="{{ .alt }}"
+       {{- with $class }} class="{{ . }}"{{ end }}
+       width="{{ .width }}" height="{{ .height }}"
+       {{- with $loading }} loading="{{ . }}"{{ end }}
+       {{- with $decoding }} decoding="{{ . }}"{{ end }}
+       {{- with $fetchpriority }} fetchpriority="{{ . }}"{{ end }}>
+</picture>

@@ -429,13 +429,15 @@ jobs:
 
               for (const el of reviewElements.slice(0, 10)) {
                 try {
-                  const author = await el.$eval('[class*="author"], [class*="name"], .reviewer-name', e => e.textContent?.trim()).catch(() => 'HomeAdvisor User');
-                  const rating = await el.$eval('[class*="rating"], [class*="stars"]', e => {
-                    const stars = e.querySelectorAll('[class*="filled"], .star-filled, [data-filled="true"]').length;
-                    return stars || parseInt(e.getAttribute('data-rating') || e.textContent?.match(/(\d)/)?.[1] || '5', 10);
-                  }).catch(() => 5);
-                  const text = await el.$eval('[class*="text"], [class*="content"], .review-text, .review-content', e => e.textContent?.trim()).catch(() => '');
-                  const date = await el.$eval('[class*="date"], time', e => e.textContent?.trim() || e.getAttribute('datetime')).catch(() => new Date().toISOString().split('T')[0]);
+                  const [author, rating, text, date] = await Promise.all([
+                    el.$eval('[class*="author"], [class*="name"], .reviewer-name', e => e.textContent?.trim()).catch(() => 'HomeAdvisor User'),
+                    el.$eval('[class*="rating"], [class*="stars"]', e => {
+                      const stars = e.querySelectorAll('[class*="filled"], .star-filled, [data-filled="true"]').length;
+                      return stars || parseInt(e.getAttribute('data-rating') || e.textContent?.match(/(\d)/)?.[1] || '5', 10);
+                    }).catch(() => 5),
+                    el.$eval('[class*="text"], [class*="content"], .review-text, .review-content', e => e.textContent?.trim()).catch(() => ''),
+                    el.$eval('[class*="date"], time', e => e.textContent?.trim() || e.getAttribute('datetime')).catch(() => new Date().toISOString().split('T')[0])
+                  ]);
 
                   if (text && rating >= 4) {
                     reviews.push({
@@ -487,9 +489,11 @@ jobs:
 
               for (const el of reviewElements.slice(0, 10)) {
                 try {
-                  const author = await el.$eval('[class*="author"], [class*="name"]', e => e.textContent?.trim()).catch(() => 'Neighbor');
-                  const text = await el.$eval('[class*="text"], [class*="content"], [class*="body"]', e => e.textContent?.trim()).catch(() => '');
-                  const date = await el.$eval('[class*="date"], time', e => e.textContent?.trim() || e.getAttribute('datetime')).catch(() => new Date().toISOString().split('T')[0]);
+                  const [author, text, date] = await Promise.all([
+                    el.$eval('[class*="author"], [class*="name"]', e => e.textContent?.trim()).catch(() => 'Neighbor'),
+                    el.$eval('[class*="text"], [class*="content"], [class*="body"]', e => e.textContent?.trim()).catch(() => ''),
+                    el.$eval('[class*="date"], time', e => e.textContent?.trim() || e.getAttribute('datetime')).catch(() => new Date().toISOString().split('T')[0])
+                  ]);
 
                   if (text) {
                     reviews.push({

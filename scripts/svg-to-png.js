@@ -30,10 +30,7 @@ const WIDTH = 800;
 </body>
 </html>`;
 
-  const browser = await puppeteer.launch({
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-    headless: 'new'
-  });
+  const browser = await puppeteer.launch({ headless: 'new' });
 
   const page = await browser.newPage();
   await page.setContent(html);

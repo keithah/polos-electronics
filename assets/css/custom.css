@@ -718,44 +718,9 @@ body {
   line-height: 1.4;
 }
 
-.reviews-reliability-meta .reviews-freshness-meta span,
-.reviews-reliability-meta--stale {
+.reviews-reliability-meta .reviews-freshness-meta span {
   color: #8a8a8a;
   font-size: 0.85rem;
-}
-
-.reviews-stats {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.overall-rating {
-  display: inline-block;
-  padding: 20px 40px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.rating-number {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #323232;
-  font-family: 'Josefin Sans', sans-serif;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.rating-stars {
-  font-size: 1.5rem;
-  color: #ffa500;
-  margin-bottom: 10px;
-}
-
-.rating-count {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0;
 }
 
 /* Reviews Carousel */
@@ -984,14 +949,6 @@ body {
 .reviews-cta {
   text-align: center;
   margin-top: 40px;
-}
-
-.reviews-empty-state {
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-  color: #666;
-  font-size: 1rem;
 }
 
 .reviews-cta-text {
@@ -1304,22 +1261,6 @@ body {
   margin-bottom: 1rem;
 }
 
-.city-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.city {
-  background: #f1f4f8;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid #dbe2ea;
-  font-size: 0.9rem;
-  color: #323232;
-}
-
 .county-group {
   margin-bottom: 0.9rem;
   line-height: 1.7;
@@ -1333,12 +1274,6 @@ body {
 
 .city-inline {
   color: #4f4f4f;
-}
-
-.city.headquarters {
-  background: #fe3a46;
-  color: #fff;
-  font-weight: 600;
 }
 
 .service-area-statewide {
@@ -1475,9 +1410,6 @@ body {
     text-align: center;
   }
 
-  .city-list {
-    justify-content: center;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1510,13 +1442,6 @@ body {
     font-size: 0.98rem;
   }
 
-  .city-list {
-    justify-content: center;
-  }
-
-  .city {
-    font-size: 0.85rem;
-  }
 }
 
 /* Responsive Design */

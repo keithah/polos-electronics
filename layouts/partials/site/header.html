@@ -25,7 +25,16 @@
         <nav class="navbar">
             <div class="nav-container">
                 <a class="nav-logo" href="{{ "/" | relURL }}">
-                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439" decoding="async">
+                    {{ partial "site/picture.html" (dict
+                        "src" "/images/responsive/logo-205.png"
+                        "srcset" "/images/responsive/logo-205.png 205w, /images/responsive/logo-410.png 410w"
+                        "webpSrcset" "/images/responsive/logo-205.webp 205w, /images/responsive/logo-410.webp 410w"
+                        "sizes" "205px"
+                        "alt" "Polos Electronics Logo"
+                        "class" "logo"
+                        "width" "205"
+                        "height" "60"
+                    ) }}
                 </a>
                 <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
                     <span class="hamburger"></span>
