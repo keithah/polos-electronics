@@ -1,0 +1,31 @@
+{{- $page := . -}}
+{{- $address := printf "%s, %s, %s %s" $page.Site.Data.business.address.streetAddress $page.Site.Data.business.address.addressLocality $page.Site.Data.business.address.addressRegion $page.Site.Data.business.address.postalCode -}}
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" loading="lazy" width="1500" height="439">
+            </div>
+            <div class="footer-services">
+                <h4>Commercial & Residential Services</h4>
+                <ul>
+                    <li>Pre-Wiring & Retrofits</li>
+                    <li>Residential & Commercial Security Systems</li>
+                    <li>Surveillance Systems</li>
+                    <li>Door Access Systems</li>
+                    <li>Home Theater Systems</li>
+                    <li>Whole House Audio/Visual</li>
+                    <li>Full Networking Services</li>
+                    <li>Cable Management</li>
+                    <li>Wiring Cleanup</li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4><a href="tel:{{ $page.Site.Params.phone_href }}">{{ $page.Site.Params.phone }}</a></h4>
+                <p><a href="mailto:{{ $page.Site.Data.business.email }}">{{ $page.Site.Data.business.email }}</a></p>
+                <p><a href="{{ $page.Site.Data.business.googleMapsUrl }}" target="_blank" rel="noopener">{{ $address }}</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{ now.Year }} Polos Electronics. All rights reserved.</p>
+        </div>
+    </footer>

@@ -50,18 +50,7 @@
   "closes" $b.openingHours.closes
 -}}
 
-{{- /* Build areaServed array with @id for cross-referencing */ -}}
-{{- $areas := slice -}}
-{{- range $b.areaServed -}}
-  {{- $kebabName := .name | lower | replaceRE " " "-" -}}
-  {{- $area := dict
-    "@type" "AdministrativeArea"
-    "@id" (printf "%s#area-%s" $baseURL $kebabName)
-    "name" (printf "%s, %s" .name .state)
-    "sameAs" .sameAs
-  -}}
-  {{- $areas = $areas | append $area -}}
-{{- end -}}
+{{- $areas := partial "schema/area-served.html" (dict "areas" $b.areaServed "baseURL" $baseURL "mode" "full") -}}
 
 {{- /* Build main schema */ -}}
 {{- $schema := dict

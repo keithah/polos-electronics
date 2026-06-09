@@ -1,0 +1,18 @@
+{{- $baseURL := .baseURL -}}
+{{- $mode := .mode | default "full" -}}
+{{- $areas := slice -}}
+{{- range .areas -}}
+  {{- $kebabName := .name | lower | replaceRE " " "-" -}}
+  {{- $id := printf "%s#area-%s" $baseURL $kebabName -}}
+  {{- if eq $mode "ref" -}}
+    {{- $areas = $areas | append (dict "@id" $id) -}}
+  {{- else -}}
+    {{- $areas = $areas | append (dict
+      "@type" "AdministrativeArea"
+      "@id" $id
+      "name" (printf "%s, %s" .name .state)
+      "sameAs" .sameAs
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $areas -}}

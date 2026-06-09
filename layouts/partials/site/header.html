@@ -1,0 +1,53 @@
+{{- $page := .page -}}
+{{- $prefix := .prefix -}}
+{{- $contactHref := printf "%s#contact" $prefix -}}
+{{- $address := printf "%s, %s, %s %s" $page.Site.Data.business.address.streetAddress $page.Site.Data.business.address.addressLocality $page.Site.Data.business.address.addressRegion $page.Site.Data.business.address.postalCode -}}
+    <header class="site-header">
+        {{- if .showTop }}
+        <div class="header-top">
+            <div class="header-container">
+                <div class="header-info">
+                    <div class="header-address">
+                        <span class="icon">📍</span>
+                        <a href="{{ $page.Site.Data.business.googleMapsUrl }}" target="_blank" rel="noopener">{{ $address }}</a>
+                    </div>
+                    <div class="header-hours">
+                        <span class="icon">🕒</span>
+                        <span>Mon-Fri 09:00am - 04:00pm<br>Saturday & Sunday closed</span>
+                    </div>
+                </div>
+                <div class="header-contact">
+                    <a href="{{ $contactHref }}" class="contact-btn">CONTACT US</a>
+                </div>
+            </div>
+        </div>
+        {{- end }}
+        <nav class="navbar">
+            <div class="nav-container">
+                <a class="nav-logo" href="{{ "/" | relURL }}">
+                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="{{ printf "%s#home" $prefix }}">Home</a></li>
+                    {{- if .fullNav }}
+                    <li><a href="{{ printf "%s#about" $prefix }}">About</a></li>
+                    {{- end }}
+                    <li><a href="{{ printf "%s#services" $prefix }}">Services</a></li>
+                    <li><a href="{{ printf "%s#service-area" $prefix }}">Service Area</a></li>
+                    {{- if .fullNav }}
+                    <li><a href="{{ printf "%s#faq" $prefix }}">FAQ</a></li>
+                    {{- end }}
+                    <li><a href="{{ $contactHref }}">Contact</a></li>
+                </ul>
+                <div class="nav-phone">
+                    <div class="phone-cta">
+                        <span class="phone-text">call for a free estimate!</span>
+                        <a href="tel:{{ $page.Site.Params.phone_href }}" class="phone-number">{{ $page.Site.Params.phone }}</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>

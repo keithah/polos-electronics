@@ -42,13 +42,10 @@
     <meta name="twitter:image:alt" content="{{ .Site.Title }} Logo">
 
     <!-- Load CSS -->
-    {{ $style := resources.Get "css/custom.css" | resources.Minify }}
-    <link rel="stylesheet" href="{{ $style.Permalink }}">
+    {{ partial "site/styles.html" (dict "service" false) }}
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    {{ partial "site/fonts.html" . }}
 
     <!-- Structured Data -->
     {{ partial "schema/local-business.html" . }}
@@ -71,49 +68,7 @@
 </head>
 <body>
     <!-- Navigation Header -->
-    <header class="site-header">
-        <div class="header-top">
-            <div class="header-container">
-                <div class="header-info">
-                    <div class="header-address">
-                        <span class="icon">📍</span>
-                        <a href="https://maps.app.goo.gl/2puYhDM2pxiSJUPR7" target="_blank" rel="noopener">{{ .Site.Data.business.address.streetAddress }}, {{ .Site.Data.business.address.addressLocality }}, {{ .Site.Data.business.address.addressRegion }} {{ .Site.Data.business.address.postalCode }}</a>
-                    </div>
-                    <div class="header-hours">
-                        <span class="icon">🕒</span>
-                        <span>Mon-Fri 09:00am - 04:00pm<br>Saturday & Sunday closed</span>
-                    </div>
-                </div>
-                <div class="header-contact">
-                    <a href="#contact" class="contact-btn">CONTACT US</a>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
-                </div>
-                <button class="nav-toggle" aria-label="Toggle navigation menu">
-                    <span class="hamburger"></span>
-                </button>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#service-area">Service Area</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="nav-phone">
-                    <div class="phone-cta">
-                        <span class="phone-text">call for a free estimate!</span>
-                        <a href="tel:{{ .Site.Params.phone_href }}" class="phone-number">{{ .Site.Params.phone }}</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    {{ partial "site/header.html" (dict "page" . "prefix" "" "showTop" true "fullNav" true) }}
 
     <main class="site-main">
         <!-- Hero Section -->
@@ -124,7 +79,7 @@
                     <p class="hero-text">Polos Electronics is a locally owned and operated Low Voltage Electrical Contractor. We have been doing consistent business under one name and one family since 1979. If you are looking for a fresh, local company to trust with your home or business needs, your search is over. Contact Polos Electronics for a free quote today!</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">CONTACT US »</a>
-                        <a href="tel:+13606873543" class="btn btn-secondary">CALL FOR A FREE ESTIMATE »</a>
+                        <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-secondary">CALL FOR A FREE ESTIMATE »</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -456,7 +411,7 @@
             <div class="cta-overlay">
                 <div class="cta-container">
                     <h2 class="cta-title">Not sure where to begin?<br>no need to worry, give us a call!</h2>
-                    <a href="tel:+13606873543" class="btn btn-primary">CALL US NOW »</a>
+                    <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-primary">CALL US NOW »</a>
                 </div>
             </div>
         </section>
@@ -561,9 +516,9 @@
                 </ul>
             </div>
             <div class="footer-contact">
-                <h4><a href="tel:{{ replace .Site.Data.business.telephone " " "" }}">{{ .Site.Data.business.telephone }}</a></h4>
+                <h4><a href="tel:{{ .Site.Params.phone_href }}">{{ .Site.Data.business.telephone }}</a></h4>
                 <p><a href="mailto:{{ .Site.Data.business.email }}">{{ .Site.Data.business.email }}</a></p>
-                <p><a href="https://maps.app.goo.gl/2puYhDM2pxiSJUPR7" target="_blank" rel="noopener">{{ .Site.Data.business.address.streetAddress }}, {{ .Site.Data.business.address.addressLocality }}, {{ .Site.Data.business.address.addressRegion }} {{ .Site.Data.business.address.postalCode }}</a></p>
+                <p><a href="{{ .Site.Data.business.googleMapsUrl }}" target="_blank" rel="noopener">{{ .Site.Data.business.address.streetAddress }}, {{ .Site.Data.business.address.addressLocality }}, {{ .Site.Data.business.address.addressRegion }} {{ .Site.Data.business.address.postalCode }}</a></p>
                 <div class="footer-social">
                     <a href="https://share.google/D3mexUt7VZzi7gvWZ" target="_blank" rel="noopener" aria-label="Google Business Profile" title="Google Business Profile">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
@@ -603,24 +558,7 @@
             });
         });
 
-        // Mobile menu toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-
-        if (navToggle && navMenu) {
-            navToggle.addEventListener('click', function() {
-                navToggle.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-
-            // Close menu when clicking on a link
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navToggle.classList.remove('active');
-                    navMenu.classList.remove('active');
-                });
-            });
-        }
+{{ partial "site/mobile-nav-script.html" . | safeJS }}
 
         // Simple CAPTCHA
         function generateCaptcha() {
@@ -750,25 +688,7 @@
             }
         }
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', function() {
-                const item = this.parentElement;
-                const isOpen = item.classList.contains('active');
-
-                // Close all items
-                document.querySelectorAll('.faq-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                });
-
-                // Open clicked item if it was closed
-                if (!isOpen) {
-                    item.classList.add('active');
-                    this.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
+{{ partial "site/faq-script.html" . | safeJS }}
 
         // Map embed: fade out preview when iframe loads
         const mapPreview = document.querySelector('.service-area-map-preview');

@@ -8,38 +8,12 @@
     <meta name="description" content="{{ .Description }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ .Permalink }}">
-    {{ $style := resources.Get "css/custom.css" | resources.Minify }}
-    <link rel="stylesheet" href="{{ $style.Permalink }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    {{ partial "site/styles.html" (dict "service" true) }}
+    {{ partial "site/fonts.html" . }}
     {{ partial "schema/local-business.html" . }}
 </head>
 <body>
-    <header class="site-header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a class="nav-logo" href="{{ "/" | relURL }}">
-                    <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
-                </a>
-                <button class="nav-toggle" aria-label="Toggle navigation menu">
-                    <span class="hamburger"></span>
-                </button>
-                <ul class="nav-menu">
-                    <li><a href="{{ "/" | relURL }}#home">Home</a></li>
-                    <li><a href="{{ "/" | relURL }}#services">Services</a></li>
-                    <li><a href="{{ "/" | relURL }}#service-area">Service Area</a></li>
-                    <li><a href="{{ "/" | relURL }}#contact">Contact</a></li>
-                </ul>
-                <div class="nav-phone">
-                    <div class="phone-cta">
-                        <span class="phone-text">call for a free estimate!</span>
-                        <a href="tel:{{ .Site.Params.phone_href }}" class="phone-number">{{ .Site.Params.phone }}</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    {{ partial "site/header.html" (dict "page" . "prefix" ("/" | relURL) "showTop" false "fullNav" false) }}
     <main class="site-main service-page-main">
         <section class="service-page-hero">
             <div class="section-container">
@@ -61,14 +35,7 @@
         </section>
     </main>
     <script>
-      const navToggle = document.querySelector('.nav-toggle');
-      const navMenu = document.querySelector('.nav-menu');
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-          navToggle.classList.toggle('active');
-          navMenu.classList.toggle('active');
-        });
-      }
+{{ partial "site/mobile-nav-script.html" . | safeJS }}
     </script>
 </body>
 </html>

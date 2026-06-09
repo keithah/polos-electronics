@@ -1,0 +1,7 @@
+{{- $styles := slice (resources.Get "css/custom.css" | resources.Minify) -}}
+{{- if .service -}}
+  {{- $styles = $styles | append (resources.Get "css/services.css" | resources.Minify) -}}
+{{- end -}}
+{{- range $styles }}
+    <link rel="stylesheet" href="{{ .Permalink }}">
+{{- end }}
