@@ -2,6 +2,8 @@
 {{- $prefix := .prefix -}}
 {{- $contactHref := printf "%s#contact" $prefix -}}
 {{- $address := printf "%s, %s, %s %s" $page.Site.Data.business.address.streetAddress $page.Site.Data.business.address.addressLocality $page.Site.Data.business.address.addressRegion $page.Site.Data.business.address.postalCode -}}
+{{- $hours := $page.Site.Data.business.openingHours -}}
+{{- $hoursText := $hours.display | default (printf "Mon-Fri %s - %s<br>Saturday & Sunday closed" $hours.opens $hours.closes) -}}
     <header class="site-header">
         {{- if .showTop }}
         <div class="header-top">
@@ -13,7 +15,7 @@
                     </div>
                     <div class="header-hours">
                         <span class="icon">🕒</span>
-                        <span>Mon-Fri 09:00am - 04:00pm<br>Saturday & Sunday closed</span>
+                        <span>{{ $hoursText | safeHTML }}</span>
                     </div>
                 </div>
                 <div class="header-contact">
@@ -25,16 +27,7 @@
         <nav class="navbar">
             <div class="nav-container">
                 <a class="nav-logo" href="{{ "/" | relURL }}">
-                    {{ partial "site/picture.html" (dict
-                        "src" "/images/responsive/logo-205.png"
-                        "srcset" "/images/responsive/logo-205.png 205w, /images/responsive/logo-410.png 410w"
-                        "webpSrcset" "/images/responsive/logo-205.webp 205w, /images/responsive/logo-410.webp 410w"
-                        "sizes" "205px"
-                        "alt" "Polos Electronics Logo"
-                        "class" "logo"
-                        "width" "205"
-                        "height" "60"
-                    ) }}
+                    {{ partial "site/picture.html" (dict "image" "logo" "class" "logo") }}
                 </a>
                 <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
                     <span class="hamburger"></span>

@@ -1,17 +1,26 @@
-{{- $class := .class | default "" -}}
-{{- $loading := .loading | default "" -}}
-{{- $decoding := .decoding | default "async" -}}
-{{- $fetchpriority := .fetchpriority | default "" -}}
+{{- $image := .image | default "" -}}
+{{- $spec := .spec | default (index site.Data.images $image) | default dict -}}
+{{- $src := .src | default $spec.src -}}
+{{- $srcset := .srcset | default $spec.srcset -}}
+{{- $webpSrcset := .webpSrcset | default $spec.webpSrcset -}}
+{{- $sizes := .sizes | default $spec.sizes -}}
+{{- $alt := .alt | default $spec.alt -}}
+{{- $width := .width | default $spec.width -}}
+{{- $height := .height | default $spec.height -}}
+{{- $class := .class | default $spec.class | default "" -}}
+{{- $loading := .loading | default $spec.loading | default "" -}}
+{{- $decoding := .decoding | default $spec.decoding | default "async" -}}
+{{- $fetchpriority := .fetchpriority | default $spec.fetchpriority | default "" -}}
 <picture>
-  {{- with .webpSrcset }}
-  <source type="image/webp" srcset="{{ . }}" sizes="{{ $.sizes }}">
+  {{- with $webpSrcset }}
+  <source type="image/webp" srcset="{{ . }}" sizes="{{ $sizes }}">
   {{- end }}
-  <img src="{{ .src }}"
-       {{- with .srcset }} srcset="{{ . }}"{{ end }}
-       {{- with .sizes }} sizes="{{ . }}"{{ end }}
-       alt="{{ .alt }}"
+  <img src="{{ $src }}"
+       {{- with $srcset }} srcset="{{ . }}"{{ end }}
+       {{- with $sizes }} sizes="{{ . }}"{{ end }}
+       alt="{{ $alt }}"
        {{- with $class }} class="{{ . }}"{{ end }}
-       width="{{ .width }}" height="{{ .height }}"
+       width="{{ $width }}" height="{{ $height }}"
        {{- with $loading }} loading="{{ . }}"{{ end }}
        {{- with $decoding }} decoding="{{ . }}"{{ end }}
        {{- with $fetchpriority }} fetchpriority="{{ . }}"{{ end }}>

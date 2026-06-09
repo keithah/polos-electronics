@@ -35,6 +35,7 @@
     "Cable management and wiring cleanup"
   ],
   "openingHours": {
+    "display": "Mon-Fri 09:00am - 04:00pm<br>Saturday & Sunday closed",
     "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     "opens": "09:00",
     "closes": "16:00"

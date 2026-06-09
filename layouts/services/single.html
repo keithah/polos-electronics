@@ -86,41 +86,18 @@
                 </div>
                 <div class="service-page-photo">
                     {{- $heroImage := .Params.hero_image | default "images/services-image.jpg" -}}
-                    {{- $imageAlt := .Params.image_alt | default .Title -}}
+                    {{- $heroImageKey := "services" -}}
                     {{- if eq $heroImage "images/hero-image.jpg" -}}
-                        {{ partial "site/picture.html" (dict
-                            "src" "/images/hero-image.jpg"
-                            "srcset" "/images/responsive/hero-image-400.jpg 400w, /images/responsive/hero-image-600.jpg 600w, /images/responsive/hero-image-960.jpg 960w, /images/hero-image.jpg 1500w"
-                            "webpSrcset" "/images/responsive/hero-image-400.webp 400w, /images/responsive/hero-image-600.webp 600w, /images/responsive/hero-image-960.webp 960w, /images/responsive/hero-image-1500.webp 1500w"
-                            "sizes" "(max-width: 768px) 100vw, 40vw"
-                            "alt" $imageAlt
-                            "width" "1500"
-                            "height" "1000"
-                            "fetchpriority" "high"
-                        ) }}
+                        {{- $heroImageKey = "hero" -}}
                     {{- else if eq $heroImage "images/contact-image.jpg" -}}
-                        {{ partial "site/picture.html" (dict
-                            "src" "/images/contact-image.jpg"
-                            "srcset" "/images/responsive/contact-image-250.jpg 250w, /images/contact-image.jpg 500w"
-                            "webpSrcset" "/images/responsive/contact-image-250.webp 250w, /images/responsive/contact-image-500.webp 500w"
-                            "sizes" "(max-width: 768px) 100vw, 40vw"
-                            "alt" $imageAlt
-                            "width" "500"
-                            "height" "500"
-                            "fetchpriority" "high"
-                        ) }}
-                    {{- else -}}
-                        {{ partial "site/picture.html" (dict
-                            "src" "/images/services-image.jpg"
-                            "srcset" "/images/responsive/services-image-400.jpg 400w, /images/services-image.jpg 600w"
-                            "webpSrcset" "/images/responsive/services-image-400.webp 400w, /images/responsive/services-image-600.webp 600w"
-                            "sizes" "(max-width: 768px) 100vw, 40vw"
-                            "alt" $imageAlt
-                            "width" "600"
-                            "height" "900"
-                            "fetchpriority" "high"
-                        ) }}
+                        {{- $heroImageKey = "contact" -}}
                     {{- end }}
+                    {{ partial "site/picture.html" (dict
+                        "image" $heroImageKey
+                        "sizes" "(max-width: 768px) 100vw, 40vw"
+                        "alt" (.Params.image_alt | default .Title)
+                        "fetchpriority" "high"
+                    ) }}
                 </div>
             </div>
         </section>
