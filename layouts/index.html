@@ -247,6 +247,7 @@
                                     src="{{ $mapEmbedUrl }}"
                                     class="service-area-map-embed"
                                     title="{{ $mapAlt }}"
+                                    loading="lazy"
                                     allowfullscreen>
                                 </iframe>
                             </div>
@@ -326,6 +327,7 @@
                                              alt="{{ .author }}"
                                              class="review-avatar"
                                              width="48" height="48"
+                                             loading="lazy"
                                              onerror="this.src='/images/default-avatar.svg'; this.onerror=null;">
                                         {{ else }}
                                         <div class="review-avatar review-avatar-placeholder">
