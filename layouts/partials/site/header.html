@@ -27,10 +27,10 @@
                 <a class="nav-logo" href="{{ "/" | relURL }}">
                     <img src="{{ "images/logo.png" | relURL }}" alt="Polos Electronics Logo" class="logo" width="1500" height="439">
                 </a>
-                <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
                     <span class="hamburger"></span>
                 </button>
-                <ul class="nav-menu">
+                <ul id="primary-nav" class="nav-menu">
                     <li><a href="{{ printf "%s#home" $prefix }}">Home</a></li>
                     {{- if .fullNav }}
                     <li><a href="{{ printf "%s#about" $prefix }}">About</a></li>

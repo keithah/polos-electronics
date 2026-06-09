@@ -30,7 +30,7 @@ question = "What areas do you serve for Starlink installation?"
 answer = "We regularly serve Vancouver, Battle Ground, Clark County, Cowlitz County, Lewis County, Skamania County, and other Washington locations depending on the project."
 +++
 
-Polos Electronics handles Starlink installation as part of our low-voltage electrical work across Southwest Washington. A good install is more than getting the dish outside. The cable path needs to be clean, protected, and practical for the way the building is actually used.
+Polos Electronics handles Starlink installation as part of our low-voltage electrical work across Southwest Washington. A good installation is more than getting the dish outside. The cable path needs to be clean, protected, and practical for the way the building is actually used.
 
 We look at likely mounting locations, cable entry points, existing network equipment, and the best route from the Starlink hardware to the router or network location. That helps avoid messy exposed cable, awkward equipment placement, and avoidable service problems.
 
