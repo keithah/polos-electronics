@@ -16,15 +16,6 @@
   {{- $ratingValue = div $ratingSum $reviewCount -}}
 {{- end -}}
 
-{{- /* Build aggregateRating object */ -}}
-{{- $aggregateRating := dict
-  "@type" "AggregateRating"
-  "ratingValue" (printf "%.2f" $ratingValue)
-  "reviewCount" $reviewCount
-  "bestRating" "5"
-  "worstRating" "1"
--}}
-
 {{- /* Build address object */ -}}
 {{- $address := dict
   "@type" "PostalAddress"
@@ -76,8 +67,17 @@
   "sameAs" $b.sameAs
   "hasMap" $b.googleMapsUrl
   "knowsAbout" $b.knowsAbout
-  "aggregateRating" $aggregateRating
 -}}
+
+{{- if gt $reviewCount 0 -}}
+  {{- $schema = merge $schema (dict "aggregateRating" (dict
+    "@type" "AggregateRating"
+    "ratingValue" (div (math.Round (mul $ratingValue 100)) 100.0)
+    "reviewCount" $reviewCount
+    "bestRating" 5
+    "worstRating" 1
+  )) -}}
+{{- end -}}
 
 <script type="application/ld+json">
 {{- $schema | jsonify | safeJS -}}

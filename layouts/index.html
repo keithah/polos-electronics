@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="{{ "images/hero-image.jpg" | relURL }}" alt="Electrical work and installation" width="1500" height="1000" fetchpriority="high">
+                    <img src="{{ "images/hero-image.jpg" | relURL }}" alt="Electrical work and installation" width="1500" height="1000" fetchpriority="high" decoding="async">
                 </div>
             </div>
         </section>
@@ -100,6 +100,7 @@
                             <img src="{{ "images/andy-polos.jpg" | relURL }}"
                                  alt="Andy Polos"
                                  loading="lazy"
+                                 decoding="async"
                                  width="960" height="958">
                         </div>
                         <h3 class="member-name">Andy Polos</h3>
@@ -113,6 +114,7 @@
                             <img src="{{ "images/derick-steele.jpg" | relURL }}"
                                  alt="Derick Steele"
                                  loading="lazy"
+                                 decoding="async"
                                  width="907" height="680">
                         </div>
                         <h3 class="member-name">Derick Steele</h3>
@@ -126,6 +128,7 @@
                             <img src="{{ "images/john-polos.jpg" | relURL }}"
                                  alt="John Polos"
                                  loading="lazy"
+                                 decoding="async"
                                  width="500" height="500">
                         </div>
                         <h3 class="member-name">John Polos</h3>
@@ -183,6 +186,7 @@
                             <img src="{{ "images/services-image.jpg" | relURL }}"
                                  alt="Electrical work and installation"
                                  loading="lazy"
+                                 decoding="async"
                                  width="600" height="900">
                         </div>
                         <div class="since-badge">
@@ -328,6 +332,7 @@
                                              class="review-avatar"
                                              width="48" height="48"
                                              loading="lazy"
+                                             decoding="async"
                                              onerror="this.src='/images/default-avatar.svg'; this.onerror=null;">
                                         {{ else }}
                                         <div class="review-avatar review-avatar-placeholder">
@@ -343,6 +348,8 @@
                                             <img src="/images/platforms/{{ $review.platform }}-logo.svg"
                                                  alt="{{ $review.platform | title }}"
                                                  class="platform-badge"
+                                                 loading="lazy"
+                                                 decoding="async"
                                                  width="24" height="24">
                                         </a>
                                         {{ else }}
@@ -352,6 +359,8 @@
                                             <img src="/images/platforms/{{ $review.platform }}-logo.svg"
                                                  alt="{{ $review.platform | title }}"
                                                  class="platform-badge"
+                                                 loading="lazy"
+                                                 decoding="async"
                                                  width="24" height="24">
                                         </a>
                                         {{ end }}
@@ -447,6 +456,7 @@
                         <img src="{{ "images/contact-image.jpg" | relURL }}"
                              alt="Andy Polos at work"
                              loading="lazy"
+                             decoding="async"
                              width="500" height="500">
                     </div>
 
@@ -501,6 +511,7 @@
                 <img src="{{ "images/logo.png" | relURL }}"
                      alt="Polos Electronics Logo"
                      loading="lazy"
+                     decoding="async"
                      width="1500" height="439">
             </div>
             <div class="footer-services">
