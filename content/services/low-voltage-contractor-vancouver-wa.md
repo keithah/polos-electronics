@@ -6,7 +6,7 @@ kicker = "Commercial and residential low voltage work"
 lead = "Polos Electronics provides low voltage electrical installation, repair, troubleshooting, and wiring cleanup for homes and businesses across Southwest Washington."
 service_name = "Low Voltage Electrical Services"
 service_type = "Low voltage electrical contracting"
-hero_image = "images/services-image.jpg"
+image_key = "services"
 image_alt = "Low voltage electrical installation by Polos Electronics"
 highlights = [
   "Security and surveillance systems",

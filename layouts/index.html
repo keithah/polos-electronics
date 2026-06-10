@@ -1,63 +1,22 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ define "head" }}
+{{ partial "site/head.html" (dict
+    "page" .
+    "title" (.Site.Params.seo_title | default .Site.Title)
+    "description" .Site.Params.description
+    "ogImage" "images/hero-image.jpg"
+    "ogImageWidth" "1500"
+    "ogImageHeight" "1000"
+    "twitterImageAlt" (printf "%s Logo" .Site.Title)
+    "businessMeta" true
+) }}
+{{ partial "schema/local-business.html" . }}
+{{ partial "schema/services.html" . }}
+{{ partial "schema/faq.html" . }}
+{{ partial "schema/reviews.html" . }}
+{{ partial "schema/service-area-geo.html" . }}
+{{ end }}
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
-
-    <title>{{ .Site.Params.seo_title | default .Site.Title }}</title>
-    <meta name="description" content="{{ .Site.Params.description }}">
-    <meta name="keywords" content="electrical contractor, security systems, home theater, surveillance, Battle Ground WA, low voltage, networking, Starlink">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Polos Electronics">
-    <link rel="canonical" href="{{ .Permalink }}">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ .Site.Title }}">
-    <meta property="og:title" content="{{ .Site.Params.seo_title | default (printf "%s - Low Voltage Electrical Contractor" .Site.Title) }}">
-    <meta property="og:description" content="{{ .Site.Params.description }}">
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:image" content="{{ "images/hero-image.jpg" | absURL }}">
-    <meta property="og:image:width" content="1500">
-    <meta property="og:image:height" content="1000">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:phone_number" content="{{ .Site.Params.phone }}">
-    <meta property="business:contact_data:street_address" content="20810 NE 267th St">
-    <meta property="business:contact_data:locality" content="Battle Ground">
-    <meta property="business:contact_data:region" content="WA">
-    <meta property="business:contact_data:postal_code" content="98604">
-    <meta property="business:contact_data:country_name" content="USA">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@poloselectronics">
-    <meta name="twitter:title" content="{{ .Site.Params.seo_title | default (printf "%s - Low Voltage Electrical Contractor" .Site.Title) }}">
-    <meta name="twitter:description" content="{{ .Site.Params.description }}">
-    <meta name="twitter:image" content="{{ "images/hero-image.jpg" | absURL }}">
-    <meta name="twitter:image:alt" content="{{ .Site.Title }} Logo">
-
-    <!-- Load CSS -->
-    {{ partialCached "site/styles.html" (dict "service" false) false }}
-    
-    <!-- Fonts -->
-    {{ partial "site/fonts.html" . }}
-
-    <!-- Structured Data -->
-    {{ partial "schema/local-business.html" . }}
-    {{ partial "schema/services.html" . }}
-    {{ partial "schema/faq.html" . }}
-    {{ partial "schema/reviews.html" . }}
-    {{ partial "schema/service-area-geo.html" . }}
-
-    <!-- Google Analytics -->
-    {{ partial "site/analytics.html" . }}
-</head>
-<body>
+{{ define "body" }}
     <!-- Navigation Header -->
     {{ partial "site/header.html" (dict "page" . "prefix" "" "showTop" true "fullNav" true) }}
 
@@ -130,17 +89,15 @@
                         </div>
 
                         <ul class="services-list">
-                            <li><a href="{{ "services/starlink-installation-vancouver-wa/" | relURL }}">Starlink Installation</a></li>
-                            <li>Pre-Wiring & Retrofits</li>
-                            <li><a href="{{ "services/low-voltage-contractor-vancouver-wa/" | relURL }}">Residential & Commercial Security Systems</a></li>
-                            <li><a href="{{ "services/security-camera-installation-battle-ground-wa/" | relURL }}">Surveillance Systems</a></li>
-                            <li><a href="{{ "services/access-control-systems-clark-county-wa/" | relURL }}">Door Access Systems</a></li>
-                            <li><a href="{{ "services/home-theater-installation-vancouver-wa/" | relURL }}">Home Theater Systems</a></li>
-                            <li>Whole House Audio/Visual</li>
-                            <li><a href="{{ "services/network-cabling-vancouver-wa/" | relURL }}">Full Networking Services</a></li>
-                            <li>Cable Management</li>
-                            <li>Wiring Cleanup</li>
-                            <li>CAT5 & CAT6</li>
+                            {{ range where .Site.Data.services.services "showOnHomepage" true }}
+                            <li>
+                                {{ if .path }}
+                                <a href="{{ .path | relURL }}">{{ .label | default .name }}</a>
+                                {{ else }}
+                                {{ .label | default .name }}
+                                {{ end }}
+                            </li>
+                            {{ end }}
                         </ul>
 
                         <div class="services-intro">
@@ -148,13 +105,9 @@
                         </div>
 
                         <ul class="services-list">
-                            <li>Surveillance</li>
-                            <li>Security</li>
-                            <li>AV</li>
-                            <li>Wiring</li>
-                            <li>Networking</li>
-                            <li>Whole House Audio</li>
-                            <li>Panel Troubleshooting</li>
+                            {{ range .Site.Data.services.systemTypes }}
+                            <li>{{ . }}</li>
+                            {{ end }}
                         </ul>
 
                         <p class="services-cta">Call us for more information!</p>
@@ -636,5 +589,4 @@
             });
         }
     </script>
-</body>
-</html>
+{{ end }}

@@ -6,7 +6,7 @@ kicker = "Door access and entry control"
 lead = "Polos Electronics installs door access systems, keypad entry, card reader wiring, and related low voltage infrastructure for commercial and residential properties."
 service_name = "Access Control Systems"
 service_type = "Door access control installation"
-hero_image = "images/hero-image.jpg"
+image_key = "hero"
 image_alt = "Low voltage access control wiring installation"
 highlights = [
   "Door access system installation",

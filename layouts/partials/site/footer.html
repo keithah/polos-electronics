@@ -8,15 +8,9 @@
             <div class="footer-services">
                 <h4>Commercial & Residential Services</h4>
                 <ul>
-                    <li>Pre-Wiring & Retrofits</li>
-                    <li>Residential & Commercial Security Systems</li>
-                    <li>Surveillance Systems</li>
-                    <li>Door Access Systems</li>
-                    <li>Home Theater Systems</li>
-                    <li>Whole House Audio/Visual</li>
-                    <li>Full Networking Services</li>
-                    <li>Cable Management</li>
-                    <li>Wiring Cleanup</li>
+                    {{ range where $page.Site.Data.services.services "showInFooter" true }}
+                    <li>{{ .label | default .name }}</li>
+                    {{ end }}
                 </ul>
             </div>
             <div class="footer-contact">

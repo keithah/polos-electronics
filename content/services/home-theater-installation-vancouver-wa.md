@@ -6,7 +6,7 @@ kicker = "AV wiring and entertainment systems"
 lead = "Polos Electronics installs and repairs home theater, surround sound, whole house audio, and AV wiring systems with clean cable management."
 service_name = "Home Theater Installation"
 service_type = "Audio visual installation"
-hero_image = "images/contact-image.jpg"
+image_key = "contact"
 image_alt = "Polos Electronics technician working on low voltage systems"
 highlights = [
   "Home theater wiring and setup",

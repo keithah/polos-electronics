@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
-    <title>{{ .Title }}</title>
-    <meta name="description" content="{{ .Description }}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ .Permalink }}">
-    {{ partialCached "site/styles.html" (dict "service" true) true }}
-    {{ partial "site/fonts.html" . }}
-    {{ partial "schema/local-business.html" . }}
-</head>
-<body>
+{{ define "head" }}
+{{ partial "site/head.html" (dict "page" . "serviceStyles" true) }}
+{{ partial "schema/local-business.html" . }}
+{{ end }}
+
+{{ define "body" }}
     {{ partial "site/header.html" (dict "page" . "prefix" ("/" | relURL) "showTop" false "fullNav" false) }}
     <main class="site-main service-page-main">
         <section class="service-page-hero">
@@ -38,5 +29,4 @@
     <script>
 {{ partial "site/mobile-nav-script.html" . | safeJS }}
     </script>
-</body>
-</html>
+{{ end }}

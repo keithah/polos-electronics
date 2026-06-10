@@ -1,5 +1,8 @@
 {{- $image := .image | default "" -}}
 {{- $spec := .spec | default (index site.Data.images $image) | default dict -}}
+{{- if not $spec -}}
+  {{- errorf "Missing image spec for key %q" $image -}}
+{{- end -}}
 {{- $src := .src | default $spec.src -}}
 {{- $srcset := .srcset | default $spec.srcset -}}
 {{- $webpSrcset := .webpSrcset | default $spec.webpSrcset -}}

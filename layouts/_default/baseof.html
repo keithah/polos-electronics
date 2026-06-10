@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+{{ block "head" . }}{{ partial "site/head.html" (dict "page" .) }}{{ end }}
+</head>
+<body>
+{{ block "body" . }}{{ end }}
+</body>
+</html>

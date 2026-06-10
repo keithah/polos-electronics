@@ -6,7 +6,7 @@ kicker = "Ethernet and structured wiring"
 lead = "Polos Electronics installs CAT5e, CAT6, Ethernet drops, structured cabling, and network wiring for residential and commercial properties."
 service_name = "Network Cabling"
 service_type = "Structured cabling installation"
-hero_image = "images/services-image.jpg"
+image_key = "services"
 image_alt = "Structured cabling and low voltage wiring work"
 highlights = [
   "CAT5e and CAT6 cable runs",

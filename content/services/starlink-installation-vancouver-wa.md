@@ -6,7 +6,7 @@ kicker = "Starlink installer for Southwest Washington"
 lead = "Polos Electronics installs Starlink for homes, shops, offices, and rural properties that need clean mounting, weather-aware cable routing, and reliable network setup."
 service_name = "Starlink Installation"
 service_type = "Satellite internet installation"
-hero_image = "images/hero-image.jpg"
+image_key = "hero"
 image_alt = "Low voltage installation work by Polos Electronics"
 highlights = [
   "Dish placement and mounting guidance",

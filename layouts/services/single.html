@@ -1,67 +1,22 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ define "head" }}
+{{- $imageKey := .Params.image_key | default "services" -}}
+{{- $imageSpec := index .Site.Data.images $imageKey -}}
+{{- if not $imageSpec -}}
+  {{- errorf "Unknown service image_key %q in %s" $imageKey .File.Path -}}
+{{- end -}}
+{{ partial "site/head.html" (dict
+  "page" .
+  "title" .Title
+  "description" .Description
+  "ogImage" $imageSpec.src
+  "serviceStyles" true
+) }}
+{{ partial "schema/local-business.html" . }}
+{{ partial "schema/service-page.html" . }}
+{{ partial "schema/faq-page.html" . }}
+{{ end }}
 
-    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
-
-    <title>{{ .Title }}</title>
-    <meta name="description" content="{{ .Description }}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ .Permalink }}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ .Site.Title }}">
-    <meta property="og:title" content="{{ .Title }}">
-    <meta property="og:description" content="{{ .Description }}">
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:image" content="{{ (.Params.hero_image | default "images/services-image.jpg") | absURL }}">
-    <meta property="og:locale" content="en_US">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ .Title }}">
-    <meta name="twitter:description" content="{{ .Description }}">
-    <meta name="twitter:image" content="{{ (.Params.hero_image | default "images/services-image.jpg") | absURL }}">
-
-    {{ partialCached "site/styles.html" (dict "service" true) true }}
-    {{ partial "site/fonts.html" . }}
-
-    {{ partial "schema/local-business.html" . }}
-
-    {{ $b := .Site.Data.business }}
-    {{ $serviceAreas := partial "schema/area-served.html" (dict "areas" $b.areaServed "baseURL" .Site.BaseURL "mode" "full") }}
-    {{ $service := dict
-      "@context" "https://schema.org"
-      "@type" "Service"
-      "@id" (printf "%s#service" .Permalink)
-      "name" (.Params.service_name | default .Title)
-      "description" .Description
-      "serviceType" (.Params.service_type | default "Low voltage electrical service")
-      "provider" (dict "@id" (printf "%s#organization" .Site.BaseURL))
-      "areaServed" $serviceAreas
-      "url" .Permalink
-    }}
-    <script type="application/ld+json">
-    {{- $service | jsonify | safeJS -}}
-    </script>
-
-    {{ with .Params.faqs }}
-    {{ $questions := slice }}
-    {{ range . }}
-      {{ $questions = $questions | append (dict "@type" "Question" "name" .question "acceptedAnswer" (dict "@type" "Answer" "text" .answer)) }}
-    {{ end }}
-    {{ $faqSchema := dict "@context" "https://schema.org" "@type" "FAQPage" "@id" (printf "%s#faq" $.Permalink) "mainEntity" $questions }}
-    <script type="application/ld+json">
-    {{- $faqSchema | jsonify | safeJS -}}
-    </script>
-    {{ end }}
-
-    {{ partial "site/analytics.html" . }}
-</head>
-<body>
+{{ define "body" }}
     {{ partial "site/header.html" (dict "page" . "prefix" ("/" | relURL) "showTop" true "fullNav" true) }}
 
     <main class="site-main service-page-main">
@@ -77,15 +32,8 @@
                     </div>
                 </div>
                 <div class="service-page-photo">
-                    {{- $heroImage := .Params.hero_image | default "images/services-image.jpg" -}}
-                    {{- $heroImageKey := "services" -}}
-                    {{- if eq $heroImage "images/hero-image.jpg" -}}
-                        {{- $heroImageKey = "hero" -}}
-                    {{- else if eq $heroImage "images/contact-image.jpg" -}}
-                        {{- $heroImageKey = "contact" -}}
-                    {{- end }}
                     {{ partial "site/picture.html" (dict
-                        "image" $heroImageKey
+                        "image" (.Params.image_key | default "services")
                         "sizes" "(max-width: 768px) 100vw, 40vw"
                         "alt" (.Params.image_alt | default .Title)
                         "fetchpriority" "high"
@@ -107,7 +55,6 @@
                         {{ end }}
                     </ul>
                     <h2>Common Service Areas</h2>
-                    {{/* Display-only list for page readers; schema uses Site.Data.business.areaServed. */}}
                     <p>{{ delimit .Params.service_areas ", " }}</p>
                     <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-primary">Call {{ .Site.Params.phone }}</a>
                 </aside>
@@ -151,5 +98,4 @@
 {{ partial "site/mobile-nav-script.html" . | safeJS }}
 {{ partial "site/faq-script.html" . | safeJS }}
     </script>
-</body>
-</html>
+{{ end }}

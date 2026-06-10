@@ -6,7 +6,7 @@ kicker = "Surveillance systems for homes and businesses"
 lead = "Polos Electronics installs surveillance cameras, cabling, recorders, and remote viewing systems with clean low voltage workmanship."
 service_name = "Security Camera Installation"
 service_type = "Surveillance system installation"
-hero_image = "images/services-image.jpg"
+image_key = "services"
 image_alt = "Low voltage wiring and surveillance installation work"
 highlights = [
   "Residential and commercial camera systems",
