@@ -154,7 +154,7 @@ body {
   height: 2px;
   background: #323232;
   position: relative;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .hamburger::before,
@@ -165,15 +165,16 @@ body {
   height: 2px;
   background: #323232;
   left: 0;
-  transition: all 0.3s ease;
+  top: 0;
+  transition: transform 0.3s ease;
 }
 
 .hamburger::before {
-  top: -8px;
+  transform: translateY(-8px);
 }
 
 .hamburger::after {
-  bottom: -8px;
+  transform: translateY(8px);
 }
 
 .nav-toggle.active .hamburger {
@@ -182,12 +183,10 @@ body {
 
 .nav-toggle.active .hamburger::before {
   transform: rotate(45deg);
-  top: 0;
 }
 
 .nav-toggle.active .hamburger::after {
   transform: rotate(-45deg);
-  bottom: 0;
 }
 
 .nav-phone {
@@ -520,6 +519,12 @@ body {
 /* Call to Action Section */
 .cta-section {
   background: url('/images/hero-image.jpg') center center;
+  background-image: image-set(
+    url('/images/responsive/hero-image-960.webp') type('image/webp') 1x,
+    url('/images/responsive/hero-image-1500.webp') type('image/webp') 2x,
+    url('/images/responsive/hero-image-960.jpg') type('image/jpeg') 1x,
+    url('/images/hero-image.jpg') type('image/jpeg') 2x
+  );
   background-size: cover;
   position: relative;
   padding: 100px 0;
@@ -1368,15 +1373,25 @@ body {
 }
 
 .faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease, padding 0.3s ease;
+  display: none;
   background: #ffffff;
 }
 
 .faq-item.active .faq-answer {
-  max-height: 300px;
+  display: block;
   padding: 20px 25px;
+  animation: faq-answer-in 0.2s ease;
+}
+
+@keyframes faq-answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .faq-answer p {
@@ -1517,18 +1532,24 @@ body {
     background: #ffffff;
     flex-direction: column;
     gap: 0;
-    padding: 0;
+    padding: 20px 0;
     margin: 0;
-    max-height: 0;
+    opacity: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    pointer-events: none;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    visibility: hidden;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
   }
 
   .nav-menu.active {
-    max-height: 300px;
-    padding: 20px 0;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scaleY(1);
+    visibility: visible;
   }
 
   .nav-menu li {

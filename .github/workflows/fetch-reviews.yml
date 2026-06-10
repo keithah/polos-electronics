@@ -22,11 +22,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
 
-      - name: Install Playwright
-        run: |
-          npm install playwright
-          npx playwright install chromium --with-deps
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install review scraper dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Install Playwright browser
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium --with-deps
 
       - name: Ensure reviews contract baseline
         run: |
@@ -72,7 +84,7 @@ jobs:
             issues=$((issues + 1))
           else
             G_BODY="/tmp/google-validate.json"
-            G_HTTP=$(curl -sS -o "$G_BODY" -w "%{http_code}" \
+            G_HTTP=$(curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$G_BODY" -w "%{http_code}" \
               "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name&key=${GOOGLE_API_KEY}")
             G_STATUS=$(jq -r '.status // "UNKNOWN"' "$G_BODY")
             G_ERROR=$(jq -r '.error_message // empty' "$G_BODY")
@@ -90,7 +102,7 @@ jobs:
             echo "::warning::YELP_API_KEY missing. Yelp API fetch will be skipped."
           else
             Y_BODY="/tmp/yelp-validate.json"
-            Y_HTTP=$(curl -sS -o "$Y_BODY" -w "%{http_code}" \
+            Y_HTTP=$(curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$Y_BODY" -w "%{http_code}" \
               "https://api.yelp.com/v3/businesses/${BIZ_ID}" \
               -H "Authorization: Bearer ${YELP_API_KEY}")
             Y_ERROR=$(jq -r '.error.description // .error.code // empty' "$Y_BODY" 2>/dev/null || true)
@@ -127,7 +139,7 @@ jobs:
           fi
 
           GOOGLE_BODY="/tmp/google-response.json"
-          GOOGLE_HTTP_CODE=$(curl -sS -o "$GOOGLE_BODY" -w "%{http_code}" \
+          GOOGLE_HTTP_CODE=$(curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$GOOGLE_BODY" -w "%{http_code}" \
             "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}")
 
           if [ "$GOOGLE_HTTP_CODE" != "200" ]; then
@@ -189,9 +201,29 @@ jobs:
           BUSINESS_ID="${YELP_BUSINESS_ID:-polos-electronics-battle-ground}"
 
           YELP_REVIEWS_BODY="/tmp/yelp-reviews-response.json"
-          YELP_REVIEWS_HTTP_CODE=$(curl -sS -o "$YELP_REVIEWS_BODY" -w "%{http_code}" \
-            "https://api.yelp.com/v3/businesses/${BUSINESS_ID}/reviews" \
-            -H "Authorization: Bearer ${YELP_API_KEY}")
+          YELP_REVIEWS_STATUS="/tmp/yelp-reviews-status.txt"
+          YELP_BUSINESS_BODY="/tmp/yelp-business-response.json"
+          YELP_BUSINESS_STATUS="/tmp/yelp-business-status.txt"
+
+          (
+            curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$YELP_REVIEWS_BODY" -w "%{http_code}" \
+              "https://api.yelp.com/v3/businesses/${BUSINESS_ID}/reviews" \
+              -H "Authorization: Bearer ${YELP_API_KEY}" > "$YELP_REVIEWS_STATUS" || echo "000" > "$YELP_REVIEWS_STATUS"
+          ) &
+          yelp_reviews_pid=$!
+
+          (
+            curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$YELP_BUSINESS_BODY" -w "%{http_code}" \
+              "https://api.yelp.com/v3/businesses/${BUSINESS_ID}" \
+              -H "Authorization: Bearer ${YELP_API_KEY}" > "$YELP_BUSINESS_STATUS" || echo "000" > "$YELP_BUSINESS_STATUS"
+          ) &
+          yelp_business_pid=$!
+
+          wait "$yelp_reviews_pid"
+          wait "$yelp_business_pid"
+
+          YELP_REVIEWS_HTTP_CODE=$(cat "$YELP_REVIEWS_STATUS")
+          YELP_BUSINESS_HTTP_CODE=$(cat "$YELP_BUSINESS_STATUS")
 
           if [ "$YELP_REVIEWS_HTTP_CODE" = "401" ] || [ "$YELP_REVIEWS_HTTP_CODE" = "403" ]; then
             echo "Yelp API auth failed with HTTP ${YELP_REVIEWS_HTTP_CODE}."
@@ -211,11 +243,6 @@ jobs:
           fi
 
           RESPONSE=$(cat "$YELP_REVIEWS_BODY")
-
-          YELP_BUSINESS_BODY="/tmp/yelp-business-response.json"
-          YELP_BUSINESS_HTTP_CODE=$(curl -sS -o "$YELP_BUSINESS_BODY" -w "%{http_code}" \
-            "https://api.yelp.com/v3/businesses/${BUSINESS_ID}" \
-            -H "Authorization: Bearer ${YELP_API_KEY}")
 
           if [ "$YELP_BUSINESS_HTTP_CODE" != "200" ]; then
             echo "Yelp Business API request failed with HTTP ${YELP_BUSINESS_HTTP_CODE}."
@@ -386,6 +413,8 @@ jobs:
               }
             } catch (error) {
               console.log('Yelp scrape failed:', error.message);
+            } finally {
+              await browser.close();
             }
 
             const seen = new Set();
@@ -396,7 +425,6 @@ jobs:
               return true;
             });
 
-            await browser.close();
             console.log(JSON.stringify(deduped));
           })();
           EOF
@@ -457,9 +485,10 @@ jobs:
               }
             } catch (error) {
               console.error('HomeAdvisor scrape error:', error.message);
+            } finally {
+              await browser.close();
             }
 
-            await browser.close();
             console.log(JSON.stringify(reviews));
           })();
           EOF
@@ -513,9 +542,10 @@ jobs:
               }
             } catch (error) {
               console.error('Nextdoor scrape error:', error.message);
+            } finally {
+              await browser.close();
             }
 
-            await browser.close();
             console.log(JSON.stringify(reviews));
           })();
           EOF

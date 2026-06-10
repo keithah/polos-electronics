@@ -55,16 +55,7 @@
     {{ partial "schema/service-area-geo.html" . }}
 
     <!-- Google Analytics -->
-    {{ if .Site.Params.google_analytics }}
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.google_analytics }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ .Site.Params.google_analytics }}');
-    </script>
-    {{ end }}
+    {{ partial "site/analytics.html" . }}
 </head>
 <body>
     <!-- Navigation Header -->
@@ -286,19 +277,13 @@
             <div class="section-container">
                 <h2 class="section-title">What Our Customers Say</h2>
                 <div class="reviews-reliability-meta">
-                    {{ partial "reviews-reliability-meta.html" . }}
+                {{ partial "reviews-reliability-meta.html" . }}
                 </div>
 
                 {{ $reviewsData := .Site.Data.reviews | default dict }}
-                {{ $displayReviews := slice }}
-                {{ if gt (len ($reviewsData.reviews | default slice)) 0 }}
-                    {{ range $reviewsData.reviews }}
-                        {{ $displayReviews = $displayReviews | append . }}
-                    {{ end }}
-                {{ else }}
-                    {{ range $reviewsData.fallbackReviews }}
-                        {{ $displayReviews = $displayReviews | append . }}
-                    {{ end }}
+                {{ $displayReviews := $reviewsData.reviews | default slice }}
+                {{ if eq (len $displayReviews) 0 }}
+                    {{ $displayReviews = $reviewsData.fallbackReviews | default slice }}
                 {{ end }}
 
                 <div class="reviews-carousel">

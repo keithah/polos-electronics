@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/keithah/polos-electronics#readme",
   "devDependencies": {
+    "playwright": "^1.60.0",
     "puppeteer": "^24.37.3"
   }
 }
