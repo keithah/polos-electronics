@@ -5,6 +5,7 @@
 {{- $baseURL := .Site.BaseURL -}}
 {{- range .Site.Data.reviews.reviews -}}
 {{- if .rating -}}
+{{- $ratingValue := float .rating -}}
 {{- $review := dict
   "@context" "https://schema.org"
   "@type" "Review"
@@ -12,9 +13,9 @@
   "author" (dict "@type" "Person" "name" .author)
   "reviewRating" (dict
     "@type" "Rating"
-    "ratingValue" (printf "%.1f" .rating)
-    "bestRating" "5"
-    "worstRating" "1"
+    "ratingValue" $ratingValue
+    "bestRating" (int 5)
+    "worstRating" (int 1)
   )
   "reviewBody" .text
 -}}

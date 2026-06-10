@@ -1,0 +1,17 @@
+{{- $page := . -}}
+{{- $b := $page.Site.Data.business -}}
+{{- $serviceAreas := partial "schema/area-served.html" (dict "areas" $b.areaServed "baseURL" $page.Site.BaseURL "mode" "full") -}}
+{{- $service := dict
+  "@context" "https://schema.org"
+  "@type" "Service"
+  "@id" (printf "%s#service" $page.Permalink)
+  "name" ($page.Params.service_name | default $page.Title)
+  "description" $page.Description
+  "serviceType" ($page.Params.service_type | default "Low voltage electrical service")
+  "provider" (dict "@id" (printf "%s#organization" $page.Site.BaseURL))
+  "areaServed" $serviceAreas
+  "url" $page.Permalink
+-}}
+    <script type="application/ld+json">
+    {{- $service | jsonify | safeJS -}}
+    </script>

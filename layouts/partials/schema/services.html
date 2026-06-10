@@ -1,12 +1,7 @@
 {{- $services := .Site.Data.services -}}
 {{- $baseURL := .Site.BaseURL -}}
 
-{{- /* Build areaServed references to match local-business.html @ids */ -}}
-{{- $areaRefs := slice
-  (dict "@id" (printf "%s#area-clark-county" $baseURL))
-  (dict "@id" (printf "%s#area-cowlitz-county" $baseURL))
-  (dict "@id" (printf "%s#area-skamania-county" $baseURL))
--}}
+{{- $areaRefs := partial "schema/area-served.html" (dict "areas" .Site.Data.business.areaServed "baseURL" $baseURL "mode" "ref") -}}
 
 {{- range $services.services -}}
 {{- $service := dict

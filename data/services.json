@@ -5,77 +5,115 @@
       "name": "Starlink Installation",
       "description": "Professional Starlink satellite internet installation for residential and commercial properties. Expert mounting, cabling, and network configuration.",
       "serviceType": "Installation",
-      "category": "Internet & Networking"
+      "category": "Internet & Networking",
+      "path": "services/starlink-installation-vancouver-wa/",
+      "showOnHomepage": true,
+      "showInFooter": false
     },
     {
       "id": "pre-wiring-retrofits",
       "name": "Pre-Wiring & Retrofits",
       "description": "New construction pre-wiring and retrofit installations for low voltage systems. Structured cabling for future-ready homes and businesses.",
       "serviceType": "Installation",
-      "category": "Infrastructure"
+      "category": "Infrastructure",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "security-systems",
       "name": "Security Systems",
       "description": "Residential and commercial security system installation. Alarm systems, motion sensors, and integrated security solutions.",
       "serviceType": "Installation",
-      "category": "Security"
+      "category": "Security",
+      "label": "Residential & Commercial Security Systems",
+      "path": "services/low-voltage-contractor-vancouver-wa/",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "surveillance-systems",
       "name": "Surveillance Systems",
       "description": "CCTV and video surveillance installation for homes and businesses. HD cameras, DVR/NVR setup, and remote viewing configuration.",
       "serviceType": "Installation",
-      "category": "Security"
+      "category": "Security",
+      "path": "services/security-camera-installation-battle-ground-wa/",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "door-access",
       "name": "Door Access Systems",
       "description": "Electronic access control systems for commercial and residential properties. Keypad, card reader, and biometric entry solutions.",
       "serviceType": "Installation",
-      "category": "Security"
+      "category": "Security",
+      "path": "services/access-control-systems-clark-county-wa/",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "home-theater",
       "name": "Home Theater Systems",
       "description": "Custom home theater design and installation. Projectors, screens, surround sound, and acoustic optimization.",
       "serviceType": "Installation",
-      "category": "Audio/Visual"
+      "category": "Audio/Visual",
+      "path": "services/home-theater-installation-vancouver-wa/",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "whole-house-audio",
       "name": "Whole House Audio/Visual",
       "description": "Multi-room audio and video distribution systems. Centralized control and seamless entertainment throughout your home.",
       "serviceType": "Installation",
-      "category": "Audio/Visual"
+      "category": "Audio/Visual",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "networking",
       "name": "Full Networking Services",
       "description": "Structured cabling and network infrastructure installation. Ethernet drops, patch panels, and network rack setup.",
       "serviceType": "Installation",
-      "category": "Internet & Networking"
+      "category": "Internet & Networking",
+      "path": "services/network-cabling-vancouver-wa/",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "cable-management",
       "name": "Cable Management",
       "description": "Professional cable organization and cleanup for existing installations. Labeling, routing, and cable concealment.",
       "serviceType": "Repair",
-      "category": "Infrastructure"
+      "category": "Infrastructure",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "wiring-cleanup",
       "name": "Wiring Cleanup",
       "description": "Existing wiring troubleshooting and organization. Identify and resolve wiring issues, improve system reliability.",
       "serviceType": "Repair",
-      "category": "Infrastructure"
+      "category": "Infrastructure",
+      "showOnHomepage": true,
+      "showInFooter": true
     },
     {
       "id": "cat-cabling",
       "name": "CAT5 & CAT6",
       "description": "Ethernet cable installation and termination. CAT5e and CAT6 runs for high-speed network connectivity.",
       "serviceType": "Installation",
-      "category": "Internet & Networking"
+      "category": "Internet & Networking",
+      "showOnHomepage": true,
+      "showInFooter": false
     }
+  ],
+  "systemTypes": [
+    "Surveillance",
+    "Security",
+    "AV",
+    "Wiring",
+    "Networking",
+    "Whole House Audio",
+    "Panel Troubleshooting"
   ]
 }

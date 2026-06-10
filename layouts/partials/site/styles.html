@@ -1,0 +1,7 @@
+{{- $styles := slice (resources.Get "css/custom.css" | resources.Minify | resources.Fingerprint "sha256") -}}
+{{- if .service -}}
+  {{- $styles = $styles | append (resources.Get "css/services.css" | resources.Minify | resources.Fingerprint "sha256") -}}
+{{- end -}}
+{{- range $styles }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{- end }}

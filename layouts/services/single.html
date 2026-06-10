@@ -1,0 +1,101 @@
+{{ define "head" }}
+{{- $imageKey := .Params.image_key | default "services" -}}
+{{- $imageSpec := index .Site.Data.images $imageKey -}}
+{{- if not $imageSpec -}}
+  {{- errorf "Unknown service image_key %q in %s" $imageKey .File.Path -}}
+{{- end -}}
+{{ partial "site/head.html" (dict
+  "page" .
+  "title" .Title
+  "description" .Description
+  "ogImage" $imageSpec.src
+  "serviceStyles" true
+) }}
+{{ partial "schema/local-business.html" . }}
+{{ partial "schema/service-page.html" . }}
+{{ partial "schema/faq-page.html" . }}
+{{ end }}
+
+{{ define "body" }}
+    {{ partial "site/header.html" (dict "page" . "prefix" ("/" | relURL) "showTop" true "fullNav" true) }}
+
+    <main class="site-main service-page-main">
+        <section class="service-page-hero">
+            <div class="section-container service-page-hero-grid">
+                <div>
+                    <p class="service-page-kicker">{{ .Params.kicker | default "Polos Electronics" }}</p>
+                    <h1>{{ .Params.h1 | default .Title }}</h1>
+                    <p class="service-page-lead">{{ .Params.lead }}</p>
+                    <div class="hero-buttons">
+                        <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-primary">CALL FOR A FREE ESTIMATE »</a>
+                        <a href="{{ "/" | relURL }}#contact" class="btn btn-secondary">CONTACT US »</a>
+                    </div>
+                </div>
+                <div class="service-page-photo">
+                    {{ partial "site/picture.html" (dict
+                        "image" (.Params.image_key | default "services")
+                        "sizes" "(max-width: 768px) 100vw, 40vw"
+                        "alt" (.Params.image_alt | default .Title)
+                        "fetchpriority" "high"
+                    ) }}
+                </div>
+            </div>
+        </section>
+
+        <section class="service-page-content-section">
+            <div class="section-container service-page-layout">
+                <article class="service-page-content">
+                    {{ .Content }}
+                </article>
+                <aside class="service-page-aside" aria-label="Service summary">
+                    <h2>Service Highlights</h2>
+                    <ul class="services-list">
+                        {{ range .Params.highlights }}
+                        <li>{{ . }}</li>
+                        {{ end }}
+                    </ul>
+                    <h2>Common Service Areas</h2>
+                    <p>{{ delimit .Params.service_areas ", " }}</p>
+                    <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-primary">Call {{ .Site.Params.phone }}</a>
+                </aside>
+            </div>
+        </section>
+
+        {{ with .Params.faqs }}
+        <section class="faq-section service-page-faq">
+            <div class="section-container">
+                <h2 class="section-title">Questions About This Service</h2>
+                <div class="faq-list">
+                    {{ range . }}
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>{{ .question }}</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>{{ .answer }}</p>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </section>
+        {{ end }}
+
+        <section class="cta-section">
+            <div class="cta-overlay">
+                <div class="cta-container">
+                    <h2 class="cta-title">Need low voltage help in Southwest Washington?</h2>
+                    <a href="tel:{{ .Site.Params.phone_href }}" class="btn btn-primary">CALL US NOW »</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {{ partial "site/footer.html" . }}
+
+    <script>
+{{ partial "site/mobile-nav-script.html" . | safeJS }}
+{{ partial "site/faq-script.html" . | safeJS }}
+    </script>
+{{ end }}

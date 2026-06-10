@@ -16,15 +16,6 @@
   {{- $ratingValue = div $ratingSum $reviewCount -}}
 {{- end -}}
 
-{{- /* Build aggregateRating object */ -}}
-{{- $aggregateRating := dict
-  "@type" "AggregateRating"
-  "ratingValue" (printf "%.2f" $ratingValue)
-  "reviewCount" $reviewCount
-  "bestRating" "5"
-  "worstRating" "1"
--}}
-
 {{- /* Build address object */ -}}
 {{- $address := dict
   "@type" "PostalAddress"
@@ -50,18 +41,7 @@
   "closes" $b.openingHours.closes
 -}}
 
-{{- /* Build areaServed array with @id for cross-referencing */ -}}
-{{- $areas := slice -}}
-{{- range $b.areaServed -}}
-  {{- $kebabName := .name | lower | replaceRE " " "-" -}}
-  {{- $area := dict
-    "@type" "AdministrativeArea"
-    "@id" (printf "%s#area-%s" $baseURL $kebabName)
-    "name" (printf "%s, %s" .name .state)
-    "sameAs" .sameAs
-  -}}
-  {{- $areas = $areas | append $area -}}
-{{- end -}}
+{{- $areas := partial "schema/area-served.html" (dict "areas" $b.areaServed "baseURL" $baseURL "mode" "full") -}}
 
 {{- /* Build main schema */ -}}
 {{- $schema := dict
@@ -69,7 +49,9 @@
   "@type" $b.type
   "@id" (printf "%s#organization" $baseURL)
   "name" $b.name
+  "legalName" $b.legalName
   "description" $b.description
+  "slogan" $b.slogan
   "url" $b.url
   "telephone" $b.telephone
   "email" $b.email
@@ -78,12 +60,24 @@
   "openingHoursSpecification" (slice $hours)
   "priceRange" $b.priceRange
   "foundingDate" $b.foundingDate
+  "founder" (dict "@type" "Person" "name" $b.founder)
   "image" (printf "%simages/logo.png" $baseURL)
   "logo" (printf "%simages/logo.png" $baseURL)
   "areaServed" $areas
   "sameAs" $b.sameAs
-  "aggregateRating" $aggregateRating
+  "hasMap" $b.googleMapsUrl
+  "knowsAbout" $b.knowsAbout
 -}}
+
+{{- if gt $reviewCount 0 -}}
+  {{- $schema = merge $schema (dict "aggregateRating" (dict
+    "@type" "AggregateRating"
+    "ratingValue" (div (math.Round (mul $ratingValue 100)) 100.0)
+    "reviewCount" $reviewCount
+    "bestRating" 5
+    "worstRating" 1
+  )) -}}
+{{- end -}}
 
 <script type="application/ld+json">
 {{- $schema | jsonify | safeJS -}}

@@ -2,10 +2,12 @@
   "type": "Electrician",
   "name": "Polos Electronics",
   "legalName": "Polos Electronics Inc.",
-  "description": "Locally owned and operated Low Voltage Electrical Contractor since 1979",
+  "description": "Low voltage electrical contractor serving Battle Ground, Vancouver, Clark County, and Southwest Washington since 1979. Security, surveillance, Starlink, networking, access control, and AV installation.",
+  "slogan": "Locally owned and operated under one name and one family since 1979.",
   "telephone": "(360) 687-3543",
   "email": "service@poloselectronics.com",
   "url": "https://poloselectronics.com",
+  "googleMapsUrl": "https://www.google.com/maps/place/Polos+Electronics/@45.7906,-122.5344,17z",
   "address": {
     "streetAddress": "20810 NE 267th St",
     "addressLocality": "Battle Ground",
@@ -14,12 +16,26 @@
     "addressCountry": "US"
   },
   "geo": {
-    "latitude": 45.7844,
-    "longitude": -122.5375
+    "latitude": 45.7906,
+    "longitude": -122.5344
   },
   "foundingDate": "1979",
+  "founder": "John Polos",
   "priceRange": "$$",
+  "knowsAbout": [
+    "Low voltage wiring",
+    "Security system installation",
+    "Surveillance camera installation",
+    "Starlink installation",
+    "Structured network cabling",
+    "CAT5 and CAT6 cabling",
+    "Home theater installation",
+    "Whole house audio",
+    "Door access control systems",
+    "Cable management and wiring cleanup"
+  ],
   "openingHours": {
+    "display": "Mon-Fri 09:00am - 04:00pm<br>Saturday & Sunday closed",
     "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     "opens": "09:00",
     "closes": "16:00"
@@ -36,6 +52,11 @@
       "sameAs": "https://en.wikipedia.org/wiki/Cowlitz_County,_Washington"
     },
     {
+      "name": "Lewis County",
+      "state": "Washington",
+      "sameAs": "https://en.wikipedia.org/wiki/Lewis_County,_Washington"
+    },
+    {
       "name": "Skamania County",
       "state": "Washington",
       "sameAs": "https://en.wikipedia.org/wiki/Skamania_County,_Washington"
@@ -43,7 +64,7 @@
   ],
   "sameAs": [
     "https://www.linkedin.com/company/polos-electronics/",
-    "https://share.google/D3mexUt7VZzi7gvWZ",
+    "https://www.google.com/maps/place/Polos+Electronics/@45.7906,-122.5344,17z",
     "https://www.yelp.com/biz/polos-electronics-battle-ground",
     "https://nextdoor.com/page/polos-electronics-battle-ground-wa",
     "https://www.homeadvisor.com/rated.PolosElectronicsInc.7529229.html"

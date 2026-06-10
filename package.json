@@ -4,6 +4,7 @@
   "description": "A Hugo static site recreating the WordPress website for Polos Electronics - a locally owned and operated Low Voltage Electrical Contractor serving Battle Ground, WA since 1979.",
   "main": "index.js",
   "scripts": {
+    "generate:service-map": "node scripts/svg-to-png.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,6 @@
   },
   "homepage": "https://github.com/keithah/polos-electronics#readme",
   "devDependencies": {
-    "puppeteer": "^24.37.3"
+    "playwright": "^1.60.0"
   }
 }

@@ -1,0 +1,65 @@
+{
+  "logo": {
+    "src": "/images/responsive/logo-205.png",
+    "srcset": "/images/responsive/logo-205.png 205w, /images/responsive/logo-410.png 410w",
+    "webpSrcset": "/images/responsive/logo-205.webp 205w, /images/responsive/logo-410.webp 410w",
+    "sizes": "205px",
+    "alt": "Polos Electronics Logo",
+    "width": "205",
+    "height": "60"
+  },
+  "hero": {
+    "src": "/images/hero-image.jpg",
+    "srcset": "/images/responsive/hero-image-400.jpg 400w, /images/responsive/hero-image-600.jpg 600w, /images/responsive/hero-image-960.jpg 960w, /images/hero-image.jpg 1500w",
+    "webpSrcset": "/images/responsive/hero-image-400.webp 400w, /images/responsive/hero-image-600.webp 600w, /images/responsive/hero-image-960.webp 960w, /images/responsive/hero-image-1500.webp 1500w",
+    "sizes": "(max-width: 768px) 100vw, 50vw",
+    "alt": "Electrical work and installation",
+    "width": "1500",
+    "height": "1000"
+  },
+  "andy": {
+    "src": "/images/andy-polos.jpg",
+    "srcset": "/images/responsive/andy-polos-480.jpg 480w, /images/andy-polos.jpg 960w",
+    "webpSrcset": "/images/responsive/andy-polos-480.webp 480w, /images/responsive/andy-polos-960.webp 960w",
+    "sizes": "(max-width: 768px) 100vw, 33vw",
+    "alt": "Andy Polos",
+    "width": "960",
+    "height": "958"
+  },
+  "derick": {
+    "src": "/images/derick-steele.jpg",
+    "srcset": "/images/responsive/derick-steele-480.jpg 480w, /images/responsive/derick-steele-907.jpg 907w",
+    "webpSrcset": "/images/responsive/derick-steele-480.webp 480w, /images/responsive/derick-steele-907.webp 907w",
+    "sizes": "(max-width: 768px) 100vw, 33vw",
+    "alt": "Derick Steele",
+    "width": "907",
+    "height": "680"
+  },
+  "john": {
+    "src": "/images/john-polos.jpg",
+    "srcset": "/images/responsive/john-polos-250.jpg 250w, /images/john-polos.jpg 500w",
+    "webpSrcset": "/images/responsive/john-polos-250.webp 250w, /images/responsive/john-polos-500.webp 500w",
+    "sizes": "(max-width: 768px) 100vw, 33vw",
+    "alt": "John Polos",
+    "width": "500",
+    "height": "500"
+  },
+  "services": {
+    "src": "/images/services-image.jpg",
+    "srcset": "/images/responsive/services-image-400.jpg 400w, /images/services-image.jpg 600w",
+    "webpSrcset": "/images/responsive/services-image-400.webp 400w, /images/responsive/services-image-600.webp 600w",
+    "sizes": "(max-width: 768px) 100vw, 40vw",
+    "alt": "Electrical work and installation",
+    "width": "600",
+    "height": "900"
+  },
+  "contact": {
+    "src": "/images/contact-image.jpg",
+    "srcset": "/images/responsive/contact-image-250.jpg 250w, /images/contact-image.jpg 500w",
+    "webpSrcset": "/images/responsive/contact-image-250.webp 250w, /images/responsive/contact-image-500.webp 500w",
+    "sizes": "(max-width: 768px) 100vw, 500px",
+    "alt": "Andy Polos at work",
+    "width": "500",
+    "height": "500"
+  }
+}
