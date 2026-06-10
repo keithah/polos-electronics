@@ -185,7 +185,7 @@
                                 </iframe>
                             </div>
                             {{ if $mapPreviewUrl }}
-                            <!-- Preview image shown instantly, fades when iframe ready -->
+                            <!-- Preview image remains visible even if the third-party iframe renders blank. -->
                             <div class="service-area-map-preview">
                                 <picture>
                                     {{ with $mapPreviewWebpUrl }}
@@ -580,13 +580,5 @@
 
 {{ partial "site/faq-script.html" . | safeJS }}
 
-        // Map embed: fade out preview when iframe loads
-        const mapPreview = document.querySelector('.service-area-map-preview');
-        const mapEmbed = document.querySelector('.service-area-map-embed');
-        if (mapPreview && mapEmbed) {
-            mapEmbed.addEventListener('load', function() {
-                mapPreview.classList.add('is-loaded');
-            });
-        }
     </script>
 {{ end }}

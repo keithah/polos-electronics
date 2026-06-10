@@ -1167,7 +1167,7 @@ body {
   margin-top: -56px;
 }
 
-/* Preview image (shown while iframe loads) */
+/* Reliable map preview; external embeds can render blank in privacy/headless contexts. */
 .service-area-map-preview {
   position: absolute;
   top: 0;
@@ -1175,12 +1175,6 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  transition: opacity 0.3s ease;
-}
-
-.service-area-map-preview.is-loaded {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .service-area-map-preview-image {
