@@ -16,6 +16,7 @@ enableRobotsTXT = true
   email = "service@poloselectronics.com"
   address = "20810 NE 267th St, Battle Ground, WA 98604"
   google_analytics = "G-TT7PTG1YW9"
+  google_site_verification = ""
 
 [markup]
   [markup.goldmark]

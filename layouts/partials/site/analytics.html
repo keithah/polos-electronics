@@ -6,5 +6,35 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', '{{ . }}');
+
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest && event.target.closest('a[href]');
+        if (!link || typeof gtag !== 'function') return;
+
+        var href = link.getAttribute('href') || '';
+        var text = (link.textContent || link.getAttribute('aria-label') || '').trim().slice(0, 100);
+        var eventName = '';
+        var params = {
+          link_url: link.href,
+          link_text: text,
+          page_location: window.location.href
+        };
+
+        if (href.indexOf('tel:') === 0) {
+          eventName = 'click_to_call';
+        } else if (href.indexOf('mailto:') === 0) {
+          eventName = 'click_to_email';
+        } else if (/google\.com\/maps|share\.google/i.test(href)) {
+          eventName = 'click_google_business_profile';
+        } else if (/yelp\.com|homeadvisor\.com|nextdoor\.com/i.test(href)) {
+          eventName = 'click_review_profile';
+        } else if (link.pathname && link.pathname.indexOf('/services/') === 0) {
+          eventName = 'click_service_page';
+        }
+
+        if (eventName) {
+          gtag('event', eventName, params);
+        }
+      });
     </script>
 {{- end }}

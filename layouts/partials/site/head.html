@@ -13,6 +13,9 @@
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <meta name="robots" content="index, follow">
+    {{- with $page.Site.Params.google_site_verification }}
+    <meta name="google-site-verification" content="{{ . }}">
+    {{- end }}
     <link rel="canonical" href="{{ $page.Permalink }}">
 
     <meta property="og:type" content="website">
