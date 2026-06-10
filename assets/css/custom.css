@@ -66,7 +66,7 @@ body {
 
 .header-address .icon,
 .header-hours .icon {
-  color: #5a9fd4;
+  color: #2f6f9f;
 }
 
 .header-address a {
@@ -76,12 +76,12 @@ body {
 }
 
 .header-address a:hover {
-  color: #5a9fd4;
+  color: #2f6f9f;
   text-decoration: underline;
 }
 
 .contact-btn {
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
   padding: 8px 20px;
   text-decoration: none;
@@ -93,7 +93,7 @@ body {
 }
 
 .contact-btn:hover {
-  background: #4a8bc2;
+  background: #286090;
 }
 
 /* Main Navigation */
@@ -135,7 +135,7 @@ body {
 }
 
 .nav-menu a:hover {
-  color: #5a9fd4;
+  color: #2f6f9f;
 }
 
 /* Mobile Menu Toggle */
@@ -284,24 +284,24 @@ body {
 }
 
 .btn-primary {
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
-  border-color: #5a9fd4;
+  border-color: #2f6f9f;
 }
 
 .btn-primary:hover {
-  background: #4a8bc2;
-  border-color: #4a8bc2;
+  background: #286090;
+  border-color: #286090;
 }
 
 .btn-secondary {
   background: transparent;
-  color: #5a9fd4;
-  border-color: #5a9fd4;
+  color: #2f6f9f;
+  border-color: #2f6f9f;
 }
 
 .btn-secondary:hover {
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
 }
 
@@ -415,7 +415,7 @@ body {
   left: 0;
   width: 60px;
   height: 3px;
-  background: #5a9fd4;
+  background: #2f6f9f;
 }
 
 .services-intro h3 {
@@ -435,7 +435,7 @@ body {
   transform: translateY(-50%);
   width: 20px;
   height: 2px;
-  background: #5a9fd4;
+  background: #2f6f9f;
 }
 
 .services-list {
@@ -456,12 +456,12 @@ body {
   content: "✓";
   position: absolute;
   left: -25px;
-  color: #5a9fd4;
+  color: #2f6f9f;
   font-weight: bold;
 }
 
 .services-list a {
-  color: #4a8bc2;
+  color: #286090;
   font-weight: 600;
   text-decoration: none;
 }
@@ -493,7 +493,7 @@ body {
 }
 
 .since-badge {
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
   padding: 30px 40px;
   border-radius: 8px;
@@ -578,7 +578,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #5a9fd4;
+  background: #2f6f9f;
 }
 
 .contact-layout {
@@ -625,7 +625,7 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #5a9fd4;
+  border-color: #2f6f9f;
   background: #ffffff;
 }
 
@@ -670,7 +670,7 @@ body {
 }
 
 .submit-btn {
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
   padding: 15px 30px;
   border: none;
@@ -685,7 +685,7 @@ body {
 }
 
 .submit-btn:hover {
-  background: #4a8bc2;
+  background: #286090;
 }
 
 /* Reviews Section */
@@ -709,7 +709,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #5a9fd4;
+  background: #2f6f9f;
 }
 
 .reviews-reliability-meta {
@@ -718,13 +718,13 @@ body {
 }
 
 .reviews-reliability-meta .reviews-freshness-meta {
-  color: #7b7b7b;
+  color: #555;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
 .reviews-reliability-meta .reviews-freshness-meta span {
-  color: #8a8a8a;
+  color: #555;
   font-size: 0.85rem;
 }
 
@@ -755,7 +755,7 @@ body {
 }
 
 .carousel-btn {
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
   border: none;
   width: 50px;
@@ -773,7 +773,7 @@ body {
 }
 
 .carousel-btn:hover {
-  background: #4a8bc2;
+  background: #286090;
   transform: scale(1.1);
 }
 
@@ -809,7 +809,7 @@ body {
 }
 
 .dot.active {
-  background: #5a9fd4;
+  background: #2f6f9f;
   transform: scale(1.2);
 }
 
@@ -894,7 +894,7 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: #fff;
   display: flex;
   align-items: center;
@@ -906,7 +906,7 @@ body {
 
 /* Nextdoor Recommended badge */
 .review-recommended {
-  color: #00b246;
+  color: #147a36;
   font-weight: 600;
   font-size: 1rem;
   margin-bottom: 15px;
@@ -925,27 +925,27 @@ body {
 .review-source-link {
   display: inline-block;
   font-size: 0.85rem;
-  color: #5a9fd4;
+  color: #2f6f9f;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .review-source-link:hover {
-  color: #4a8bc2;
+  color: #286090;
   text-decoration: underline;
 }
 
 /* Platform-specific styling */
-.review-card[data-platform="google"] .review-source-link { color: #4285f4; }
+.review-card[data-platform="google"] .review-source-link { color: #1a5fb4; }
 .review-card[data-platform="yelp"] .review-source-link { color: #d32323; }
-.review-card[data-platform="homeadvisor"] .review-source-link { color: #ff6600; }
-.review-card[data-platform="nextdoor"] .review-source-link { color: #00b246; }
+.review-card[data-platform="homeadvisor"] .review-source-link { color: #b34700; }
+.review-card[data-platform="nextdoor"] .review-source-link { color: #147a36; }
 
 /* CTA review platform buttons */
-.review-platform-btn[data-platform="google"] { background: #4285f4; border-color: #4285f4; }
+.review-platform-btn[data-platform="google"] { background: #1a5fb4; border-color: #1a5fb4; }
 .review-platform-btn[data-platform="yelp"] { background: #d32323; border-color: #d32323; }
-.review-platform-btn[data-platform="homeadvisor"] { background: #ff6600; border-color: #ff6600; }
-.review-platform-btn[data-platform="nextdoor"] { background: #00b246; border-color: #00b246; }
+.review-platform-btn[data-platform="homeadvisor"] { background: #b34700; border-color: #b34700; }
+.review-platform-btn[data-platform="nextdoor"] { background: #147a36; border-color: #147a36; }
 
 .review-platform-btn:hover {
   filter: brightness(1.1);
@@ -996,19 +996,20 @@ body {
   width: auto;
 }
 
-.footer-services h4 {
+.footer-heading {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1.2rem;
   color: #323232;
   margin-bottom: 20px;
   text-align: center;
+  font-weight: 700;
 }
 
 .footer-services ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  color: #5a9fd4;
+  color: #2f6f9f;
   line-height: 1.8;
   text-align: center;
   font-size: 0.95rem;
@@ -1018,20 +1019,20 @@ body {
   text-align: center;
 }
 
-.footer-contact h4 {
+.footer-phone {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1.8rem;
-  color: #5a9fd4;
+  color: #2f6f9f;
   margin-bottom: 10px;
   font-weight: 700;
 }
 
-.footer-contact h4 a {
-  color: #5a9fd4;
+.footer-phone a {
+  color: #2f6f9f;
   text-decoration: none;
 }
 
-.footer-contact h4 a:hover {
+.footer-phone a:hover {
   text-decoration: underline;
 }
 
@@ -1042,7 +1043,7 @@ body {
 }
 
 .footer-contact a {
-  color: #5a9fd4;
+  color: #2f6f9f;
   text-decoration: none;
 }
 
@@ -1063,7 +1064,7 @@ body {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: #5a9fd4;
+  background: #2f6f9f;
   color: white;
   text-align: center;
   border-radius: 50%;
@@ -1073,7 +1074,7 @@ body {
 }
 
 .footer-social a:hover {
-  background: #4a8bc2;
+  background: #286090;
   transform: translateY(-2px);
 }
 
@@ -1090,7 +1091,7 @@ body {
 }
 
 .footer-bottom p {
-  color: #999;
+  color: #555;
   font-size: 0.9rem;
   margin: 0;
 }
@@ -1116,7 +1117,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #5a9fd4;
+  background: #2f6f9f;
 }
 
 .service-area-content {
@@ -1186,7 +1187,7 @@ body {
 .service-area-map-link {
   display: inline-block;
   margin-top: 0.75rem;
-  color: #fe3a46;
+  color: #c4202b;
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
@@ -1194,7 +1195,7 @@ body {
 }
 
 .service-area-map-link:hover {
-  color: #d32f3a;
+  color: #9f1720;
   text-decoration: underline;
 }
 
@@ -1239,7 +1240,7 @@ body {
 .service-area-tagline {
   text-align: center;
   font-size: 1.35rem;
-  color: #fe3a46;
+  color: #c4202b;
   font-weight: 700;
   margin-bottom: 2rem;
 }
@@ -1309,7 +1310,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #5a9fd4;
+  background: #2f6f9f;
 }
 
 .faq-list {
@@ -1357,7 +1358,7 @@ body {
 
 .faq-icon {
   font-size: 1.5rem;
-  color: #5a9fd4;
+  color: #2f6f9f;
   font-weight: 400;
   transition: transform 0.3s ease;
 }
@@ -1748,7 +1749,7 @@ body {
     gap: 30px;
   }
 
-  .footer-contact h4 {
+  .footer-phone {
     font-size: 1.5rem;
   }
 

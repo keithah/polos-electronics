@@ -6,7 +6,7 @@
                 {{ partial "site/picture.html" (dict "image" "logo" "loading" "lazy") }}
             </div>
             <div class="footer-services">
-                <h4>Commercial & Residential Services</h4>
+                <p class="footer-heading">Commercial & Residential Services</p>
                 <ul>
                     {{ range where $page.Site.Data.services.services "showInFooter" true }}
                     <li>{{ .label | default .name }}</li>
@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="footer-contact">
-                <h4><a href="tel:{{ $page.Site.Params.phone_href }}">{{ $page.Site.Params.phone }}</a></h4>
+                <p class="footer-phone"><a href="tel:{{ $page.Site.Params.phone_href }}">{{ $page.Site.Params.phone }}</a></p>
                 <p><a href="mailto:{{ $page.Site.Data.business.email }}">{{ $page.Site.Data.business.email }}</a></p>
                 <p><a href="{{ $page.Site.Data.business.googleMapsUrl }}" target="_blank" rel="noopener">{{ $address }}</a></p>
                 <div class="footer-social">
