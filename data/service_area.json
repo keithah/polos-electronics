@@ -85,6 +85,7 @@
   "map": {
     "embedUrl": "https://www.google.com/maps/d/embed?mid=1-ZXA51a-q4MZBShWlEtQTAZfu2EsLz8&noprof=1",
     "previewUrl": "/images/service-area-preview.jpg",
+    "previewWebpUrl": "/images/service-area-preview.webp",
     "openUrl": "https://www.google.com/maps/place/Polos+Electronics/@45.7906,-122.5344,17z",
     "url": "/images/service-area-map.svg",
     "fallbackUrl": "/images/service-area-map.png",

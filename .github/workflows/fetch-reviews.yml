@@ -36,9 +36,12 @@ jobs:
       - name: Install review scraper dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
 
+      - name: Install Playwright system dependencies
+        run: npx playwright install-deps chromium
+
       - name: Install Playwright browser
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install chromium
 
       - name: Ensure reviews contract baseline
         run: |
@@ -84,7 +87,7 @@ jobs:
             issues=$((issues + 1))
           else
             G_BODY="/tmp/google-validate.json"
-            G_HTTP=$(curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$G_BODY" -w "%{http_code}" \
+            G_HTTP=$(curl -sS --retry 3 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$G_BODY" -w "%{http_code}" \
               "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name&key=${GOOGLE_API_KEY}")
             G_STATUS=$(jq -r '.status // "UNKNOWN"' "$G_BODY")
             G_ERROR=$(jq -r '.error_message // empty' "$G_BODY")
@@ -102,7 +105,7 @@ jobs:
             echo "::warning::YELP_API_KEY missing. Yelp API fetch will be skipped."
           else
             Y_BODY="/tmp/yelp-validate.json"
-            Y_HTTP=$(curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$Y_BODY" -w "%{http_code}" \
+            Y_HTTP=$(curl -sS --retry 3 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$Y_BODY" -w "%{http_code}" \
               "https://api.yelp.com/v3/businesses/${BIZ_ID}" \
               -H "Authorization: Bearer ${YELP_API_KEY}")
             Y_ERROR=$(jq -r '.error.description // .error.code // empty' "$Y_BODY" 2>/dev/null || true)
@@ -139,7 +142,7 @@ jobs:
           fi
 
           GOOGLE_BODY="/tmp/google-response.json"
-          GOOGLE_HTTP_CODE=$(curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$GOOGLE_BODY" -w "%{http_code}" \
+          GOOGLE_HTTP_CODE=$(curl -sS --retry 3 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$GOOGLE_BODY" -w "%{http_code}" \
             "https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&fields=name,rating,reviews,user_ratings_total&key=${GOOGLE_API_KEY}")
 
           if [ "$GOOGLE_HTTP_CODE" != "200" ]; then
@@ -180,8 +183,7 @@ jobs:
             rating: .rating,
             text: .text,
             date: .relative_time_description,
-            relativeTime: .relative_time_description,
-            profilePhoto: .profile_photo_url
+            relativeTime: .relative_time_description
           }]' > /tmp/google-reviews.json
 
           echo "Fetched $(jq 'length' /tmp/google-reviews.json) Google reviews (4-5 stars)"
@@ -206,14 +208,14 @@ jobs:
           YELP_BUSINESS_STATUS="/tmp/yelp-business-status.txt"
 
           (
-            curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$YELP_REVIEWS_BODY" -w "%{http_code}" \
+            curl -sS --retry 3 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$YELP_REVIEWS_BODY" -w "%{http_code}" \
               "https://api.yelp.com/v3/businesses/${BUSINESS_ID}/reviews" \
               -H "Authorization: Bearer ${YELP_API_KEY}" > "$YELP_REVIEWS_STATUS" || echo "000" > "$YELP_REVIEWS_STATUS"
           ) &
           yelp_reviews_pid=$!
 
           (
-            curl -sS --retry 3 --retry-delay 2 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$YELP_BUSINESS_BODY" -w "%{http_code}" \
+            curl -sS --retry 3 --retry-connrefused --connect-timeout 5 --max-time 20 -o "$YELP_BUSINESS_BODY" -w "%{http_code}" \
               "https://api.yelp.com/v3/businesses/${BUSINESS_ID}" \
               -H "Authorization: Bearer ${YELP_API_KEY}" > "$YELP_BUSINESS_STATUS" || echo "000" > "$YELP_BUSINESS_STATUS"
           ) &
@@ -263,8 +265,7 @@ jobs:
             rating: .rating,
             text: .text,
             date: .time_created,
-            relativeTime: .time_created,
-            profilePhoto: .user.image_url
+            relativeTime: .time_created
           }]' > /tmp/yelp-reviews.json
 
           echo "Fetched $(jq 'length' /tmp/yelp-reviews.json) Yelp reviews (4-5 stars)"
@@ -273,6 +274,12 @@ jobs:
         env:
           GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
         run: |
+          if [ "$(jq 'length' /tmp/google-reviews.json)" -gt 0 ]; then
+            echo "Google API returned reviews - skipping Google fallback scrape"
+            echo "[]" > /tmp/google-scrape-reviews.json
+            exit 0
+          fi
+
           cat > /tmp/scrape-google.js << 'EOF'
           const { chromium } = require('playwright');
 
@@ -317,10 +324,12 @@ jobs:
                       rating: item.rating || 5,
                       text: item.text,
                       date: item.date,
-                      relativeTime: item.date,
-                      profilePhoto: null
+                      relativeTime: item.date
                     });
                   }
+                }
+                if (reviews.length >= 5) {
+                  break;
                 }
               } catch (error) {
                 console.log('Google scrape target failed:', targetUrl, error.message);
@@ -346,6 +355,12 @@ jobs:
 
       - name: Scrape Yelp Reviews (fallback)
         run: |
+          if [ "$(jq 'length' /tmp/yelp-reviews.json)" -gt 0 ]; then
+            echo "Yelp API returned reviews - skipping Yelp fallback scrape"
+            echo "[]" > /tmp/yelp-scrape-reviews.json
+            exit 0
+          fi
+
           cat > /tmp/scrape-yelp.js << 'EOF'
           const { chromium } = require('playwright');
 
@@ -367,6 +382,7 @@ jobs:
                 const rows = [];
 
                 const jsonLd = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+                let jsonLdParseFailures = 0;
                 for (const script of jsonLd) {
                   try {
                     const data = JSON.parse(script.textContent || '{}');
@@ -380,7 +396,12 @@ jobs:
                         date: r?.datePublished || new Date().toISOString().slice(0, 10)
                       });
                     }
-                  } catch (_) {}
+                  } catch (_) {
+                    jsonLdParseFailures += 1;
+                  }
+                }
+                if (jsonLdParseFailures > 0 && rows.length === 0) {
+                  console.warn(`Yelp JSON-LD parse failures: ${jsonLdParseFailures}`);
                 }
 
                 const domReviews = Array.from(document.querySelectorAll('[data-testid="review"], .review, article'));
@@ -406,8 +427,7 @@ jobs:
                     rating: item.rating || 5,
                     text: item.text,
                     date: item.date,
-                    relativeTime: item.date,
-                    profilePhoto: null
+                    relativeTime: item.date
                   });
                 }
               }
@@ -475,8 +495,7 @@ jobs:
                       rating: parseInt(rating, 10),
                       text,
                       date,
-                      relativeTime: date,
-                      profilePhoto: null
+                      relativeTime: date
                     });
                   }
                 } catch (error) {
@@ -532,8 +551,7 @@ jobs:
                       rating: null,
                       text,
                       date,
-                      relativeTime: date,
-                      profilePhoto: null
+                      relativeTime: date
                     });
                   }
                 } catch (error) {

@@ -42,7 +42,7 @@
     <meta name="twitter:image:alt" content="{{ .Site.Title }} Logo">
 
     <!-- Load CSS -->
-    {{ partial "site/styles.html" (dict "service" false) }}
+    {{ partialCached "site/styles.html" (dict "service" false) false }}
     
     <!-- Fonts -->
     {{ partial "site/fonts.html" . }}
@@ -211,6 +211,7 @@
                     {{ $mapEmbedUrl := $map.embedUrl | default "" }}
                     {{ $mapOpenUrl := $map.openUrl | default "" }}
                     {{ $mapPreviewUrl := $map.previewUrl | default "" }}
+                    {{ $mapPreviewWebpUrl := $map.previewWebpUrl | default "" }}
                     {{ $mapPrimaryUrl := $map.url | default "" }}
                     {{ $mapFallbackUrl := $map.fallbackUrl | default "" }}
                     {{ $fallbackContext := $map.fallbackContext | default $sa.tagline }}
@@ -233,12 +234,17 @@
                             {{ if $mapPreviewUrl }}
                             <!-- Preview image shown instantly, fades when iframe ready -->
                             <div class="service-area-map-preview">
+                                <picture>
+                                    {{ with $mapPreviewWebpUrl }}
+                                    <source srcset="{{ . | relURL }}" type="image/webp">
+                                    {{ end }}
                                 <img
                                     src="{{ $mapPreviewUrl | relURL }}"
                                     alt="{{ $mapAlt }}"
                                     class="service-area-map-preview-image"
                                     width="762" height="620"
                                     loading="lazy">
+                                </picture>
                             </div>
                             {{ end }}
                         </div>
@@ -295,19 +301,9 @@
                                 {{ $review := . }}
                                 <div class="review-card" data-platform="{{ .platform }}">
                                     <div class="review-header">
-                                        {{ if .profilePhoto }}
-                                        <img src="{{ .profilePhoto }}"
-                                             alt="{{ .author }}"
-                                             class="review-avatar"
-                                             width="48" height="48"
-                                             loading="lazy"
-                                             decoding="async"
-                                             onerror="this.src='/images/default-avatar.svg'; this.onerror=null;">
-                                        {{ else }}
                                         <div class="review-avatar review-avatar-placeholder">
                                             {{ substr .author 0 1 }}
                                         </div>
-                                        {{ end }}
                                         <div class="review-meta">
                                             <p class="review-author">{{ .author }}</p>
                                         </div>
@@ -539,9 +535,14 @@
                 const j = Math.floor(Math.random() * (i + 1));
                 [cardsToShuffle[i], cardsToShuffle[j]] = [cardsToShuffle[j], cardsToShuffle[i]];
             }
-            cardsToShuffle.forEach(card => grid.appendChild(card));
+            const shuffledCards = document.createDocumentFragment();
+            cardsToShuffle.forEach(card => shuffledCards.appendChild(card));
+            grid.appendChild(shuffledCards);
 
             const cards = Array.from(grid.children);
+            cards.forEach(card => {
+                card.hidden = true;
+            });
             const prevBtn = reviewsCarousel.querySelector('.prev');
             const nextBtn = reviewsCarousel.querySelector('.next');
             const dotsContainer = document.querySelector('.carousel-dots');
@@ -557,6 +558,7 @@
                 }
 
                 let currentPage = 0;
+                let previousPage = null;
 
                 for (let i = 0; i < totalPages; i++) {
                     const dot = document.createElement('span');
@@ -569,13 +571,20 @@
                 const dots = Array.from(dotsContainer.children);
 
                 function updateCarousel() {
-                    cards.forEach(card => card.style.display = 'none');
+                    if (previousPage !== null) {
+                        const previousStart = previousPage * cardsPerPage;
+                        const previousEnd = previousStart + cardsPerPage;
+                        for (let i = previousStart; i < previousEnd && i < cards.length; i++) {
+                            cards[i].hidden = true;
+                        }
+                    }
 
                     const startIndex = currentPage * cardsPerPage;
                     const endIndex = startIndex + cardsPerPage;
                     for (let i = startIndex; i < endIndex && i < cards.length; i++) {
-                        cards[i].style.display = 'block';
+                        cards[i].hidden = false;
                     }
+                    previousPage = currentPage;
 
                     dots.forEach((dot, index) => {
                         dot.classList.toggle('active', index === currentPage);

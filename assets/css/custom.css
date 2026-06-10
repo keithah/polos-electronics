@@ -276,7 +276,7 @@ body {
   font-weight: 600;
   font-size: 14px;
   border-radius: 3px;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   border: 2px solid transparent;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -678,7 +678,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   width: 100%;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -763,7 +763,7 @@ body {
   border-radius: 50%;
   font-size: 2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -805,7 +805,7 @@ body {
   border-radius: 50%;
   background: #ccc;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dot.active {
@@ -1069,7 +1069,7 @@ body {
   border-radius: 50%;
   text-decoration: none;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-social a:hover {

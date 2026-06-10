@@ -26,7 +26,7 @@
     <meta name="twitter:description" content="{{ .Description }}">
     <meta name="twitter:image" content="{{ (.Params.hero_image | default "images/services-image.jpg") | absURL }}">
 
-    {{ partial "site/styles.html" (dict "service" true) }}
+    {{ partialCached "site/styles.html" (dict "service" true) true }}
     {{ partial "site/fonts.html" . }}
 
     {{ partial "schema/local-business.html" . }}

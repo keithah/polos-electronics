@@ -8,7 +8,7 @@
     <meta name="description" content="{{ .Description }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ .Permalink }}">
-    {{ partial "site/styles.html" (dict "service" true) }}
+    {{ partialCached "site/styles.html" (dict "service" true) true }}
     {{ partial "site/fonts.html" . }}
     {{ partial "schema/local-business.html" . }}
 </head>

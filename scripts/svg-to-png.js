@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Convert SVG to PNG using Puppeteer and Chrome
+ * Convert SVG to PNG using Playwright and Chromium
  * Usage: node scripts/svg-to-png.js
  */
-const puppeteer = require('puppeteer');
+const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
@@ -30,7 +30,7 @@ const WIDTH = 800;
 </body>
 </html>`;
 
-  const browser = await puppeteer.launch({ headless: 'new' });
+  const browser = await chromium.launch({ headless: true });
 
   try {
     const page = await browser.newPage();
