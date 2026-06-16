@@ -2,10 +2,10 @@
   "name": "polos-electronics",
   "version": "1.0.0",
   "description": "A Hugo static site recreating the WordPress website for Polos Electronics - a locally owned and operated Low Voltage Electrical Contractor serving Battle Ground, WA since 1979.",
-  "main": "index.js",
   "scripts": {
+    "build": "hugo --cleanDestinationDir --ignoreCache --gc --minify",
     "generate:service-map": "node scripts/svg-to-png.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build"
   },
   "repository": {
     "type": "git",

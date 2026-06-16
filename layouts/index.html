@@ -172,18 +172,8 @@
                     {{ $fallbackContactCta := $sa.fallbackContactCta | default "Prefer writing first? Send us your city and project details through the contact form." }}
                     <div class="service-area-map">
                         {{ if $mapEmbedUrl }}
-                        <!-- Wrapper holds both stacked; preview fades out when iframe loads -->
+                        <!-- Keep the heavy third-party map out of the page lifecycle until requested. -->
                         <div class="service-area-map-wrapper">
-                            <!-- Interactive map embed (loads in background) -->
-                            <div class="service-area-map-embed-container">
-                                <iframe
-                                    src="{{ $mapEmbedUrl }}"
-                                    class="service-area-map-embed"
-                                    title="{{ $mapAlt }}"
-                                    loading="lazy"
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
                             {{ if $mapPreviewUrl }}
                             <!-- Preview image remains visible even if the third-party iframe renders blank. -->
                             <div class="service-area-map-preview">
@@ -200,6 +190,12 @@
                                 </picture>
                             </div>
                             {{ end }}
+                            <button type="button"
+                                    class="service-area-map-load"
+                                    data-map-embed-src="{{ $mapEmbedUrl }}"
+                                    data-map-title="{{ $mapAlt }}">
+                                Load Interactive Map
+                            </button>
                         </div>
                         {{ if $mapOpenUrl }}
                         <a href="{{ $mapOpenUrl }}" target="_blank" rel="noopener" class="service-area-map-link">
@@ -576,6 +572,32 @@
 
                 updateCarousel();
             }
+        }
+
+        const mapLoadButton = document.querySelector('.service-area-map-load');
+        if (mapLoadButton) {
+            mapLoadButton.addEventListener('click', function() {
+                const wrapper = this.closest('.service-area-map-wrapper');
+                if (!wrapper || wrapper.querySelector('.service-area-map-embed-container')) return;
+
+                const embedSrc = this.dataset.mapEmbedSrc;
+                if (!embedSrc) return;
+
+                const embedContainer = document.createElement('div');
+                embedContainer.className = 'service-area-map-embed-container';
+
+                const iframe = document.createElement('iframe');
+                iframe.src = embedSrc;
+                iframe.className = 'service-area-map-embed';
+                iframe.title = this.dataset.mapTitle || 'Interactive service area map';
+                iframe.loading = 'lazy';
+                iframe.allowFullscreen = true;
+
+                embedContainer.appendChild(iframe);
+                wrapper.appendChild(embedContainer);
+                wrapper.classList.add('map-loaded');
+                this.hidden = true;
+            });
         }
 
 {{ partial "site/faq-script.html" . | safeJS }}
