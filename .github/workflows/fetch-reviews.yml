@@ -11,7 +11,7 @@ permissions:
 jobs:
   fetch-reviews:
     timeout-minutes: 20
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
