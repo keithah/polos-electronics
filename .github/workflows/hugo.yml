@@ -21,7 +21,7 @@ defaults:
 jobs:
   build:
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     env:
       HUGO_VERSION: 0.135.0
       HUGO_DEB_SHA256: 8698e547eb8b035df0a9b40e6ba78d81bce372164f4f809c433e22796d1e30f9
@@ -123,7 +123,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     needs: build
     steps:
       - name: Deploy to GitHub Pages
